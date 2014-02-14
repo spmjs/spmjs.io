@@ -33,6 +33,14 @@ Package.prototype = {
     this['updated_at'] = now;
     fs.outputJsonSync(this.datafile(), this);
     return this;
+  },
+
+  saveTarfile: function(data) {
+    this.filename = this.name + '-' + this.version + '.tar.gz';
+    fs.writeFileSync(
+      path.join('data', 'repository', this.name, this.version, this.filename),
+      data
+    );
   }
 };
 

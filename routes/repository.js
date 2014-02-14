@@ -18,19 +18,22 @@ exports.project = {
   }
 };
 
+var Cache = {};
 exports.package = {
   get: function(req, res) {
     res.send("respond with a resource");
   },
   post: function(req, res) {
-    var data = req.body;
-    project = new Project(data);
-    project.update(data);
+    var data = CacheData = req.body;
+    Cache.project = new Project(data);
+    Cache.package = new Package(data);
+    Cache.project.update(data);
     res.send(200);
   },
   put: function(req, res) {
     var data = req.body;
-    var package = new Package(data);
+    var package = Cache.package;
+    var project = Cache.project;
     if (!package) {
       abortify(res, {
         code: 404,
@@ -38,7 +41,32 @@ exports.package = {
       });
       return;
     }
-    uploadPackage(package, req, res);
+    var encoding = req.headers['content-encoding'];
+    var ctype = req.headers['content-type'];
+    if (ctype == 'application/x-tar' && encoding == 'gzip') {
+      ctype = 'application/x-tar-gz'
+    }
+    if (ctype !== 'application/x-tar-gz' && ctype !== 'application/x-tgz') {
+      abortify(res, {
+        code: 415,
+        message: 'Only gziped tar file is allowed.'
+      });
+    }
+    package.md5 = crypto.createHash('md5').update(req.body).digest('hex');
+    var md5 = req.headers['x-package-md5'];
+    if (md5 && md5 !== package.md5) {
+      abortify(res, {
+        code: 400,
+        message: 'MD5 does not match.'
+      });
+    }
+
+    package.saveTarfile(req.body);
+    package.save();
+    project.update(package);
+    project.save();
+
+    res.send(200, package);
   },
   delete: function(req, res) {
     res.send(200, {
@@ -47,31 +75,6 @@ exports.package = {
     });
   }
 };
-
-function uploadPackage(package, req, res) {
-  var encoding = req.headers['content-encoding'];
-  var ctype = req.headers['content-type'];
-  if (ctype == 'application/x-tar' && encoding == 'gzip') {
-    ctype = 'application/x-tar-gz'
-  }
-  if (ctype !== 'application/x-tar-gz' && ctype !== 'application/x-tgz') {
-    abortify(res, {
-      code: 415,
-      message: 'Only gziped tar file is allowed.'
-    });
-  }
-
-  package.md5 = crypto.createHash('md5').update(req.body).digest('hex');
-  var md5 = req.headers['x-package-md5'];
-  if (md5 && md5 !== package.md5) {
-    abortify(res, {
-      code: 400,
-      message: 'MD5 does not match.'
-    });
-  }
-
-  res.send(200);
-}
 
 function abortify(res, options) {
   code = options.code || 401;
