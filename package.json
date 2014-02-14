@@ -1,0 +1,16 @@
+{
+  "name": "spmjs.org",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "ejs": "*",
+    "fs-extra": "~0.8.1",
+    "lodash": "~2.4.1",
+    "moment": "~2.5.1",
+    "semver": "~2.2.1"
+  }
+}
