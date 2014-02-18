@@ -1,6 +1,8 @@
 var Project = require('../models/project');
 var Package = require('../models/package');
 var crypto = require('crypto');
+var fs = require('fs');
+var path = require('path');
 
 exports.index = function(req, res) {
   res.send("respond with a resource");
@@ -21,7 +23,11 @@ exports.project = {
 var Cache = {};
 exports.package = {
   get: function(req, res) {
-    res.send("respond with a resource");
+    var p = new Package({
+      name: req.params.name,
+      version: req.params.version
+    });
+    res.send(JSON.stringify(p));
   },
   post: function(req, res) {
     var data = CacheData = req.body;
@@ -72,6 +78,18 @@ exports.package = {
     res.send(200, {
       status: 'info',
       message: 'Project is deleted.'
+    });
+  }
+};
+
+exports.filename = {
+  get: function(req, res) {
+    fs.readFile(path.join('data', 'repository',
+      req.params.name,
+      req.params.version,
+      req.params.filename
+    ), function(err, data) {
+      res.send(data);
     });
   }
 };

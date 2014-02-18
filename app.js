@@ -48,6 +48,7 @@ app.get('/repository/:name/:version', repository.package.get);
 app.post('/repository/:name/:version', repository.package.post);
 app.put('/repository/:name/:version', repository.package.put);
 app.delete('/repository/:name/:version', repository.package.delete);
+app.get('/repository/:name/:version/:filename', repository.filename.get);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
