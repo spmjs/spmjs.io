@@ -6,7 +6,7 @@ var moment = require('moment');
 var semver = require('semver');
 
 function Project(project) {
-  if (!project.name || !project.version) {
+  if (!project.name) {
     return;
   }
   this.name = project.name;
@@ -16,7 +16,7 @@ function Project(project) {
   if (fs.existsSync(datafile)) {
     pkg = fs.readJsonSync(datafile);
   } else {
-    pkg = {};
+    return {};
   }
   _.merge(this, pkg);
   _.merge(this, project);

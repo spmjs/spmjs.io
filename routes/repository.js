@@ -10,7 +10,14 @@ exports.index = function(req, res) {
 
 exports.project = {
   get: function(req, res) {
-    res.send("respond with a resource");
+    var p = new Project({
+      name: req.params.name
+    });
+    if (!p.name) {
+      res.send(404, JSON.stringify(p));
+    } else {
+      res.send(JSON.stringify(p));
+    }
   },
   delete: function(req, res) {
     res.send(200, {
@@ -27,7 +34,11 @@ exports.package = {
       name: req.params.name,
       version: req.params.version
     });
-    res.send(JSON.stringify(p));
+    if (!p.name) {
+      res.send(404, JSON.stringify(p));
+    } else {
+      res.send(JSON.stringify(p));
+    }
   },
   post: function(req, res) {
     var data = CacheData = req.body;

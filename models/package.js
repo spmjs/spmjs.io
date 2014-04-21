@@ -15,7 +15,7 @@ function Package(package) {
   if (fs.existsSync(datafile)) {
     pkg = fs.readJsonSync(datafile);
   } else {
-    pkg = {};
+    return {};
   }
   _.merge(this, pkg);
   _.merge(this, package);
