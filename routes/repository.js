@@ -16,6 +16,7 @@ exports.project = {
     if (!p.version) {
       abortify(res, { code: 404 });
     } else {
+      res.set('Content-Type', 'application/json');
       res.send(JSON.stringify(p));
     }
   },
@@ -43,6 +44,7 @@ exports.package = {
     if (!p.md5) {
       abortify(res, { code: 404 });
     } else {
+      res.set('Content-Type', 'application/json');
       res.send(JSON.stringify(p));
     }
   },
@@ -111,6 +113,12 @@ exports.filename = {
       req.params.version,
       req.params.filename
     ), function(err, data) {
+      if (err) {
+        abortify(res, { code: 404 });
+      }
+      if (path.extname(req.params.filename) === '.json') {
+        res.set('Content-Type', 'application/json');
+      }
       res.send(data);
     });
   }
@@ -132,6 +140,7 @@ function abortify(res, options) {
   };
   message = options.message || msgs[code];
   res.send(code, {
+    statusCode: code,
     status: status,
     message: message
   });
@@ -140,6 +149,6 @@ function abortify(res, options) {
 // TODO:
 //   1. auth
 //   2. force
-//   3. remove
+//   3. remove [done]
 //   4. publisher
 //   5. ANONYMOUS
