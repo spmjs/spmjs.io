@@ -14,7 +14,7 @@ exports.project = {
       name: req.params.name
     });
     if (!p.version) {
-      res.send(404, JSON.stringify(p));
+      abortify(res, { code: 404 });
     } else {
       res.send(JSON.stringify(p));
     }
@@ -22,7 +22,7 @@ exports.project = {
   delete: function(req, res) {
     var project = new Project(req.params);
     if (!project.name) {
-      res.send(404, JSON.stringify(p));
+      abortify(res, { code: 404 });
     } else {
       project.delete();
       res.send(200, {
@@ -41,7 +41,7 @@ exports.package = {
       version: req.params.version
     });
     if (!p.md5) {
-      res.send(404, JSON.stringify(p));
+      abortify(res, { code: 404 });
     } else {
       res.send(JSON.stringify(p));
     }
@@ -58,10 +58,7 @@ exports.package = {
     var package = Cache.package;
     var project = Cache.project;
     if (!package) {
-      abortify(res, {
-        code: 404,
-        message: 'Package not found.'
-      });
+      abortify(res, { code: 404 });
       return;
     }
     var encoding = req.headers['content-encoding'];
@@ -95,7 +92,7 @@ exports.package = {
     var package = new Package(req.params);
     var project = new Project(req.params);
     if (!package.name) {
-      res.send(404, JSON.stringify(p));
+      abortify(res, { code: 404 });
     } else {
       project.remove(project.version);
       package.delete();
