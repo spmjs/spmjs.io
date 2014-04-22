@@ -16,7 +16,7 @@ function Project(project) {
   if (fs.existsSync(datafile)) {
     pkg = fs.readJsonSync(datafile);
   } else {
-    return {};
+    pkg = {};
   }
   _.merge(this, pkg);
   _.merge(this, project);
@@ -33,7 +33,18 @@ Project.prototype = {
     return this;
   },
 
-  remove: function(version) {},
+  delete: function() {
+    fs.removeSync(path.join('data', 'repository', this.name));
+    return this;
+  },
+
+  remove: function(version) {
+    if (version in this.packages) {
+      delete this.packages[version];
+      this.save();
+    }
+    return this;
+  },
 
   update: function(data) {
     var now = moment().format('YYYY-MM-DDTHH:mm:ssZ');
@@ -50,7 +61,6 @@ Project.prototype = {
 
     var keys = [
       'name',
-      'version',
       'homepage',
       'description',
       'keywords',

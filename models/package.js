@@ -15,7 +15,7 @@ function Package(package) {
   if (fs.existsSync(datafile)) {
     pkg = fs.readJsonSync(datafile);
   } else {
-    return {};
+    pkg = {};
   }
   _.merge(this, pkg);
   _.merge(this, package);
@@ -41,6 +41,11 @@ Package.prototype = {
       path.join('data', 'repository', this.name, this.version, this.filename),
       data
     );
+  },
+
+  delete: function() {
+    fs.removeSync(path.join('data', 'repository', this.name, this.version));
+    return this;
   }
 };
 

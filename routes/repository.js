@@ -13,17 +13,23 @@ exports.project = {
     var p = new Project({
       name: req.params.name
     });
-    if (!p.name) {
+    if (!p.version) {
       res.send(404, JSON.stringify(p));
     } else {
       res.send(JSON.stringify(p));
     }
   },
   delete: function(req, res) {
-    res.send(200, {
-      status: 'info',
-      message: 'Project is deleted.'
-    });
+    var project = new Project(req.params);
+    if (!project.name) {
+      res.send(404, JSON.stringify(p));
+    } else {
+      project.delete();
+      res.send(200, {
+        status: 'info',
+        message: 'Project is deleted.'
+      });
+    }
   }
 };
 
@@ -34,7 +40,7 @@ exports.package = {
       name: req.params.name,
       version: req.params.version
     });
-    if (!p.name) {
+    if (!p.md5) {
       res.send(404, JSON.stringify(p));
     } else {
       res.send(JSON.stringify(p));
@@ -86,10 +92,18 @@ exports.package = {
     res.send(200, package);
   },
   delete: function(req, res) {
-    res.send(200, {
-      status: 'info',
-      message: 'Project is deleted.'
-    });
+    var package = new Package(req.params);
+    var project = new Project(req.params);
+    if (!package.name) {
+      res.send(404, JSON.stringify(p));
+    } else {
+      project.remove(project.version);
+      package.delete();
+      res.send(200, {
+        status: 'info',
+        message: 'Package is deleted.'
+      });
+    }
   }
 };
 
@@ -131,3 +145,4 @@ function abortify(res, options) {
 //   2. force
 //   3. remove
 //   4. publisher
+//   5. ANONYMOUS
