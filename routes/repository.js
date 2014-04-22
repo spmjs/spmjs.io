@@ -5,7 +5,8 @@ var fs = require('fs');
 var path = require('path');
 
 exports.index = function(req, res) {
-  res.send("respond with a resource");
+  res.set('Content-Type', 'application/json');
+  res.send(200, JSON.stringify(Project.getAll()));
 };
 
 exports.project = {
@@ -17,7 +18,7 @@ exports.project = {
       abortify(res, { code: 404 });
     } else {
       res.set('Content-Type', 'application/json');
-      res.send(JSON.stringify(p));
+      res.send(200, JSON.stringify(p));
     }
   },
   delete: function(req, res) {
@@ -45,7 +46,7 @@ exports.package = {
       abortify(res, { code: 404 });
     } else {
       res.set('Content-Type', 'application/json');
-      res.send(JSON.stringify(p));
+      res.send(200, JSON.stringify(p));
     }
   },
   post: function(req, res) {
@@ -145,10 +146,3 @@ function abortify(res, options) {
     message: message
   });
 }
-
-// TODO:
-//   1. auth
-//   2. force
-//   3. remove [done]
-//   4. publisher
-//   5. ANONYMOUS

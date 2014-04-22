@@ -94,6 +94,9 @@ Project.prototype = {
 };
 
 Project.getByUser = function() {};
-Project.getAll = function() {};
+
+Project.getAll = function() {
+  return fs.readdirSync(path.join('data', 'repository'));
+};
 
 module.exports = Project;
