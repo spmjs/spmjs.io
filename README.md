@@ -1,11 +1,11 @@
 ## TODO:
 
-1. auth
-2. force
-3. ~~unpublish~~
-4. publisher
-5. ANONYMOUS
-6. upload doc
-7. login
+1. publish auth
+2. publisher
+3. ANONYMOUS
+4. github login
+5. --force
+6. ~~unpublish~~
+7. upload doc
 8. web page
-9. merge build
+9. sync
