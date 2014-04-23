@@ -4,7 +4,7 @@
 2. publisher
 3. ANONYMOUS
 4. github login
-5. --force
+5. ~~--force~~
 6. ~~unpublish~~
 7. ~~upload doc~~
 8. web page

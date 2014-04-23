@@ -77,6 +77,12 @@ exports.package = {
         message: 'Only gziped tar file is allowed.'
       });
     }
+
+    var force = req.headers['x-yuan-force'];
+    if(package.md5 && !force) {
+      return abortify(res, { code: 444 });
+    }
+
     package.md5 = crypto.createHash('md5').update(req.body).digest('hex');
     var md5 = req.headers['x-package-md5'];
     if (md5 && md5 !== package.md5) {
@@ -152,9 +158,7 @@ exports.upload = function(req, res) {
     }
     var dest;
     if (tag === 'latest') {
-      dest = path.join('data', 'docs', name);
-    } else {
-      dest = path.join('data', 'archive', name, tag);
+      dest = path.join('data', 'docs', name, tag);
     }
     if (fs.existsSync(dest)) {
       fs.removeSync(dest);
@@ -163,7 +167,7 @@ exports.upload = function(req, res) {
     var version = req.body.version;
     var versionDir;
     if (version) {
-      versionDir = path.join('data', 'archive', name, version);
+      versionDir = path.join('data', 'docs', name, version);
       if (fs.existsSync(versionDir)) {
         fs.removeSync(versionDir);
       }
