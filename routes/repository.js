@@ -181,7 +181,6 @@ exports.upload = function(req, res) {
       message: 'Upload docs success.'
     });
   });
-
 };
 
 function abortify(res, options) {
