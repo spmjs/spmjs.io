@@ -117,7 +117,7 @@ exports.package = {
 
 exports.filename = {
   get: function(req, res) {
-    fs.readFile(path.join('data', 'repository',
+    fs.readFile(path.join(CONFIG.wwwroot, 'repository',
       req.params.name,
       req.params.version,
       req.params.filename
@@ -158,7 +158,7 @@ exports.upload = function(req, res) {
     }
     var dest;
     if (tag === 'latest') {
-      dest = path.join('data', 'docs', name, tag);
+      dest = path.join(CONFIG.wwwroot, 'docs', name, tag);
     }
     if (fs.existsSync(dest)) {
       fs.removeSync(dest);
@@ -167,7 +167,7 @@ exports.upload = function(req, res) {
     var version = req.body.version;
     var versionDir;
     if (version) {
-      versionDir = path.join('data', 'docs', name, version);
+      versionDir = path.join(CONFIG.wwwroot, 'docs', name, version);
       if (fs.existsSync(versionDir)) {
         fs.removeSync(versionDir);
       }

@@ -24,7 +24,7 @@ function Package(package) {
 
 Package.prototype = {
   datafile: function() {
-    return path.join('data', 'repository', this.name, this.version, 'index.json');
+    return path.join(CONFIG.wwwroot, 'repository', this.name, this.version, 'index.json');
   },
 
   save: function() {
@@ -38,13 +38,13 @@ Package.prototype = {
   saveTarfile: function(data) {
     this.filename = this.name + '-' + this.version + '.tar.gz';
     fs.writeFileSync(
-      path.join('data', 'repository', this.name, this.version, this.filename),
+      path.join(CONFIG.wwwroot, 'repository', this.name, this.version, this.filename),
       data
     );
   },
 
   delete: function() {
-    fs.removeSync(path.join('data', 'repository', this.name, this.version));
+    fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name, this.version));
     return this;
   }
 };

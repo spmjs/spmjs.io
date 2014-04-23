@@ -13,10 +13,14 @@ var path = require('path');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
+var yaml = require('node-yaml-config');
+var CONFIG = yaml.load('./config/base.yaml');
+global.CONFIG = CONFIG;
+
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', CONFIG.server.port || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());

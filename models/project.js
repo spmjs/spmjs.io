@@ -25,7 +25,7 @@ function Project(project) {
 
 Project.prototype = {
   datafile: function() {
-    return path.join('data', 'repository', this.name, 'index.json');
+    return path.join(CONFIG.wwwroot, 'repository', this.name, 'index.json');
   },
 
   save: function() {
@@ -34,7 +34,7 @@ Project.prototype = {
   },
 
   delete: function() {
-    fs.removeSync(path.join('data', 'repository', this.name));
+    fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name));
     return this;
   },
 
@@ -96,7 +96,7 @@ Project.prototype = {
 Project.getByUser = function() {};
 
 Project.getAll = function() {
-  return fs.readdirSync(path.join('data', 'repository'));
+  return fs.readdirSync(path.join(CONFIG.wwwroot, 'repository'));
 };
 
 module.exports = Project;
