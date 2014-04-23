@@ -1,8 +1,10 @@
 var Project = require('../models/project');
 var Package = require('../models/package');
 var crypto = require('crypto');
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
+var tempfile = require('tempfile');
+var tar = require('tarball-extract');
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -123,6 +125,59 @@ exports.filename = {
       res.send(data);
     });
   }
+};
+
+exports.upload = function(req, res) {
+  var tarball = req.files.file;
+  if (!tarball) {
+    return abortify(res, {
+      code: 406,
+      message: 'file is missing.'
+    });
+  }
+
+  var name = req.body.name;
+  var tag = req.body.tag;
+  var filename = tarball.name;
+
+  var fpath = path.join(path.dirname(tempfile()), filename);
+  if (fs.existsSync(fpath)) {
+    fs.removeSync(fpath);
+  }
+
+  tar.extractTarball(tarball.path, fpath, function(err) {
+    if(err) {
+      console.log(err);
+      return abortify(res, { code: 415 });
+    }
+    var dest;
+    if (tag === 'latest') {
+      dest = path.join('data', 'docs', name);
+    } else {
+      dest = path.join('data', 'archive', name, tag);
+    }
+    if (fs.existsSync(dest)) {
+      fs.removeSync(dest);
+    }
+
+    var version = req.body.version;
+    var versionDir;
+    if (version) {
+      versionDir = path.join('data', 'archive', name, version);
+      if (fs.existsSync(versionDir)) {
+        fs.removeSync(versionDir);
+      }
+      fs.copySync(fpath, versionDir);
+    }
+
+    fs.copySync(fpath, dest);
+
+    res.send(200, {
+      status: 'info',
+      message: 'Upload docs success.'
+    });
+  });
+
 };
 
 function abortify(res, options) {

@@ -10,6 +10,8 @@ var package = require('./routes/package');
 var repository = require('./routes/repository');
 var http = require('http');
 var path = require('path');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 var app = express();
 
@@ -49,6 +51,8 @@ app.post('/repository/:name/:version', repository.package.post);
 app.put('/repository/:name/:version', repository.package.put);
 app.delete('/repository/:name/:version', repository.package.delete);
 app.get('/repository/:name/:version/:filename', repository.filename.get);
+
+app.post('/repository/upload', multipartMiddleware, repository.upload);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
