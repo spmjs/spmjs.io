@@ -5,6 +5,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var tempfile = require('tempfile');
 var tar = require('tarball-extract');
+var hook = require('../lib/hook');
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -53,9 +54,14 @@ exports.package = {
   },
   post: function(req, res) {
     var data = CacheData = req.body;
+    var isNewProject;
     Cache.project = new Project(data);
     Cache.package = new Package(data);
+    var isNewProject = !Cache.project['created_at'];
     Cache.project.update(data);
+    if (isNewProject) {
+      hook.emit('create', Cache.project);
+    }
     res.send(200);
   },
   put: function(req, res) {
@@ -96,6 +102,7 @@ exports.package = {
     package.save();
     project.update(package);
     project.save();
+    hook.emit('update', package);
 
     res.send(200, package);
   },
