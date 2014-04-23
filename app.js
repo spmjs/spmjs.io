@@ -6,7 +6,6 @@
 var express = require('express');
 var routes = require('./routes');
 var account = require('./routes/account');
-var package = require('./routes/package');
 var repository = require('./routes/repository');
 var http = require('http');
 var path = require('path');
@@ -44,8 +43,8 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/account', account.index);
 app.get('/account/setting', account.setting);
-app.get('/package/:name', package.index);
-app.get('/package/:name/:version', package.version);
+app.get('/package/:name', routes.project);
+app.get('/package/:name/:version', routes.package);
 
 app.get('/repository', repository.index);
 app.get('/repository/:name', repository.project.get);

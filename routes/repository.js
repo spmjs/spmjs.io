@@ -26,10 +26,11 @@ exports.project = {
   },
   delete: function(req, res) {
     var project = new Project(req.params);
-    if (!project.name) {
+    if (!project.packages) {
       abortify(res, { code: 404 });
     } else {
       project.delete();
+      hook.emit('delete:project', project);
       res.send(200, {
         status: 'info',
         message: 'Project is deleted.'
@@ -60,7 +61,7 @@ exports.package = {
     var isNewProject = !Cache.project['created_at'];
     Cache.project.update(data);
     if (isNewProject) {
-      hook.emit('create', Cache.project);
+      hook.emit('create:project', Cache.project);
     }
     res.send(200);
   },
@@ -102,18 +103,18 @@ exports.package = {
     package.save();
     project.update(package);
     project.save();
-    hook.emit('update', package);
+    hook.emit('update:package', package);
 
     res.send(200, package);
   },
   delete: function(req, res) {
     var package = new Package(req.params);
     var project = new Project(req.params);
-    if (!package.name) {
+    if (!package.md5) {
       abortify(res, { code: 404 });
     } else {
-      project.remove(project.version);
-      package.delete();
+      project.remove(package.version);
+      hook.emit('delete:package', package);
       res.send(200, {
         status: 'info',
         message: 'Package is deleted.'

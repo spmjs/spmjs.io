@@ -34,6 +34,10 @@ Project.prototype = {
   },
 
   delete: function() {
+    var that = this;
+    this.getVersions().forEach(function(version) {
+      that.remove(version);
+    });
     fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name));
     return this;
   },
@@ -41,6 +45,20 @@ Project.prototype = {
   remove: function(version) {
     if (version in this.packages) {
       delete this.packages[version];
+      if (Object.keys(this.packages).length === 0) {
+        this.delete();
+      } else {
+        this.save();
+      }
+    }
+    var p = new Package({
+      name: this.name,
+      version: version
+    });
+    console.log(this.name, version, p);
+    if (p.md5) {
+      p.delete();
+      this.version = this.getLatestVerion();
       this.save();
     }
     return this;
@@ -82,14 +100,22 @@ Project.prototype = {
     delete pkg.readme;
 
     this.packages[data.version] = pkg;
-    this.version = Object.keys(this.packages).sort(function(a, b) {
-      return semver.lt(a, b);
-    })[0];
+    this.version = this.getLatestVerion();
 
     this['created_at'] = this['created_at'] || now;
     this['updated_at'] = now;
     this.save();
     return this;
+  },
+
+  getVersions: function() {
+    return Object.keys(this.packages);
+  },
+
+  getLatestVerion: function() {
+    return this.getVersions().sort(function(a, b) {
+      return semver.lt(a, b);
+    })[0];
   }
 };
 

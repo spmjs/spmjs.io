@@ -1,0 +1,19 @@
+<div class="yue">
+  <h1><a href="/package/<%= name %>/"><%= name %></a></h1>
+  <hr>
+  <blockquote>
+    <p><%= description %></p>
+  </blockquote>
+  <pre>spm install <%= name %></pre>
+  <p>Latest version: <strong><%= latest.version %></strong> <span>~ <%= latest.tag %></span></p>
+  <table class="meta">
+    <tr>
+      <th>Versions:</th>
+      <td><%= versions %></td>
+    </tr>
+    <tr>
+      <th>Updated:</th>
+      <td><%= updated_at %></td>
+    </tr>
+  </table>
+</div>
