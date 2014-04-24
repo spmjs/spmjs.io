@@ -1,0 +1,235 @@
+.markdown ::-moz-selection {
+  background-color: rgba(0,0,0,0.2);
+}
+.markdown ::selection {
+  background-color: rgba(0,0,0,0.2);
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: #222223;
+}
+.markdown h1 {
+  font-size: 1.8em;
+  margin: 0.67em 0;
+}
+.markdown > h1 {
+  font-size: 2em;
+  margin: 0;
+}
+.markdown h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.markdown h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-size: 1em;
+  margin: 1.6em 0 1em 0;
+}
+.markdown h6 {
+  font-weight: 500;
+}
+.markdown p {
+  margin-top: 0;
+  margin-bottom: 1.46em;
+}
+.markdown a {
+  word-wrap: break-word;
+}
+.markdown strong,
+.markdown b {
+  font-weight: 700;
+  color: #222;
+}
+.markdown em,
+.markdown i {
+  font-style: italic;
+  color: #222;
+}
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.2em 0;
+}
+.markdown a img {
+  /* Remove border on IE */
+  border: none;
+}
+.markdown figure {
+  position: relative;
+  clear: both;
+  outline: 0;
+  margin: 10px 0 30px;
+  padding: 0;
+  min-height: 100px;
+}
+.markdown figure img {
+  display: block;
+  max-width: 100%;
+  margin: auto auto 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.markdown figure figcaption {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #666665;
+}
+.markdown figure figcaption a {
+  text-decoration: none;
+  color: #666665;
+}
+.markdown hr {
+  display: block;
+  margin: 15px auto;
+  border: 0 none;
+  border-top: 1px solid #dededc;
+}
+.markdown blockquote {
+  margin: 0 0 1.64em 0;
+  border-left: 3px solid #dadada;
+  padding-left: 12px;
+  color: #666664;
+}
+.markdown blockquote a {
+  color: #666664;
+}
+.markdown ul,
+.markdown ol {
+  margin: 0 0 24px 6px;
+  padding-left: 16px;
+}
+.markdown ul {
+  list-style-type: square;
+}
+.markdown ol {
+  list-style-type: decimal;
+}
+.markdown li {
+  margin-bottom: 0.2em;
+}
+.markdown li ul,
+.markdown li ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 14px;
+}
+.markdown li ul {
+  list-style-type: disc;
+}
+.markdown li ul ul {
+  list-style-type: circle;
+}
+.markdown li p {
+  margin: 0.4em 0 0.6em;
+}
+.markdown .unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.markdown code,
+.markdown tt {
+  color: #808080;
+  font-size: 0.96em;
+  background-color: #FFFDEF;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-family: "Inconsolata", "Menlo", monospace;
+}
+.markdown pre {
+  margin: 1.64em 0;
+  padding: 7px;
+  border: none;
+  border-left: 3px solid #F9F9F8;
+  padding-left: 10px;
+  overflow: auto;
+  line-height: 1.5;
+  font-size: 0.96em;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  color: #4c4c4c;
+  background-color: #F9F9F8;
+}
+.markdown pre code,
+.markdown pre tt {
+  color: #4c4c4c;
+  border: none;
+  background: none;
+  padding: 0;
+}
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5em;
+  font-size: 0.96em;
+}
+.markdown th,
+.markdown td {
+  text-align: left;
+  padding: 4px 8px 4px 10px;
+  border: 1px solid #dadada;
+}
+.markdown td {
+  vertical-align: top;
+}
+.markdown tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.markdown iframe {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+.markdown figure iframe {
+  margin: auto;
+}
+.markdown table pre {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+@media (min-width: 1100px) {
+  .markdown blockquote {
+    margin-left: -24px;
+    padding-left: 20px;
+    border-width: 4px;
+  }
+  .markdown blockquote blockquote {
+    margin-left: 0;
+  }
+  .markdown figure img {
+    margin: 0 0 4px;
+  }
+  .markdown figure figcaption:before {
+    width: 25%;
+    margin-left: 75%;
+    border-top: 1px solid #dededc;
+    display: block;
+    content: "";
+    margin-bottom: 10px;
+  }
+  .markdown figure figcaption {
+    position: absolute;
+    left: -172px;
+    width: 150px;
+    top: 0;
+    text-align: right;
+    margin-top: 0;
+  }
+}

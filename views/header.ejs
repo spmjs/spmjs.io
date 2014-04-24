@@ -2,6 +2,58 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='http://static.alipayobjects.com/gallery/normalize/3.0.0/normalize.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/markdown.css' />
   </head>
   <body>
+  <header>
+    <div class="container">
+      <h1 id="logo"><a href="/">spmjs</a></h1>
+      <div class="search-form">
+        <form method="get" action="/search">
+          <input class="text" name="q" type="search" placeholder="Search Packages">
+        </form>
+      </div>
+      <ul class="navigation">
+        <li>
+          <a href="/packages">
+            <i class="iconfont">&#xf0174;</i>
+            Packages
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="iconfont">&#xf0015;</i>
+            Docs
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/spmjs/spm">
+            <i class="iconfont">&#xf0036;</i>
+            Cli</a>
+        </li>
+        <li>
+          <a href="">
+            <i class="iconfont">&#xf00df;</i>
+            Issues
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="iconfont">&#xf01ca;</i>
+            Sign in
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <section class="index-banner">
+    <div class="container">
+      <h2>spm</h2>
+      <p>A graceful static package manager for browser based on CommonJS.</p>
+      <a class="button positive" href="">Getting Started</a>
+      <a class="button negative" href="/packages">Packages</a>
+    </div>
+  </section>
+  <section class="main container">

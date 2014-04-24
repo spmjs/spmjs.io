@@ -22,6 +22,7 @@
     "cookie-parser": "~1.0.1",
     "serve-static": "~1.0.4",
     "errorhandler": "~1.0.0",
-    "nstore": "~0.5.2"
+    "nstore": "~0.5.2",
+    "marked": "~0.3.2"
   }
 }

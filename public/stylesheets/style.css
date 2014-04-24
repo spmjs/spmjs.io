@@ -1,8 +1,244 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Open Sans Light Italic'), local('OpenSansLight-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/PRmiXeptR36kaC0GEAetxvR_54zmj3SbGZQh3vCOwvY.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('http://at.alicdn.com/t/font_1398347314_106385.eot'); /* IE9*/
+  src: url('http://at.alicdn.com/t/font_1398347314_106385.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('http://at.alicdn.com/t/font_1398347314_1279993.woff') format('woff'), /* chrome、firefox */
+  url('http://at.alicdn.com/t/font_1398347313_9356124.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('http://at.alicdn.com/t/font_1398347314_1555343.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:'iconfont';
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px/1.62 "Open Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+  color: #555;
 }
 
 a {
-  color: #00B7FF;
+  color: #2EA3D0;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.button {
+  -moz-user-select: none;
+  background-color: #FAFAFA;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  border: medium none;
+  border-radius: 0.25em;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
+  box-sizing: border-box;
+  color: #808080;
+  cursor: pointer;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  min-height: 1em;
+  outline: 0 none;
+  padding: 0.8em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.25s ease 0s, background-color 0.25s ease 0s, color 0.25s ease 0s, background 0.25s ease 0s, box-shadow 0.25s ease 0s;
+  vertical-align: middle;
+  background-color: #5BBD72;
+  color: #FFFFFF;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button:active {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2) inset;
+}
+
+.button.positive {
+  background-color: #5BBD72;
+  color: #fff;
+}
+
+.button.positive:hover {
+  background-color: #58CB73;
+}
+
+.button.negative {
+  background-color: #D95C5C;
+  color: #fff;
+}
+
+.button.negative:hover {
+  background-color: #E75869;
+}
+
+.container {
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  height: 60px;
+  line-height: 60px;
+  background: #3D3D3D;
+}
+
+header a {
+  color: #fff;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+header #logo {
+  margin: 0;
+  font-size: 22px;
+  text-shadow: 0 0 70px #fff;
+}
+
+header #logo,
+.search-form {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.search-form {
+  margin-left: 60px;
+  width: 30%;
+}
+
+.search-form input {
+  border-radius: 0.3125em;
+  border: none;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  background: rgba(0,0,0,0.35);
+  color: #ddd;
+  width: 80%;
+  transition: all 0.4s ease-out;
+}
+
+.search-form input:focus {
+  width: 120%;
+  background: rgba(0,0,0,0.8);
+}
+
+.navigation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  display: inline-block;
+  float: right;
+}
+
+.navigation li {
+  display: inline-block;
+}
+
+.navigation li a {
+  display: block;
+  padding: 0 12px;
+}
+
+.navigation li a i {
+  margin-right: 5px;
+  color: #aaa;
+}
+
+.navigation li a:hover {
+  background: #4f4f4f;
+}
+
+.main {
+  border-bottom: 1px solid #ddd;
+  min-height: 400px;
+  margin-top: 40px;
+}
+
+footer {
+  padding: 25px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.index-banner {
+  display: none;
+  height: 240px;
+  background: #4880AE;
+  color: #fff;
+  padding: 20px 0;
+  text-shadow: 0 0 90px #fff;
+}
+
+.index-banner h2 {
+  font-size: 56px;
+  margin: 0;
+}
+
+.index-banner p {
+  margin: 0;
+  font-size: 22px;
+}
+
+.index-banner .button {
+  margin-top: 34px;
+  margin-right: 10px;
+}
+
+.index-list {
+  float: left;
+  width: 50%;
+}
+
+.index-list h2 {
+  font-size: 18px;
+}
+
+.index-list ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.count i {
+  margin-right: 10px;
 }

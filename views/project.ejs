@@ -1,51 +1,55 @@
 <% include header %>
-<div class="yue">
-  <h1><a href="/package/<%= name %>/"><%= name %></a></h1>
+<div class="markdown">
+  <h1><a href="/package/<%= project.name %>/"><%= project.name %></a></h1>
   <hr>
-  <blockquote>
-    <p><%= description %></p>
-  </blockquote>
-  <pre>spm install <%= name %></pre>
-  <p>Latest version: <strong><%= latest.version %></strong> <span>~ <%= latest.tag %></span></p>
+  <p><%= project.description %></p>
+  <pre>spm install <%= project.name %></pre>
+  <p>
+    Latest version: <strong><%= project.latest.version %></strong>
+    <span>~ <%= project.latest.tag %></span>
+  </p>
   <table class="meta">
     <tr>
       <th>Versions:</th>
-      <td><%= versions %></td>
+      <td><%= project.versions %></td>
     </tr>
     <tr>
       <th>Updated:</th>
-      <td><%= updated_at %></td>
+      <td><%= project.updated_at %></td>
     </tr>
-    <% if (homepage) { %>
+    <% if (project.homepage) { %>
     <tr>
       <th>Homepage:</th>
-      <td><%= homepage %></td>
+      <td><%= project.homepage %></td>
     </tr>
     <% } %>
-    <% if (repository) { %>
+    <% if (project.repository) { %>
     <tr>
       <th>Repository:</th>
-      <td><%= repository.url %></td>
+      <td><%= project.repository.url %></td>
     </tr>
     <% } %>
-    <% if (latest.dependencies) { %>
+    <% if (project.latest.dependencies) { %>
     <tr>
       <th>Dependencies:</th>
-      <td><%= latest.dependencies %></td>
+      <td><%= project.latest.dependencies %></td>
     </tr>
     <% } %>
-    <% if (latest.dependents) { %>
+    <% if (project.latest.dependents) { %>
     <tr>
       <th>Dependents:</th>
-      <td><%= latest.dependents %></td>
+      <td><%= project.latest.dependents %></td>
     </tr>
     <% } %>
-    <% if (latest.spm.main) { %>
+    <% if (project.latest.spm.main) { %>
     <tr>
       <th>Main:</th>
-      <td><%= latest.spm.main %></td>
+      <td><%= project.latest.spm.main %></td>
     </tr>
     <% } %>
   </table>
+</div>
+<div class="markdown">
+<%- project.latest.readme %>
 </div>
 <% include footer %>

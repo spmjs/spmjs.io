@@ -1,3 +1,48 @@
-<%= name %>
-<%= version %>
-
+<% include header %>
+<div class="markdown">
+  <h1><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
+  <hr>
+  <p><%= package.description %></p>
+  <pre>spm install <%= package.name %></pre>
+  <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
+  <table class="meta">
+    <tr>
+      <th>Updated:</th>
+      <td><%= package.updated_at %></td>
+    </tr>
+    <% if (package.homepage) { %>
+    <tr>
+      <th>Homepage:</th>
+      <td><%= package.homepage %></td>
+    </tr>
+    <% } %>
+    <% if (package.repository) { %>
+    <tr>
+      <th>Repository:</th>
+      <td><%= package.repository.url %></td>
+    </tr>
+    <% } %>
+    <% if (package.dependencies) { %>
+    <tr>
+      <th>Dependencies:</th>
+      <td><%= package.dependencies %></td>
+    </tr>
+    <% } %>
+    <% if (package.dependents) { %>
+    <tr>
+      <th>Dependents:</th>
+      <td><%= package.dependents %></td>
+    </tr>
+    <% } %>
+    <% if (package.spm.main) { %>
+    <tr>
+      <th>Main:</th>
+      <td><%= package.spm.main %></td>
+    </tr>
+    <% } %>
+  </table>
+</div>
+<div class="markdown">
+<%- package.readme %>
+</div>
+<% include footer %>

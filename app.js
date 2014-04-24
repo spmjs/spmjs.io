@@ -51,7 +51,7 @@ app.use(require('./middlewares/raw-body')({
   limit: '50mb'
 }));
 app.use(bodyParser());
-app.use(cookieParser('your secret here'));
+app.use(cookieParser('spmjs'));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
@@ -62,6 +62,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/account', account.index);
 app.get('/account/setting', account.setting);
+app.get('/packages', routes.all);
 app.get('/package/:name', routes.project);
 app.get('/package/:name/:version', routes.package);
 
@@ -75,6 +76,13 @@ app.delete('/repository/:name/:version', repository.package.delete);
 app.get('/repository/:name/:version/:filename', repository.filename.get);
 
 app.post('/repository/upload', multipartMiddleware, repository.upload);
+
+// 404
+app.get('*', function(req, res){
+  res.render('404.ejs', {
+    title: 'No Found - ' + CONFIG.website.title
+  });
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
