@@ -55,7 +55,6 @@ Project.prototype = {
       name: this.name,
       version: version
     });
-    console.log(this.name, version, p);
     if (p.md5) {
       p.delete();
       this.version = this.getLatestVerion();
