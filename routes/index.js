@@ -13,7 +13,7 @@ exports.project = function(req, res){
     name: name
   });
   if (p.packages) {
-    p.title = CONFIG.title;
+    p.title = CONFIG.website.title;
     p.latest = p.packages[p.version];
     p.versions = p.getVersions().join(', ');
     res.render('project', p);
@@ -32,7 +32,7 @@ exports.package = function(req, res){
     version: version
   });
   if (p.md5) {
-    p.title = CONFIG.title;
+    p.title = CONFIG.website.title;
     res.render('project', p);
   } else {
     res.render('404', {

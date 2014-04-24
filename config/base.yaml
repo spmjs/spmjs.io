@@ -2,7 +2,7 @@ default:
   server:
     port: 3000
   website:
-    title: 'SPMJS'
+    title: 'spmjs'
     GA: ''
   wwwroot: 'data'
   authorize: 'anonymous' # or github

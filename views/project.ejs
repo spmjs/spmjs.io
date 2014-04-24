@@ -1,3 +1,4 @@
+<% include header %>
 <div class="yue">
   <h1><a href="/package/<%= name %>/"><%= name %></a></h1>
   <hr>
@@ -15,5 +16,36 @@
       <th>Updated:</th>
       <td><%= updated_at %></td>
     </tr>
+    <% if (homepage) { %>
+    <tr>
+      <th>Homepage:</th>
+      <td><%= homepage %></td>
+    </tr>
+    <% } %>
+    <% if (repository) { %>
+    <tr>
+      <th>Repository:</th>
+      <td><%= repository.url %></td>
+    </tr>
+    <% } %>
+    <% if (latest.dependencies) { %>
+    <tr>
+      <th>Dependencies:</th>
+      <td><%= latest.dependencies %></td>
+    </tr>
+    <% } %>
+    <% if (latest.dependents) { %>
+    <tr>
+      <th>Dependents:</th>
+      <td><%= latest.dependents %></td>
+    </tr>
+    <% } %>
+    <% if (latest.spm.main) { %>
+    <tr>
+      <th>Main:</th>
+      <td><%= latest.spm.main %></td>
+    </tr>
+    <% } %>
   </table>
 </div>
+<% include footer %>
