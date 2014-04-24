@@ -9,6 +9,8 @@
 7. ~~upload doc~~
 8. web page
 9. sync
-10. feed and count
+10. ~~feed and count~~
 11. search
 12. ~~dependents~~
+13. ~~reserved words~~
+14. badge

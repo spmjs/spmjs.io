@@ -54,6 +54,14 @@ exports.package = {
     }
   },
   post: function(req, res) {
+    var name = req.body.name.toLowerCase();
+    if (CONFIG.reservedWords.split(' ').indexOf(name) >= 0) {
+      return abortify(res, {
+        code: 406,
+        message: 'Sorry, package name is a reserved name.'
+      });
+    }
+
     var data = CacheData = req.body;
     var isNewProject;
     Cache.project = new Project(data);

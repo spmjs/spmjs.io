@@ -6,3 +6,4 @@ default:
     GA: ''
   wwwroot: 'data'
   authorize: 'anonymous' # or github
+  reservedWords: 'root admin administrator bot robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab'
