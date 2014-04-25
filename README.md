@@ -1,16 +1,13 @@
 ## TODO:
 
-1. publish auth
-2. publisher
-3. ANONYMOUS
-4. github login
-5. ~~force~~
-6. ~~unpublish~~
-7. ~~upload doc~~
-8. web page
-9. sync
-10. ~~feed and count~~
-11. search
-12. ~~dependents~~
-13. ~~reserved words~~
-14. badge
+1. account & owner & publisher & ANONYMOUS
+2. ~~force~~
+3. ~~unpublish~~
+4. ~~upload doc~~
+5. ~~web page~~
+6. sync
+7. ~~feed and count~~
+8. ~~search~~
+9. ~~dependents~~
+11. ~~reserved words~~
+12. badge
