@@ -6,6 +6,8 @@ var path = require('path');
 var tempfile = require('tempfile');
 var tar = require('tarball-extract');
 var hook = require('../lib/hook');
+var elastical = require('elastical');
+var client = new elastical.Client();
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -195,6 +197,40 @@ exports.upload = function(req, res) {
     res.send(200, {
       status: 'info',
       message: 'Upload docs success.'
+    });
+  });
+};
+
+exports.search = function(req, res, next) {
+  var query = req.query.q;
+  if (!query) {
+    res.send(404);
+    return;
+  }
+  client.search({
+    query: query,
+    index: 'spmjs',
+    type: 'package',
+  }, function(err, results) {
+    var data = [];
+    results = results || { hits: [] };
+    results.hits.forEach(function(item) {
+      var p = new Project({
+        name: item._source.name
+      });
+      data.push({
+        name: p.name,
+        description: p.description,
+        keywords: p.keywords,
+        homepage: p.homepage,
+        repository: p.repository && p.repository.url
+      });
+    });
+    res.send(200, {
+      data: {
+        total: data.length,
+        results: data
+      }
     });
   });
 };
