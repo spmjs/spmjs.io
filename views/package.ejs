@@ -7,36 +7,42 @@
   <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
   <table class="meta">
     <tr>
-      <th>Updated:</th>
+      <th>Updated</th>
       <td><%= package.updated_at %></td>
     </tr>
     <% if (package.homepage) { %>
     <tr>
-      <th>Homepage:</th>
-      <td><%= package.homepage %></td>
+      <th>Homepage</th>
+      <td><a href="<%= package.homepage %>"><%= package.homepage %></a></td>
     </tr>
     <% } %>
     <% if (package.repository) { %>
     <tr>
-      <th>Repository:</th>
+      <th>Repository</th>
       <td><%= package.repository.url %></td>
+    </tr>
+    <% } %>
+    <% if (package.publisher) { %>
+    <tr>
+      <th>Publisher</th>
+      <td><%= package.publisher %></td>
     </tr>
     <% } %>
     <% if (package.dependencies) { %>
     <tr>
-      <th>Dependencies:</th>
-      <td><%= package.dependencies %></td>
+      <th>Dependencies</th>
+      <td><%= package.dependencies.join(', ') %></td>
     </tr>
     <% } %>
     <% if (package.dependents) { %>
     <tr>
-      <th>Dependents:</th>
-      <td><%= package.dependents %></td>
+      <th>Dependents</th>
+      <td><%= package.dependents.join(', ') %></td>
     </tr>
     <% } %>
     <% if (package.spm.main) { %>
     <tr>
-      <th>Main:</th>
+      <th>Main</th>
       <td><%= package.spm.main %></td>
     </tr>
     <% } %>

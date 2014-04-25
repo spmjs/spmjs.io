@@ -29,7 +29,7 @@ exports.project = function(req, res, next) {
       name: p.name,
       version: p.version
     });
-    p.versions = p.getVersions().join(', ');
+    p.versions = p.getVersions();
     p.latest.readme = marked(p.latest.readme);
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,

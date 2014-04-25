@@ -181,8 +181,9 @@
 .markdown th,
 .markdown td {
   text-align: left;
-  padding: 4px 8px 4px 10px;
+  padding: 3px 10px;
   border: 1px solid #dadada;
+  border-width: 1px 0;
 }
 .markdown td {
   vertical-align: top;

@@ -10,40 +10,44 @@
   </p>
   <table class="meta">
     <tr>
-      <th>Versions:</th>
-      <td><%= project.versions %></td>
+      <th>Versions</th>
+      <td>
+      <% project.versions.forEach(function(version) { %>
+        <a href="<%= version %>"><%= version %></a>
+      <% }) %>
+      </td>
     </tr>
     <tr>
-      <th>Updated:</th>
+      <th>Updated</th>
       <td><%= project.updated_at %></td>
     </tr>
     <% if (project.homepage) { %>
     <tr>
-      <th>Homepage:</th>
-      <td><%= project.homepage %></td>
+      <th>Homepage</th>
+      <td><a href="<%= project.homepage %>"><%= project.homepage %></a></td>
     </tr>
     <% } %>
     <% if (project.repository) { %>
     <tr>
-      <th>Repository:</th>
+      <th>Repository</th>
       <td><%= project.repository.url %></td>
     </tr>
     <% } %>
     <% if (project.latest.dependencies) { %>
     <tr>
-      <th>Dependencies:</th>
-      <td><%= project.latest.dependencies %></td>
+      <th>Dependencies</th>
+      <td><%= project.latest.dependencies.join(', ') %></td>
     </tr>
     <% } %>
     <% if (project.latest.dependents) { %>
     <tr>
-      <th>Dependents:</th>
-      <td><%= project.latest.dependents %></td>
+      <th>Dependents</th>
+      <td><%= project.latest.dependents.join(', ') %></td>
     </tr>
     <% } %>
     <% if (project.latest.spm.main) { %>
     <tr>
-      <th>Main:</th>
+      <th>Main</th>
       <td><%= project.latest.spm.main %></td>
     </tr>
     <% } %>
