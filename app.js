@@ -60,6 +60,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/search', routes.search);
 app.get('/account', account.index);
 app.get('/account/setting', account.setting);
 app.get('/packages', routes.all);

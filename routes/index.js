@@ -4,6 +4,9 @@ var feed = require('../lib/feed');
 var dependent = require('../lib/dependent');
 var marked = require('marked');
 var moment = require('moment');
+var fs = require('fs');
+var path = require('path');
+var request = require('request');
 
 exports.index = function(req, res) {
   feed.get(function(recentlyUpdates) {
@@ -33,7 +36,8 @@ exports.project = function(req, res, next) {
     p.latest.readme = marked(p.latest.readme);
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
-      project: p
+      project: p,
+      doclink: docLink(p.name)
     });
   } else {
     next();
@@ -64,3 +68,22 @@ exports.all = function(req, res) {
     packages: Project.getAll()
   });
 };
+
+exports.search = function(req, res, next) {
+  var query = req.query.q;
+  if (!query) {
+    next();
+    return;
+  }
+  res.render('search', {
+    title: 'Search Result - ' + CONFIG.website.title,
+    query: query,
+    result: []
+  });
+};
+
+function docLink(name) {
+  if (fs.existsSync(path.join(CONFIG.wwwroot, 'docs', name, 'latest'))) {
+    return '/docs/' + name + '/latest/';
+  }
+}

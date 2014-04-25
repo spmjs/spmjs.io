@@ -1,0 +1,15 @@
+<% include header %>
+<div class="markdown">
+  <% if (result.length > 0) { %>
+  <% result.forEach(function(item) { %>
+  <div class="cell">
+    <h3><a href="<%= item.name %>"><%= item.name %></a></h3>
+    <p><%= item.description %></p>
+  </div>
+  <% }) %>
+  <% } else { %>
+    <p>Can't found any package about <strong>"<%= query %>"</strong>, change your search query!</p>
+  <% } %>
+</div>
+<% include footer %>
+

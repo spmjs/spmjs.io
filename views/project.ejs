@@ -1,6 +1,19 @@
 <% include header %>
 <div class="markdown">
   <h1><a href="/package/<%= project.name %>/"><%= project.name %></a></h1>
+  <aside class="aside-right">
+    <% if (doclink) { %>
+    <a href="<%= doclink %>" title="Documentation hosted in spmjs">
+      <i class="iconfont iconfont-doclink">&#xf012b;</i>
+    </a>
+    <% } %>
+    <% if (project.repository && project.repository.url) { %>
+    <a href="<%= project.repository.url %>" class="github-stars" title="github star count">
+      <i class="iconfont iconfont-star">&#xf0290;</i>
+      <span class="github-star-count"></span>
+    </a>
+    <% } %>
+  </aside>
   <hr>
   <p><%= project.description %></p>
   <pre>spm install <%= project.name %></pre>
@@ -12,8 +25,8 @@
     <tr>
       <th>Versions</th>
       <td>
-      <% project.versions.forEach(function(version) { %>
-        <a href="<%= version %>"><%= version %></a>
+      <% project.versions.forEach(function(v) { %>
+        <a href="/package/<%= project.name %>/<%= v %>"><%= v %></a>
       <% }) %>
       </td>
     </tr>
@@ -21,16 +34,22 @@
       <th>Updated</th>
       <td><%= project.updated_at %></td>
     </tr>
+    <% if (project.keywords) { %>
+    <tr>
+      <th>Keywords</th>
+      <td><%= project.keywords %></td>
+    </tr>
+    <% } %>
     <% if (project.homepage) { %>
     <tr>
       <th>Homepage</th>
       <td><a href="<%= project.homepage %>"><%= project.homepage %></a></td>
     </tr>
     <% } %>
-    <% if (project.repository) { %>
+    <% if (project.repository && project.repository.url) { %>
     <tr>
       <th>Repository</th>
-      <td><%= project.repository.url %></td>
+      <td><a href="<%= project.repository.url %>"><%= project.repository.url %></a></td>
     </tr>
     <% } %>
     <% if (project.latest.dependencies) { %>
@@ -56,4 +75,27 @@
 <div class="markdown">
 <%- project.latest.readme %>
 </div>
+
+<script>
+seajs.use('$', function($) {
+  $('.github-stars').each(function(i, item) {
+    item = $(item);
+    var url = item.attr('href');
+    var match = url.match('github\.com[/:](.*)(\.git)$');
+    if (match) {
+      var repo = match[1];
+      $.ajax({
+        url: 'https://api.github.com/repos/' + repo,
+        dataType: 'jsonp',
+        success: function(data) {
+          var count = data.data.stargazers_count;
+          item.find('.github-star-count').html(count);
+          item.show();
+        }
+      });
+    }
+  });
+});
+
+</script>
 <% include footer %>

@@ -16,10 +16,10 @@
       <td><a href="<%= package.homepage %>"><%= package.homepage %></a></td>
     </tr>
     <% } %>
-    <% if (package.repository) { %>
+    <% if (package.repository && package.repository.url) { %>
     <tr>
       <th>Repository</th>
-      <td><%= package.repository.url %></td>
+      <td><a href="<%= package.repository.url %>"><%= package.repository.url %></a></td>
     </tr>
     <% } %>
     <% if (package.publisher) { %>
