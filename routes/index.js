@@ -7,6 +7,8 @@ var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
 var request = require('request');
+var elastical = require('elastical');
+var client = new elastical.Client();
 
 exports.index = function(req, res) {
   feed.get(function(recentlyUpdates) {
@@ -75,10 +77,19 @@ exports.search = function(req, res, next) {
     next();
     return;
   }
-  res.render('search', {
-    title: 'Search Result - ' + CONFIG.website.title,
+  client.search({
     query: query,
-    result: []
+    index: 'spmjs',
+    type: 'package',
+  }, function(err, results) {
+    results = results || { hits: [] };
+    res.render('search', {
+      title: 'Search Result - ' + CONFIG.website.title,
+      query: query,
+      result: results.hits.map(function(item) {
+        return item._source;
+      })
+    });
   });
 };
 

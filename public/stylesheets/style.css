@@ -271,6 +271,22 @@ footer {
   margin-right: 10px;
 }
 
+.cell {
+  background: #F9F9F8;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+.cell h3,
+.cell p {
+  margin: 0;
+}
+
+.search-count {
+  color: #888;
+  font-style: italic;
+}
 
 @media (max-width: 800px) {
   header {
