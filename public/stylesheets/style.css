@@ -189,7 +189,6 @@ header #logo,
 }
 
 .main {
-  border-bottom: 1px solid #ddd;
   min-height: 400px;
   margin-top: 40px;
   position: relative;
@@ -223,9 +222,12 @@ header #logo,
 }
 
 footer {
-  padding: 25px 0;
-  text-align: center;
+  padding: 20px 0;
   font-size: 14px;
+}
+
+footer a {
+  text-transform: uppercase;
 }
 
 .index-banner {

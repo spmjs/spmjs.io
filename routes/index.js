@@ -35,7 +35,7 @@ exports.project = function(req, res, next) {
       version: p.version
     });
     p.versions = p.getVersions();
-    p.latest.readme = marked(p.latest.readme);
+    p.latest.readme = marked(p.latest.readme || '');
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
       project: p,
@@ -54,7 +54,7 @@ exports.package = function(req, res, next) {
     version: version
   });
   if (p.md5) {
-    p.readme = marked(p.readme);
+    p.readme = marked(p.readme || '');
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       package: p
