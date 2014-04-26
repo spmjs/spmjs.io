@@ -155,11 +155,12 @@
   margin: 1.64em 0;
   padding: 7px;
   border: none;
-  border-left: 3px solid #F9F9F8;
-  padding-left: 10px;
+  border-left: 6px solid #F2F2F1;
+  padding-left: 12px;
   overflow: auto;
   line-height: 1.5;
   font-size: 0.96em;
+  border-radius: 6px 0 0 6px;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   color: #4c4c4c;
   background-color: #F9F9F8;
@@ -182,13 +183,11 @@
 .markdown td {
   text-align: left;
   padding: 3px 10px;
-  border: 1px solid #dadada;
-  border-width: 1px 0;
 }
 .markdown td {
   vertical-align: top;
 }
-.markdown tr:nth-child(even) {
+.markdown tr:nth-child(odd) {
   background-color: #fafafa;
 }
 .markdown iframe {
