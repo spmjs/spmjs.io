@@ -224,6 +224,7 @@ header #logo,
 footer {
   padding: 20px 0;
   font-size: 14px;
+  font-style: italic;
 }
 
 footer a {
