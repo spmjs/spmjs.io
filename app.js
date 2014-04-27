@@ -12,6 +12,7 @@ var favicon = require('static-favicon');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var serveStatic = require('serve-static');
 var fs = require('fs-extra');
 
@@ -52,6 +53,7 @@ app.use(require('./middlewares/raw-body')({
 }));
 app.use(bodyParser());
 app.use(cookieParser('spmjs'));
+app.use(session({ secret: 'keyboard cat', key: 'sid' }));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
@@ -61,11 +63,16 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/search', routes.search);
-app.get('/account', account.index);
-app.get('/account/setting', account.setting);
 app.get('/packages', routes.all);
 app.get('/package/:name', routes.project);
 app.get('/package/:name/:version', routes.package);
+
+app.get('/login', account.login);
+app.get('/callback', account.callback);
+app.get('/logout', account.logout);
+app.get('/account', account.index);
+app.get('/account/:user', account.user);
+app.post('/addOwnership', account.addOwnership);
 
 app.get('/repository', repository.index);
 app.post('/repository/upload', multipartMiddleware, repository.upload);

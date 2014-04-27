@@ -118,8 +118,6 @@ Project.prototype = {
   }
 };
 
-Project.getByUser = function() {};
-
 Project.getAll = function() {
   return fs.readdirSync(path.join(CONFIG.wwwroot, 'repository'));
 };

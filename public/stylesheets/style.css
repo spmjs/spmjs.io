@@ -41,6 +41,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   font: 16px/1.62 "Open Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
   color: #555;
@@ -289,6 +295,33 @@ footer a {
 .search-count {
   color: #888;
   font-style: italic;
+}
+
+.profile {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile label {
+  display: inline-block;
+  width: 60px;
+}
+
+.add-package-form {
+  margin: 32px 0;
+}
+
+.add-package-form input {
+  border-radius: 2px;
+  border: 1px solid #bbb;
+  padding: 7px 12px;
+  vertical-align: middle;
+  width: 180px;
+  margin-right: 6px;
+}
+
+.add-package-form button {
+  margin-right: 6px;
 }
 
 @media (max-width: 800px) {

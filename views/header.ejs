@@ -41,12 +41,27 @@
             <i class="iconfont">&#xf0036;</i>
             Cli</a>
         </li>
+        <% if (user) { %>
         <li>
-          <a href="">
+          <a href="/account">
+            <i class="iconfont">&#xf0006;</i>
+            <%= user.login %>
+          </a>
+        </li>
+        <li>
+          <a href="/logout">
+            <i class="iconfont">&#xf0204;</i>
+            logout
+          </a>
+        </li>
+        <% } else { %>
+        <li>
+          <a href="/login">
             <i class="iconfont">&#xf01ca;</i>
             Sign in
           </a>
         </li>
+        <% } %>
       </ul>
     </div>
   </header>

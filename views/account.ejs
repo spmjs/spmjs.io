@@ -1,0 +1,44 @@
+<% include header %>
+<div class="profile">
+  <img class="profile-avatar" align="right" alt="" src="<%=  profile.avatar_url %>s=180">
+  <h2><%= profile.login %></h2>
+  <p>
+    <label>Name:</label>
+    <%= profile.name %>
+  </p>
+  <p>
+    <label>Github:</label>
+    <a href="<%= profile.html_url %>"><%= profile.html_url %></a>
+  </p>
+  <p>
+    <label>Email:</label>
+    <a href="mailto:<%= profile.email %>"><%= profile.email %></a>
+  </p>
+  <p>
+    <label>Blog:</label>
+    <a href="<%= profile.blog %>"><%= profile.blog %></a>
+  </p>
+</div>
+
+<div class="packages">
+  <h2>Owned Packages</h2>
+  <% if (ownPackages.length > 0) { %>
+    <% ownPackages.forEach(function(name) { %>
+      <a href="/package/<%= name %>"><%= name %></a>
+    <% }) %>
+  <% } else { %>
+    No owned packages.
+  <% } %>
+  <% if (editable) { %>
+  <div class="add-package-form">
+    <form action="/addOwnership" method="post">
+      <input name="package" placeholder="Input package name">
+      <button class="button positive">Add Ownership</button>
+      <% if (noexistedpackage) { %>
+      <span>package "<%= noexistedpackage %>" not existed</span>
+      <% } %>
+    </form>
+  </div>
+  <% } %>
+</div>
+<% include footer %>
