@@ -62,7 +62,7 @@ exports.callback = function(req, res) {
       }, function(err, response, body) {
         if (!err && response.statusCode === 200) {
           var user = JSON.parse(body);
-          user.token = token;
+          user.token = token.access_token;
           req.session.user = user;
           // save user to database
           account.save(user, function() {

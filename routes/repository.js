@@ -8,6 +8,7 @@ var tar = require('tarball-extract');
 var hook = require('../lib/hook');
 var elastical = require('elastical');
 var client = new elastical.Client();
+var account = require('../models/account');
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -55,6 +56,25 @@ exports.package = {
       res.send(200, JSON.stringify(p));
     }
   },
+  checkPermission: function(req, res, next) {
+    var name = req.body.name.toLowerCase();
+    var authkey = req.headers.authorization.replace(/^Yuan /, '');
+    if (CONFIG.authorize !== 'anonymous') {
+      account.getAccountByAuthkey(authkey, function(publisher) {
+        if (!publisher) {
+          return abortify(res, { code: 401 });
+        }
+        var permission = account.checkPermission(publisher, name);
+        if (!permission) {
+          return abortify(res, { code: 403 });
+        }
+        req.body.publisher = publisher;
+        next();
+      });
+    } else {
+      next();
+    }
+  },
   post: function(req, res) {
     var name = req.body.name.toLowerCase();
     if (CONFIG.reservedWords.split(' ').indexOf(name) >= 0) {
@@ -63,7 +83,7 @@ exports.package = {
         message: 'Sorry, package name is a reserved name.'
       });
     }
-
+    var name = req.body.name.toLowerCase();
     var data = CacheData = req.body;
     var isNewProject;
     Cache.project = new Project(data);

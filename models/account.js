@@ -29,7 +29,7 @@ exports.delete = function(id, callback) {
   account.remove(id, callback);
 };
 
-exports.getPackages = function(id) {
+var getPackages = exports.getPackages = function(id) {
   var res = [];
   Project.getAll().forEach(function(name) {
     var p = new Project({
@@ -41,6 +41,26 @@ exports.getPackages = function(id) {
     }
   });
   return res;
+};
+
+exports.checkPermission = function(id, name) {
+  if (!id) {
+    return false;
+  }
+  var packages = getPackages(id);
+  return packages.indexOf(name) >= 0;
+};
+
+exports.getAccountByAuthkey = function(authkey, callback) {
+  callback = callback || function() {};
+  account.find({token: authkey}, function(err, results) {
+    var keys = Object.keys(results);
+    if (keys.length === 1) {
+      callback(results[keys[0]].login);
+    } else {
+      callback();
+    }
+  });
 };
 
 exports.addPackage = function(id, name) {
