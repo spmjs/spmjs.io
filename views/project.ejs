@@ -56,7 +56,7 @@
       <th>Keywords</th>
       <td>
       <% project.keywords.forEach(function(word, i) { %>
-        <a href="/search/q=<%= word %>"><%= word %></a><% if(i!==project.keywords.length-1){ %>,<% } %>
+        <a href="/search?q=<%= word %>"><%= word %></a><% if(i!==project.keywords.length-1){ %>,<% } %>
       <% }) %>
       </td>
     </tr>
