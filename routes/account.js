@@ -19,7 +19,7 @@ exports.index = function(req, res) {
       user: req.session.user,
       profile: profile,
       ownPackages: account.getPackages(profile.login),
-      noexistedpackage: req.query.noexistedpackage,
+      errormessage: req.query.errormessage,
       editable: true
     });
   }
@@ -66,7 +66,7 @@ exports.callback = function(req, res) {
           req.session.user = user;
           // save user to database
           account.save(user, function() {
-            res.redirect('/');
+            res.redirect('/account');
           });
         }
       });
@@ -78,7 +78,28 @@ exports.logout = function(req, res) {
   res.redirect('/');
 };
 
-exports.addOwnership = function(req, res) {
-  var result = account.addPackage(req.session.user.login, req.body.package);
-  res.redirect('/account' + (result?'':'?noexistedpackage='+req.body.package));
+exports.ownership =  function(req, res) {
+  var result, errormessage;
+  if (req.method === 'POST') {
+    result = account.addPackage(req.session.user.login, req.body.package);
+    errormessage = result ?
+      '' : ('?errormessage=package ' + req.body.package + ' not existed');
+  } else if (req.method === 'DELETE') {
+    result = account.removePackage(req.session.user.login, req.body.package);
+    errormessage = result ?
+      '' : ('?errormessage=your are the only owner of ' + req.body.package);
+  }
+
+  if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+    if (errormessage) {
+      res.send(403, {
+        errormessage: errormessage
+      });
+    } else {
+      res.send(200);
+    }
+  } else {
+    console.log(errormessage);
+    res.redirect('/account' + errormessage);
+  }
 };

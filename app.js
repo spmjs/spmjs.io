@@ -72,7 +72,8 @@ app.get('/callback', account.callback);
 app.get('/logout', account.logout);
 app.get('/account', account.index);
 app.get('/account/:user', account.user);
-app.post('/addOwnership', account.addOwnership);
+app.post('/ownership', account.ownership);
+app.delete('/ownership', account.ownership);
 
 app.get('/repository', repository.index);
 app.post('/repository/upload', multipartMiddleware, repository.package.checkPermission, repository.upload);
