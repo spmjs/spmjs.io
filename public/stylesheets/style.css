@@ -164,13 +164,22 @@ header #logo,
 .search-form {
   margin-left: 60px;
   width: 30%;
+  position: relative;
+}
+
+.search-form .iconfont {
+  position: absolute;
+  left: 12px;
+  top: 1px;
+  font-size: 20px;
+  color: #555;
 }
 
 .search-form input {
   border-radius: 0.3125em;
   border: none;
   font-size: 1em;
-  padding: 0.5em 1em;
+  padding: 0.5em 1em 0.5em 2.4em;
   background: rgba(0,0,0,0.35);
   color: #ddd;
   width: 80%;
@@ -400,6 +409,15 @@ footer a {
   .search-form {
     width: 100%;
     margin-left: 0;
+  }
+  .search-form input {
+    padding: 0.5em 1em;
+  }
+  .search-form input:focus {
+    width: 80%;
+  }
+  .search-form .iconfont {
+    display: none;
   }
   .index-list {
     float: none;
