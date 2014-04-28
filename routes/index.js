@@ -9,6 +9,7 @@ var path = require('path');
 var request = require('request');
 var elastical = require('elastical');
 var client = new elastical.Client();
+var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
   feed.get(function(recentlyUpdates, submitors) {
@@ -19,6 +20,7 @@ exports.index = function(req, res) {
       title: CONFIG.website.title,
       count: Project.getAll().length,
       user: req.session.user,
+      anonymous: anonymous,
       recentlyUpdates: recentlyUpdates,
       submitors: submitors,
       mostDependents: dependent.getSortedDependents()
@@ -41,6 +43,7 @@ exports.project = function(req, res, next) {
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
       user: req.session.user,
+      anonymous: anonymous,
       project: p,
       doclink: docLink(p.name)
     });
@@ -61,6 +64,7 @@ exports.package = function(req, res, next) {
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       user: req.session.user,
+      anonymous: anonymous,
       package: p
     });
   } else {
@@ -72,6 +76,7 @@ exports.all = function(req, res) {
   res.render('packages', {
     title: 'All Packages - ' + CONFIG.website.title,
     user: req.session.user,
+    anonymous: anonymous,
     packages: Project.getAll()
   });
 };
@@ -91,6 +96,7 @@ exports.search = function(req, res, next) {
     res.render('search', {
       title: 'Search Result - ' + CONFIG.website.title,
       user: req.session.user,
+      anonymous: anonymous,
       query: query,
       result: results.hits.map(function(item) {
         return item._source;

@@ -23,6 +23,7 @@
     <% }) %>
     </ul>
   </section>
+  <% if (!anonymous) { %>
   <section class="index-list">
     <h2>Top submittors</h2>
     <ul>
@@ -31,5 +32,6 @@
     <% }) %>
     </ul>
   </section>
+  <% } %>
 </section>
 <% include footer %>

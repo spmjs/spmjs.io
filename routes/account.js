@@ -17,6 +17,7 @@ exports.index = function(req, res) {
     res.render('account', {
       title: CONFIG.website.title,
       user: req.session.user,
+      anonymous: CONFIG.authorize.type === 'anonymous',
       profile: profile,
       ownPackages: account.getPackages(profile.login),
       errormessage: req.query.errormessage,
@@ -33,6 +34,7 @@ exports.user = function(req, res, next) {
       res.render('account', {
         title: CONFIG.website.title,
         user: req.session.user,
+        anonymous: CONFIG.authorize.type === 'anonymous',
         profile: user,
         ownPackages: packages,
         editable: false
@@ -103,7 +105,6 @@ exports.ownership =  function(req, res) {
       res.send(200);
     }
   } else {
-    console.log(errormessage);
     res.redirect('/account' + errormessage);
   }
 };

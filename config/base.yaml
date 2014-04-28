@@ -6,7 +6,7 @@ default:
     GA: ''
   wwwroot: 'data'
   authorize:
-    type: 'github' # or anonymous
+    type: 'anonymous' # or anonymous
     clientId: 'b780a6efae6389352673'
     clientSecret: '35d009a30759ab3b9da4794128d336007030a466'
     baseURL: 'http://127.0.0.1:3000'

@@ -39,7 +39,11 @@
       <th>Owner</th>
       <td>
       <% project.owners.forEach(function(owner) { %>
-        <a href="/account/<%= owner %>"><%= owner %></a>
+        <% if (anonymous) { %>
+          <%= owner %>
+        <% } else { %>
+          <a href="/account/<%= owner %>"><%= owner %></a>
+        <% } %>
       <% }) %>
       </td>
     </tr>

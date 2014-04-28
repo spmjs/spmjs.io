@@ -9,6 +9,7 @@ var hook = require('../lib/hook');
 var elastical = require('elastical');
 var client = new elastical.Client();
 var account = require('../models/account');
+var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
@@ -59,7 +60,9 @@ exports.package = {
   checkPermission: function(req, res, next) {
     var name = req.params.name || req.body.name;
     var authkey = req.headers.authorization.replace(/^Yuan /, '');
-    if (CONFIG.authorize.type !== 'anonymous') {
+    if (anonymous) {
+      next();
+    } else {
       account.getAccountByAuthkey(authkey, function(publisher) {
         if (!publisher) {
           return abortify(res, { code: 401 });
@@ -71,8 +74,6 @@ exports.package = {
         req.body.publisher = publisher;
         next();
       });
-    } else {
-      next();
     }
   },
   post: function(req, res) {

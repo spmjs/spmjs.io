@@ -13,7 +13,13 @@
     <% if (package.publisher) { %>
     <tr>
       <th>Publisher</th>
-      <td><a href="/account/<%= package.publisher %>"><%= package.publisher %></a></td>
+      <td>
+        <% if (anonymous) { %>
+          <%= package.publisher %>
+        <% } else { %>
+          <a href="/account/<%= package.publisher %>"><%= package.publisher %></a>
+        <% } %>
+      </td>
     </tr>
     <% } %>
     <% if (package.homepage) { %>
@@ -26,12 +32,6 @@
     <tr>
       <th>Repository</th>
       <td><a href="<%= package.repository.url %>"><%= package.repository.url %></a></td>
-    </tr>
-    <% } %>
-    <% if (package.publisher) { %>
-    <tr>
-      <th>Publisher</th>
-      <td><%= package.publisher %></td>
     </tr>
     <% } %>
     <% if (package.dependencies) { %>
