@@ -10,6 +10,12 @@
       <th>Updated</th>
       <td><%= package.updated_at %></td>
     </tr>
+    <% if (package.publisher) { %>
+    <tr>
+      <th>Publisher</th>
+      <td><a href="/account/<%= package.publisher %>"><%= package.publisher %></a></td>
+    </tr>
+    <% } %>
     <% if (package.homepage) { %>
     <tr>
       <th>Homepage</th>
