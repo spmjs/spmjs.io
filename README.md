@@ -1,6 +1,6 @@
 ## TODO:
 
-1. account & owner & publisher & ANONYMOUS
+1. ~~account & owner & publisher & ANONYMOUS~~
 2. ~~force~~
 3. ~~unpublish~~
 4. ~~upload doc~~
