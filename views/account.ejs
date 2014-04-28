@@ -18,6 +18,17 @@
     <label>Blog:</label>
     <a href="<%= profile.blog %>"><%= profile.blog %></a>
   </p>
+  <p>
+    <label>token:</label>
+    <input type="text" id="token" readonly size="38" value="<%= profile.token %>">
+  </p>
+  <p>
+    <label></label>
+    <span class="security-tip">
+      <i class="iconfont">&#xf00c9;</i>
+      Copy token above for "spm login", and do not tell it to anybody.
+    </span>
+  </p>
 </div>
 
 <div class="packages">
@@ -37,7 +48,7 @@
   <% if (editable) { %>
   <div class="add-package-form">
     <form action="/ownership" method="POST">
-      <input name="package" placeholder="Input package name">
+      <input type="text" name="package" placeholder="Input package name">
       <button class="button positive">Add Ownership</button>
       <% if (errormessage) { %>
       <span class="error-message"><%= errormessage %></span>
@@ -64,6 +75,10 @@ seajs.use(['$'], function($) {
         }
       }
     })
+  });
+
+  $('#token').focus(function() {
+    $(this).select();
   });
 });
 </script>

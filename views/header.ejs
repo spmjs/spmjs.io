@@ -57,9 +57,9 @@
         </li>
         <% } else { %>
         <li>
-          <a href="/login">
+          <a id="login" href="/login">
             <i class="iconfont">&#xf01ca;</i>
-            Sign in
+            <span>Sign in</span>
           </a>
         </li>
         <% } %>
@@ -67,6 +67,13 @@
       </ul>
     </div>
   </header>
+  <script>
+  seajs.use(['$'], function($) {
+    $('#login').click(function() {
+      $(this).find('span').html('Login..');
+    });
+  });
+  </script>
   <section class="index-banner">
     <div class="container">
       <h2>spm</h2>
