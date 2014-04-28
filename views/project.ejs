@@ -1,6 +1,9 @@
 <% include header %>
 <div class="markdown">
-  <h1><a href="/package/<%= project.name %>/"><%= project.name %></a></h1>
+  <h1>
+    <a href="/package/<%= project.name %>/"><%= project.name %></a>
+    <img class="badge" src="/badge/<%= project.name %>">
+  </h1>
   <aside class="aside-right">
     <% if (doclink) { %>
     <a href="<%= doclink %>" title="Documentation hosted in spmjs">

@@ -220,11 +220,10 @@ header #logo,
 }
 
 .aside-right {
-  font-size: 16px;
   font-style: italic;
   position: absolute;
   right: 10px;
-  top: 20px;
+  top: 18px;
 }
 
 .aside-right,
@@ -238,9 +237,9 @@ header #logo,
 }
 
 .aside-right i {
-  color: #777!important;
-  margin-left: 10px;
-  margin-right: 0;
+  margin-left: 15px;
+  margin-right: -4px;
+  font-size: 20px;
 }
 
 .github-stars {
@@ -440,4 +439,9 @@ footer a {
 
 .packages {
   margin-bottom: 50px;
+}
+
+img.badge {
+  vertical-align: middle;
+  padding-left: 12px;
 }

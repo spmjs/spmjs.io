@@ -66,6 +66,7 @@ app.get('/search', routes.search);
 app.get('/packages', routes.all);
 app.get('/package/:name', routes.project);
 app.get('/package/:name/:version', routes.package);
+app.get('/badge/:name', routes.badge);
 
 app.get('/login', account.login);
 app.get('/callback', account.callback);

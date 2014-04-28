@@ -108,7 +108,7 @@ Project.prototype = {
   },
 
   getVersions: function() {
-    return Object.keys(this.packages);
+    return Object.keys(this.packages || []);
   },
 
   getLatestVersion: function() {

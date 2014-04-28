@@ -9,6 +9,7 @@ var path = require('path');
 var request = require('request');
 var elastical = require('elastical');
 var client = new elastical.Client();
+var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
@@ -104,6 +105,15 @@ exports.search = function(req, res, next) {
       })
     });
   });
+};
+
+exports.badge = function(req, res) {
+  var name = req.params.name;
+  var p = new Project({
+    name: name
+  });
+  var version = p.getLatestVersion();
+  badge(res, name, version);
 };
 
 function docLink(name) {
