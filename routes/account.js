@@ -2,9 +2,9 @@ var request = require('request');
 var account = require('../models/account');
 
 var githubToken = require('github-token')({
-  githubClient: 'b780a6efae6389352673',
-  githubSecret: '35d009a30759ab3b9da4794128d336007030a466',
-  baseURL: 'http://127.0.0.1:3000',
+  githubClient: CONFIG.authorize.clientId,
+  githubSecret: CONFIG.authorize.clientSecret,
+  baseURL: CONFIG.authorize.baseURL,
   callbackURI: '/callback',
   scope: 'user' // optional, default scope is set to user
 });

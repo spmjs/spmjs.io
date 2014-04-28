@@ -5,5 +5,9 @@ default:
     title: 'spmjs'
     GA: ''
   wwwroot: 'data'
-  authorize: 'github' # or github
-  reservedWords: 'root admin administrator bot robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback'
+  authorize:
+    type: 'github' # or anonymous
+    clientId: 'b780a6efae6389352673'
+    clientSecret: '35d009a30759ab3b9da4794128d336007030a466'
+    baseURL: 'http://127.0.0.1:3000'
+  reservedWords: 'root admin administrator bot robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback tag tags'

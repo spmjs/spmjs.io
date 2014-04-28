@@ -59,7 +59,7 @@ exports.package = {
   checkPermission: function(req, res, next) {
     var name = req.params.name || req.body.name;
     var authkey = req.headers.authorization.replace(/^Yuan /, '');
-    if (CONFIG.authorize !== 'anonymous') {
+    if (CONFIG.authorize.type !== 'anonymous') {
       account.getAccountByAuthkey(authkey, function(publisher) {
         if (!publisher) {
           return abortify(res, { code: 401 });
