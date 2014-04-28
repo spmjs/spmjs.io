@@ -28,8 +28,8 @@
     <tr>
       <th>Versions</th>
       <td>
-      <% project.versions.forEach(function(v) { %>
-        <a href="/package/<%= project.name %>/<%= v %>"><%= v %></a>
+      <% project.versions.forEach(function(v, i) { %>
+        <a href="/package/<%= project.name %>/<%= v %>"><%= v %></a><% if(i!==project.versions.length-1){ %>,<% } %>
       <% }) %>
       </td>
     </tr>
@@ -41,11 +41,11 @@
     <tr>
       <th>Owner</th>
       <td>
-      <% project.owners.forEach(function(owner) { %>
+      <% project.owners.forEach(function(owner, i) { %>
         <% if (anonymous) { %>
-          <%= owner %>
+          <%= owner %><% if(i!==project.owners.length-1){ %>,<% } %>
         <% } else { %>
-          <a href="/account/<%= owner %>"><%= owner %></a>
+          <a href="/account/<%= owner %>"><%= owner %></a><% if(i!==project.owners.length-1){ %>,<% } %>
         <% } %>
       <% }) %>
       </td>
@@ -54,7 +54,11 @@
     <% if (project.keywords) { %>
     <tr>
       <th>Keywords</th>
-      <td><%= project.keywords %></td>
+      <td>
+      <% project.keywords.forEach(function(word, i) { %>
+        <a href="/search/q=<%= word %>"><%= word %></a><% if(i!==project.keywords.length-1){ %>,<% } %>
+      <% }) %>
+      </td>
     </tr>
     <% } %>
     <% if (project.homepage) { %>
