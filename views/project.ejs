@@ -66,13 +66,13 @@
       <td><a href="<%= project.repository.url %>"><%= project.repository.url %></a></td>
     </tr>
     <% } %>
-    <% if (project.latest.dependencies) { %>
+    <% if (project.latest.dependencies && project.latest.dependencies.length > 0) { %>
     <tr>
       <th>Dependencies</th>
       <td><%= project.latest.dependencies.join(', ') %></td>
     </tr>
     <% } %>
-    <% if (project.latest.dependents) { %>
+    <% if (project.latest.dependents && project.latest.dependents.length > 0) { %>
     <tr>
       <th>Dependents</th>
       <td><%= project.latest.dependents.join(', ') %></td>

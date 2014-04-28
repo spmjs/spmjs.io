@@ -34,13 +34,13 @@
       <td><a href="<%= package.repository.url %>"><%= package.repository.url %></a></td>
     </tr>
     <% } %>
-    <% if (package.dependencies) { %>
+    <% if (package.dependencies && package.dependencies.length > 0) { %>
     <tr>
       <th>Dependencies</th>
       <td><%= package.dependencies.join(', ') %></td>
     </tr>
     <% } %>
-    <% if (package.dependents) { %>
+    <% if (package.dependents && package.dependents.length > 0) { %>
     <tr>
       <th>Dependents</th>
       <td><%= package.dependents.join(', ') %></td>
