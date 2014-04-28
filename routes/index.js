@@ -22,6 +22,7 @@ exports.index = function(req, res) {
       count: Project.getAll().length,
       user: req.session.user,
       anonymous: anonymous,
+      GA: CONFIG.website.GA,
       recentlyUpdates: recentlyUpdates,
       submitors: submitors,
       publishCount: publishCount,
@@ -46,6 +47,7 @@ exports.project = function(req, res, next) {
       title: p.name + ' - '+ CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
+      GA: CONFIG.website.GA,
       project: p,
       doclink: docLink(p.name)
     });
@@ -67,6 +69,7 @@ exports.package = function(req, res, next) {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
+      GA: CONFIG.website.GA,
       package: p
     });
   } else {
@@ -79,6 +82,7 @@ exports.all = function(req, res) {
     title: 'All Packages - ' + CONFIG.website.title,
     user: req.session.user,
     anonymous: anonymous,
+    GA: CONFIG.website.GA,
     packages: Project.getAll()
   });
 };
@@ -99,6 +103,7 @@ exports.search = function(req, res, next) {
       title: 'Search Result - ' + CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
+      GA: CONFIG.website.GA,
       query: query,
       result: results.hits.map(function(item) {
         return item._source;

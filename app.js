@@ -91,7 +91,10 @@ app.get('/repository/:name/:version/:filename', repository.filename.get);
 // 404
 app.get('*', function(req, res){
   res.render('404.ejs', {
-    title: 'No Found - ' + CONFIG.website.title
+    title: 'No Found - ' + CONFIG.website.title,
+    anonymous: CONFIG.authorize.type === 'anonymous',
+    user: req.session.user,
+    GA: CONFIG.website.GA
   });
 });
 

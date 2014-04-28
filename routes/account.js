@@ -1,5 +1,6 @@
 var request = require('request');
 var account = require('../models/account');
+var anonymous = CONFIG.authorize.type === 'anonymous';
 
 var githubToken = require('github-token')({
   githubClient: CONFIG.authorize.clientId,
@@ -17,7 +18,8 @@ exports.index = function(req, res) {
     res.render('account', {
       title: CONFIG.website.title,
       user: req.session.user,
-      anonymous: CONFIG.authorize.type === 'anonymous',
+      anonymous: anonymous,
+      GA: CONFIG.website.GA,
       profile: profile,
       ownPackages: account.getPackages(profile.login),
       errormessage: req.query.errormessage,
@@ -36,7 +38,8 @@ exports.user = function(req, res, next) {
       res.render('account', {
         title: CONFIG.website.title,
         user: req.session.user,
-        anonymous: CONFIG.authorize.type === 'anonymous',
+        anonymous: anonymous,
+        GA: CONFIG.website.GA,
         profile: user,
         ownPackages: packages,
         editable: false
