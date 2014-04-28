@@ -261,9 +261,17 @@ footer a {
   margin-right: 10px;
 }
 
+.index-box {
+  display: -moz-box; /* Firefox */
+  display: -webkit-box; /* Safari and Chrome */
+  display: box;
+  width: 100%;
+}
+
 .index-list {
-  float: left;
-  width: 50%;
+  -moz-box-flex: 1.0;
+  -webkit-box-flex: 1.0;
+  box-flex: 1.0;
 }
 
 .index-list h2 {
