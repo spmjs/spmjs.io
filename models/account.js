@@ -5,7 +5,6 @@ var account = nStore.new(path.join(CONFIG.wwwroot, 'db', 'account.db'));
 var Project = require('./project');
 
 var save = exports.save = function(user, callback) {
-  console.log(user.login, user);
   account.save(user.login, user, function(err) {
     callback && callback(user);
   });

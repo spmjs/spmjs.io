@@ -192,7 +192,6 @@ exports.upload = function(req, res) {
 
   tar.extractTarball(tarball.path, fpath, function(err) {
     if(err) {
-      console.log(err);
       return abortify(res, { code: 415 });
     }
     var dest;
