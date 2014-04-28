@@ -10,4 +10,4 @@
 8. ~~search~~
 9. ~~dependents~~
 11. ~~reserved words~~
-12. badge
+12. ~~badge~~
