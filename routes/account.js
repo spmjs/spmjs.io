@@ -80,6 +80,23 @@ exports.logout = function(req, res) {
   res.redirect('/');
 };
 
+// for spm login
+exports.authorize = function(req, res) {
+  var id = req.body.account;
+  var token = req.body.token;
+  account.authorize(id, token, function(result) {
+    if (result) {
+      res.send(200, {
+        data: token
+      });
+    } else {
+      res.send(403, {
+        message: 'username or token is wrong.'
+      });
+    }
+  });
+};
+
 exports.ownership =  function(req, res) {
   if (!req.session.user) {
     res.send(401);

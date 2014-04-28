@@ -71,6 +71,7 @@ app.get('/login', account.login);
 app.get('/callback', account.callback);
 app.get('/logout', account.logout);
 app.get('/account', account.index);
+app.post('/account/login', account.authorize);
 app.get('/account/:user', account.user);
 app.post('/ownership', account.ownership);
 app.delete('/ownership', account.ownership);
