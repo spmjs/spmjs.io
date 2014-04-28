@@ -30,6 +30,8 @@ exports.user = function(req, res, next) {
   account.get(req.params.user, function(user) {
     if (user) {
       var profile = user;
+      // not show token in public profile
+      profile.token = null;
       var packages = account.getPackages(profile.login);
       res.render('account', {
         title: CONFIG.website.title,

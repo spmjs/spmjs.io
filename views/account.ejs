@@ -18,6 +18,7 @@
     <label>Blog:</label>
     <a href="<%= profile.blog %>"><%= profile.blog %></a>
   </p>
+  <% if (profile.token) { %>
   <p>
     <label>token:</label>
     <input type="text" id="token" readonly size="38" value="<%= profile.token %>">
@@ -29,6 +30,7 @@
       Copy token above for "spm login", and do not tell it to anybody.
     </span>
   </p>
+  <% } %>
 </div>
 
 <div class="packages">
