@@ -11,7 +11,7 @@ var elastical = require('elastical');
 var client = new elastical.Client();
 
 exports.index = function(req, res) {
-  feed.get(function(recentlyUpdates) {
+  feed.get(function(recentlyUpdates, submitors) {
     recentlyUpdates.forEach(function(item) {
       item.fromNow = moment(item.time).fromNow();
     });
@@ -20,6 +20,7 @@ exports.index = function(req, res) {
       count: Project.getAll().length,
       user: req.session.user,
       recentlyUpdates: recentlyUpdates,
+      submitors: submitors,
       mostDependents: dependent.getSortedDependents()
     });
   });
