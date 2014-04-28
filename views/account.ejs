@@ -26,7 +26,9 @@
     <% ownPackages.forEach(function(name) { %>
       <span class="package">
         <a href="/package/<%= name %>"><%= name %></a>
+        <% if (editable) { %>
         <i title="remove ownership of this package" class="iconfont" data-target="<%= name %>">&#xf000d;</i>
+        <% } %>
       </span>
     <% }) %>
   <% } else { %>

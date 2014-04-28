@@ -79,6 +79,10 @@ exports.logout = function(req, res) {
 };
 
 exports.ownership =  function(req, res) {
+  if (!req.session.user) {
+    res.send(401);
+    return;
+  }
   var result, errormessage;
   if (req.method === 'POST') {
     result = account.addPackage(req.session.user.login, req.body.package);

@@ -336,15 +336,18 @@ footer a {
   margin-right: 6px;
 }
 
+.package {
+  position:relative;
+  margin-right: 10px;
+}
 
 .package i {
   cursor: pointer;
   visibility: hidden;
   opacity: 0.6;
-  margin-left: -6px;
-  margin-right: -3px;
-  position:relative;
+  position:absolute;
   top: -8px;
+  right: -10px;
 }
 
 .package i:hover {
