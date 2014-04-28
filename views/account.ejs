@@ -21,7 +21,7 @@
 </div>
 
 <div class="packages">
-  <h2>Owned Packages</h2>
+  <h2>Owned Packages (<%= ownPackages.length || 0 %>)</h2>
   <% if (ownPackages.length > 0) { %>
     <% ownPackages.forEach(function(name) { %>
       <a href="/package/<%= name %>"><%= name %></a>
