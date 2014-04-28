@@ -75,14 +75,14 @@ app.get('/account/:user', account.user);
 app.post('/addOwnership', account.addOwnership);
 
 app.get('/repository', repository.index);
-app.post('/repository/upload', multipartMiddleware, repository.upload);
+app.post('/repository/upload', multipartMiddleware, repository.package.checkPermission, repository.upload);
 app.get('/repository/search', repository.search);
 app.get('/repository/:name', repository.project.get);
 app.delete('/repository/:name', repository.project.delete);
 app.get('/repository/:name/:version', repository.package.get);
 app.post('/repository/:name/:version', repository.package.checkPermission, repository.package.post);
 app.put('/repository/:name/:version', repository.package.put);
-app.delete('/repository/:name/:version', repository.package.delete);
+app.delete('/repository/:name/:version', repository.package.checkPermission, repository.package.delete);
 app.get('/repository/:name/:version/:filename', repository.filename.get);
 
 // 404

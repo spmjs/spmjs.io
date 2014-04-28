@@ -57,7 +57,7 @@ exports.package = {
     }
   },
   checkPermission: function(req, res, next) {
-    var name = req.body.name.toLowerCase();
+    var name = req.params.name || req.body.name;
     var authkey = req.headers.authorization.replace(/^Yuan /, '');
     if (CONFIG.authorize !== 'anonymous') {
       account.getAccountByAuthkey(authkey, function(publisher) {
