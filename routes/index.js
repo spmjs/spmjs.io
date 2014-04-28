@@ -12,7 +12,7 @@ var client = new elastical.Client();
 var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
-  feed.get(function(recentlyUpdates, submitors) {
+  feed.stat(function(recentlyUpdates, submitors, publishCount) {
     recentlyUpdates.forEach(function(item) {
       item.fromNow = moment(item.time).fromNow();
     });
@@ -23,6 +23,7 @@ exports.index = function(req, res) {
       anonymous: anonymous,
       recentlyUpdates: recentlyUpdates,
       submitors: submitors,
+      publishCount: publishCount,
       mostDependents: dependent.getSortedDependents()
     });
   });
