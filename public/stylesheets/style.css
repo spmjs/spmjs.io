@@ -1,26 +1,14 @@
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+  src: local('Open Sans'), local('OpenSans'), url(/fonts/OpenSans.woff) format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Open Sans Light Italic'), local('OpenSansLight-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/PRmiXeptR36kaC0GEAetxvR_54zmj3SbGZQh3vCOwvY.woff) format('woff');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/fonts/OpenSans-Bold.woff) format('woff');
 }
 
 @font-face {
@@ -127,6 +115,7 @@ input[type=text] {
 
 input[type=text]:focus {
   border-color: #999;
+  outline: none;
 }
 
 .container {
@@ -194,6 +183,7 @@ header #logo,
 .search-form input:focus {
   width: 120%;
   background: rgba(0,0,0,0.8);
+  outline: none;
 }
 
 .navigation {
@@ -272,7 +262,7 @@ footer a {
   background: #4880AE;
   color: #fff;
   padding: 20px 0 40px;
-  text-shadow: 0 0 90px #fff, 0 0 150px #fff;
+  text-shadow: 0 0 90px #fff, 0 0 200px #fff;
 }
 
 .index-banner h2 {
@@ -289,6 +279,16 @@ footer a {
 .index-banner .button {
   margin-top: 34px;
   margin-right: 10px;
+}
+
+.index-banner .button .iconfont {
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.index-banner .button:hover .iconfont {
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
 }
 
 .index-box {
@@ -436,4 +436,8 @@ footer a {
 
 .security-tip .iconfont {
   color: #E49208;
+}
+
+.packages {
+  margin-bottom: 50px;
 }
