@@ -57,7 +57,7 @@ Project.prototype = {
     });
     if (p.md5) {
       p.delete();
-      this.version = this.getLatestVerion();
+      this.version = this.getLatestVersion();
       this.save();
     }
     return this;
@@ -99,7 +99,7 @@ Project.prototype = {
     delete pkg.readme;
 
     this.packages[data.version] = pkg;
-    this.version = this.getLatestVerion();
+    this.version = this.getLatestVersion();
 
     this['created_at'] = this['created_at'] || now;
     this['updated_at'] = now;
@@ -111,7 +111,7 @@ Project.prototype = {
     return Object.keys(this.packages);
   },
 
-  getLatestVerion: function() {
+  getLatestVersion: function() {
     return this.getVersions().sort(function(a, b) {
       return semver.lt(a, b);
     })[0];
