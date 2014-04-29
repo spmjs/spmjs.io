@@ -87,8 +87,13 @@ exports.package = {
         message: 'Sorry, package name is a reserved name.'
       });
     }
-    var name = req.body.name.toLowerCase();
+    var name = req.body.name;
     var data = CacheData = req.body;
+
+    // fill spm key in package
+    data.spm = data.spm || {};
+    data.spm.main = data.spm.main || 'index.js';
+
     var isNewProject;
     Cache.project = new Project(data);
     Cache.package = new Package(data);
