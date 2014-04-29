@@ -53,6 +53,7 @@ a:hover {
 
 .button {
   -moz-user-select: none;
+  -webkit-font-smoothing: antialiased;
   background-color: #FAFAFA;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
   border: medium none;
@@ -110,7 +111,7 @@ a:hover {
 input[type=text] {
   border-radius: 3px;
   border: 1px solid #ccc;
-  padding: 7px 12px;
+  padding: 9px 12px;
   vertical-align: middle;
 }
 
