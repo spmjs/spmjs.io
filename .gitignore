@@ -20,6 +20,5 @@ node_modules/
 .settings
 .yml
 data
-elasticsearch*
 nohup.out
 spmjspid
