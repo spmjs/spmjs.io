@@ -145,8 +145,10 @@ seajs.use('$', function($) {
         dataType: 'jsonp',
         success: function(data) {
           var count = data.data.stargazers_count;
-          item.find('.github-star-count').html(count);
-          item.show();
+          if (count) {
+            item.find('.github-star-count').html(count);
+            item.show();
+          }
         }
       });
     }
