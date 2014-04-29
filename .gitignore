@@ -22,3 +22,4 @@ node_modules/
 data
 nohup.out
 spmjspid
+elasticsearch-1.1.1
