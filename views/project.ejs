@@ -37,7 +37,7 @@
       <th>Updated</th>
       <td><%= project.updated_at %></td>
     </tr>
-    <% if (project.keywords) { %>
+    <% if (project.keywords && project.keywords.length > 0) { %>
     <tr>
       <th>Keywords</th>
       <td>
