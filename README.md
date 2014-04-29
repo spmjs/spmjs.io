@@ -14,6 +14,10 @@ $ cd spmjs.io
 $ npm install
 ```
 
+## Config
+
+Modify `config/base.yaml` as you need.
+
 ## Deploy
 
 Start and stop server by a simple command.
