@@ -43,13 +43,21 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.latest.readme = marked(p.latest.readme || '');
+
+    var editable;
+    if (p.owners && p.owners.length > 0 && req.session.user &&
+        !anonymous && p.owners.indexOf(req.session.user.login) >= 0) {
+      editable = true;
+    }
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
       project: p,
-      doclink: docLink(p.name)
+      doclink: docLink(p.name),
+      editable: editable,
+      errormessage: req.query.errormessage
     });
   } else {
     next();

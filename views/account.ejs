@@ -36,49 +36,15 @@
 <div class="packages">
   <h2>Owned Packages (<%= ownPackages.length || 0 %>)</h2>
   <% if (ownPackages.length > 0) { %>
-    <% ownPackages.forEach(function(name) { %>
-      <span class="package">
-        <a href="/package/<%= name %>"><%= name %></a>
-        <% if (editable) { %>
-        <i title="remove ownership of this package" class="iconfont" data-target="<%= name %>">&#xf000d;</i>
-        <% } %>
-      </span>
+    <% ownPackages.forEach(function(name, i) { %>
+      <a href="/package/<%= name %>"><%= name %></a><% if(i!==ownPackages.length-1){ %>,<% } %>
     <% }) %>
   <% } else { %>
     No owned packages.
   <% } %>
-  <% if (editable) { %>
-  <div class="add-package-form">
-    <form action="/ownership" method="POST">
-      <input type="text" name="package" placeholder="Input package name">
-      <button class="button positive">Add Ownership</button>
-      <% if (errormessage) { %>
-      <span class="error-message"><%= errormessage %></span>
-      <% } %>
-    </form>
-  </div>
-  <% } %>
 </div>
 <script>
 seajs.use(['$'], function($) {
-  $('.package>i').click(function(e) {
-    var target = $(this).data('target');
-    $.ajax({
-      method: 'DELETE',
-      url: '/ownership',
-      data: {
-        package: target
-      },
-      complete: function(res) {
-        if (res.status === 200) {
-          location.reload();
-        } else {
-          location.href = res.responseJSON.errormessage;
-        }
-      }
-    })
-  });
-
   $('#token').click(function() {
     $(this).select();
   });

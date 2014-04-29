@@ -1,4 +1,5 @@
 var request = require('request');
+var url = require('url');
 var account = require('../models/account');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 
@@ -22,8 +23,7 @@ exports.index = function(req, res) {
       GA: CONFIG.website.GA,
       profile: profile,
       ownPackages: account.getPackages(profile.login),
-      errormessage: req.query.errormessage,
-      editable: true
+      errormessage: req.query.errormessage
     });
   }
 };
@@ -41,8 +41,7 @@ exports.user = function(req, res, next) {
         anonymous: anonymous,
         GA: CONFIG.website.GA,
         profile: user,
-        ownPackages: packages,
-        editable: false
+        ownPackages: packages
       });
     } else {
       next();
@@ -107,26 +106,31 @@ exports.ownership =  function(req, res) {
     res.send(401);
     return;
   }
-  var result, errormessage;
+  var errormessage;
+  var action;
+
   if (req.method === 'POST') {
-    result = account.addPackage(req.session.user.login, req.body.package);
-    errormessage = result ?
-      '' : ('?errormessage=package ' + req.body.package + ' not existed');
+    action = 'add';
+    errormessage = '?errormessage=account ' + req.body.account + ' not existed';
   } else if (req.method === 'DELETE') {
-    result = account.removePackage(req.session.user.login, req.body.package);
-    errormessage = result ?
-      '' : ('?errormessage=your are the only owner of ' + req.body.package);
+    action = 'remove';
+    errormessage = '?errormessage=your are the only owner of ' + req.body.package;
   }
 
-  if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-    if (errormessage) {
-      res.send(403, {
-        errormessage: errormessage
-      });
-    } else {
-      res.send(200);
+  account[action + 'Package'](req.body.account, req.body.package, function(result) {
+    if (result) {
+      errormessage = '';
     }
-  } else {
-    res.redirect('/account' + errormessage);
-  }
+    if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+      if (errormessage) {
+        res.send(403, {
+          errormessage: errormessage
+        });
+      } else {
+        res.send(200);
+      }
+    } else {
+      res.redirect(url.parse(req.headers.referer).pathname + errormessage);
+    }
+  });
 };

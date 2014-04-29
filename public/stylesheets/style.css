@@ -4,6 +4,7 @@
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'), url(/fonts/OpenSans.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -356,21 +357,22 @@ footer a {
   width: 60px;
 }
 
-.add-package-form {
-  margin: 32px 0;
+.add-ownership-form {
+  margin: 15px 0;
 }
 
-.add-package-form input {
-  margin-right: 6px;
+.add-ownership-form input {
+  margin-right: 5px;
+  width: 170px;
 }
 
-.add-package-form button {
-  margin-right: 6px;
+.add-ownership-form button {
+  margin-right: 8px;
 }
 
 .package {
   position:relative;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .package i {
@@ -379,7 +381,7 @@ footer a {
   opacity: 0.6;
   position:absolute;
   top: -8px;
-  right: -10px;
+  right: -12px;
 }
 
 .package i:hover {

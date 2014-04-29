@@ -63,22 +63,31 @@ exports.getAccountByAuthkey = function(authkey, callback) {
   });
 };
 
-exports.addPackage = function(id, name) {
+exports.addPackage = function(id, name, callback) {
+  callback = callback || function() {};
   var p = new Project({
     name: name
   });
-  if (p.packages) {
+  if (!p.packages) {
+    callback();
+    return;
+  }
+  account.get(id, function(err, result) {
+    if (!result) {
+      callback();
+      return;
+    }
     p.owners = p.owners || [];
-    if (p.packages && p.owners.indexOf(id) < 0) {
+    if (p.owners.indexOf(id) < 0) {
       p.owners.push(id);
       p.save();
-      return p.name;
     }
-    return true;
-  }
+    callback(p.name);
+  });
 };
 
-exports.removePackage = function(id, name) {
+exports.removePackage = function(id, name, callback) {
+  callback = callback || function() {};
   var p = new Project({
     name: name
   });
@@ -86,6 +95,7 @@ exports.removePackage = function(id, name) {
       p.owners.length !== 1) {
     p.owners.splice(p.owners.indexOf(id), 1);
     p.save();
-    return p.name;
+    callback(p.name);
   }
+  callback();
 };

@@ -37,20 +37,6 @@
       <th>Updated</th>
       <td><%= project.updated_at %></td>
     </tr>
-    <% if (project.owners) { %>
-    <tr>
-      <th>Owner</th>
-      <td>
-      <% project.owners.forEach(function(owner, i) { %>
-        <% if (anonymous) { %>
-          <%= owner %><% if(i!==project.owners.length-1){ %>,<% } %>
-        <% } else { %>
-          <a href="/account/<%= owner %>"><%= owner %></a><% if(i!==project.owners.length-1){ %>,<% } %>
-        <% } %>
-      <% }) %>
-      </td>
-    </tr>
-    <% } %>
     <% if (project.keywords) { %>
     <tr>
       <th>Keywords</th>
@@ -91,14 +77,63 @@
       <td><%= project.latest.spm.main %></td>
     </tr>
     <% } %>
+    <% if (project.owners) { %>
+    <tr>
+      <th>Owner</th>
+      <td>
+      <% project.owners.forEach(function(owner, i) { %>
+        <% if (anonymous) { %>
+          <%= owner %><% if(i!==project.owners.length-1){ %>,<% } %>
+        <% } else { %>
+          <span class="package">
+            <a href="/account/<%= owner %>"><%= owner %></a>
+            <% if (editable) { %>
+              <i title="click to remove ownership" data-target="<%= owner %>" class="iconfont">&#xf000d;</i>
+            <% } %>
+          </span>
+        <% } %>
+      <% }) %>
+      </td>
+    </tr>
+    <% } %>
   </table>
 </div>
+<% if (editable) { %>
+<div class="add-ownership-form">
+  <form action="/ownership" method="POST">
+    <input type="text" name="account" placeholder="Input account name">
+    <input type="hidden" name="package" value="<%= project.name %>">
+    <button class="button positive">Add Ownership</button>
+    <% if (errormessage) { %>
+    <span class="error-message"><%= errormessage %></span>
+    <% } %>
+  </form>
+</div>
+<% } %>
 <div class="markdown">
 <%- project.latest.readme %>
 </div>
 
 <script>
 seajs.use('$', function($) {
+  $('.package > i').click(function(e) {
+    var target = $(this).data('target');
+    $.ajax({
+      method: 'DELETE',
+      url: '/ownership',
+      data: {
+        package: '<%= project.name %>',
+        account: target
+      },
+      complete: function(res) {
+        if (res.status === 200) {
+          location.reload();
+        } else {
+          location.href = res.responseJSON.errormessage;
+        }
+      }
+    })
+  });
   $('.github-stars').each(function(i, item) {
     item = $(item);
     var url = item.attr('href');
