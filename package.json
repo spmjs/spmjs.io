@@ -1,9 +1,36 @@
 {
-  "name": "spmjs.org",
-  "version": "0.0.1",
+  "name": "spmjs.io",
+  "descrition": "The distributed packaging server for spm.",
   "private": true,
+  "version": "0.9.0",
+  "author": "afc163 <afc163@gmail.com>",
+  "keywords": [
+    "spm",
+    "package",
+    "cmd",
+    "browser",
+    "commonjs",
+    "seajs",
+    "static",
+    "component"
+  ],
+  "homepage": "http://spmjs.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spmjs/spmjs.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spmjs/spmjs.io/issues"
+  },
+  "licenses": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "scripts": {
-    "start": "node app.js"
+    "postinstall": "tar -xzvf elastic/elasticsearch.tar.gz",
+    "start": "./node_modules/forever/bin/forever start app.js && nohup elasticsearch-1.1.1/bin/elasticsearch -p spmjspid &",
+    "stop": "./node_modules/forever/bin/forever stop app.js && kill -9 `cat spmjspid`",
+    "reindex": "node elastic/reindexPackages.js"
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -29,5 +56,8 @@
     "express-session": "~1.0.3",
     "github-token": "~0.1.0",
     "raw-body": "~1.1.4"
+  },
+  "devDependencies": {
+    "forever": "~0.11.1"
   }
 }
