@@ -82,9 +82,10 @@ Project.prototype = {
       'description',
       'keywords',
       'repository',
-      'author',
       'license',
-      'maintainers'
+      'author',
+      'maintainers',
+      'owners'
     ];
 
     for (var key in data) {

@@ -60,18 +60,17 @@ exports.package = {
   checkPermission: function(req, res, next) {
     var name = req.params.name || req.body.name;
     var authkey = req.headers.authorization.replace(/^Yuan /, '');
-    console.log(name);
     var p = new Project({
       name: name
     });
-    if (anonymous || !p.packages /* new project */ ) {
+    if (anonymous) {
       next();
     } else {
       account.getAccountByAuthkey(authkey, function(publisher) {
         if (!publisher) {
           return abortify(res, { code: 401 });
         }
-        var permission = account.checkPermission(publisher, name);
+        var permission = (!p.created_at) || account.checkPermission(publisher, name);
         if (!permission) {
           return abortify(res, { code: 403 });
         }
@@ -94,6 +93,9 @@ exports.package = {
     Cache.project = new Project(data);
     Cache.package = new Package(data);
     var isNewProject = !Cache.project['created_at'];
+    if (isNewProject) {
+      data.owners = [data.publisher];
+    }
     Cache.project.update(data);
     if (isNewProject) {
       hook.emit('create:project', Cache.project);
