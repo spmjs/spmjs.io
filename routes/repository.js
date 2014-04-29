@@ -60,7 +60,11 @@ exports.package = {
   checkPermission: function(req, res, next) {
     var name = req.params.name || req.body.name;
     var authkey = req.headers.authorization.replace(/^Yuan /, '');
-    if (anonymous) {
+    console.log(name);
+    var p = new Project({
+      name: name
+    });
+    if (anonymous || !p.packages /* new project */ ) {
       next();
     } else {
       account.getAccountByAuthkey(authkey, function(publisher) {
