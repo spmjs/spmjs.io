@@ -46,4 +46,10 @@ $ npm run reindex
 ## TODO:
 
 - packages sync server
+- documentation in english
+  * some great features in index page
+  * 1. getting started (introduce and hello-world)
+  * 2. delelop a module
+  * 3. spm commands
+  * 4. diff from spm2.x
 - spm owner [ls|add|rm] ?
