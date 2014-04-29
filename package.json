@@ -28,8 +28,8 @@
   },
   "scripts": {
     "postinstall": "tar -xzvf elastic/elasticsearch.tar.gz",
-    "start": "./node_modules/forever/bin/forever start app.js && nohup elasticsearch-1.1.1/bin/elasticsearch -p spmjspid &",
-    "stop": "./node_modules/forever/bin/forever stop app.js && kill -9 `cat spmjspid`",
+    "start": "./node_modules/forever/bin/forever start app.js && nohup elasticsearch-1.1.1/bin/elasticsearch -p .spmjspid >/dev/null 2>&1 &",
+    "stop": "./node_modules/forever/bin/forever stop app.js && kill -9 `cat .spmjspid`",
     "reindex": "node elastic/reindexPackages.js"
   },
   "dependencies": {
