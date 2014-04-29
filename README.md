@@ -1,6 +1,5 @@
 # spmjs.io
 
-[![NPM version](https://badge.fury.io/js/spmjs.io.png)](http://badge.fury.io/js/spmjs.io)
 [![David Status](https://david-dm.org/afc163/spmjs.io.png)](https://david-dm.org/afc163/spmjs.io)
 
 The distributed packaging server perfectly matching with [spm3.x](https://github.com/spmjs/spm/tree/master).
