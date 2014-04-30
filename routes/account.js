@@ -32,7 +32,7 @@ exports.user = function(req, res, next) {
   account.get(req.params.user, function(user) {
     if (user) {
       var profile = user;
-      // not show token in public profile
+      // not show authkey in public profile
       profile.authkey = null;
       var packages = account.getPackages(profile.login);
       res.render('account', {
@@ -87,11 +87,11 @@ exports.logout = function(req, res) {
 // for spm login
 exports.authorize = function(req, res) {
   var id = req.body.account;
-  var token = req.body.token;
-  account.authorize(id, token, function(result) {
+  var authkey = req.body.authkey;
+  account.authorize(id, authkey, function(result) {
     if (result) {
       res.send(200, {
-        data: token
+        data: authkey
       });
     } else {
       res.send(403, {
