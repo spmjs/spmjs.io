@@ -45,6 +45,7 @@ $ npm run reindex
 ## TODO:
 
 - packages sync server
+- data backup
 - documentation in english
   * some great features in index page
   * 1. getting started (introduce and hello-world)
