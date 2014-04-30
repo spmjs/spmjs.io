@@ -44,9 +44,10 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.latest.readme = marked(p.latest.readme || '');
-    p.dependents = _.uniq(p.dependents || [], function(d) {
+    // jquery@1.7.2 -> jquery
+    p.latest.dependents = _.uniq((p.latest.dependents || []).map(function(d) {
       return d.split('@')[0];
-    });
+    }));
 
     var editable;
     if (p.owners && p.owners.length > 0 && req.session.user &&
@@ -77,6 +78,10 @@ exports.package = function(req, res, next) {
   });
   if (p.md5) {
     p.readme = marked(p.readme || '');
+    // jquery@1.7.2 -> jquery
+    p.dependents = _.uniq((p.dependents || []).map(function(d) {
+      return d.split('@')[0];
+    }));
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       user: req.session.user,
