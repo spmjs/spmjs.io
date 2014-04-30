@@ -33,8 +33,8 @@ exports.project = {
     if (!project.packages) {
       abortify(res, { code: 404 });
     } else {
-      project.delete();
       hook.emit('delete:project', project);
+      project.delete();
       res.send(200, {
         status: 'info',
         message: 'Project is deleted.'
@@ -155,8 +155,8 @@ exports.package = {
     if (!package.md5) {
       abortify(res, { code: 404 });
     } else {
-      project.remove(package.version);
       hook.emit('delete:package', package);
+      project.remove(package.version);
       res.send(200, {
         status: 'info',
         message: 'Package is deleted.'
