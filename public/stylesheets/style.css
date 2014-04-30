@@ -459,3 +459,8 @@ img.badge {
   float: left;
   width: 150px;
 }
+
+.page-404 img {
+  margin-top: 10px;
+  width: 400px;
+}
