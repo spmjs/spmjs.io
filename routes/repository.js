@@ -59,7 +59,7 @@ exports.package = {
   },
   checkPermission: function(req, res, next) {
     var name = req.params.name || req.body.name;
-    var authkey = req.headers.authorization.replace(/^Yuan /, '');
+    var authkey = (req.headers.authorization || '').replace(/^Yuan /, '');
     var p = new Project({
       name: name
     });
