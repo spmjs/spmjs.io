@@ -454,3 +454,8 @@ img.badge {
 .readme {
   margin-top: 40px;
 }
+
+.all-packages li {
+  float: left;
+  width: 150px;
+}

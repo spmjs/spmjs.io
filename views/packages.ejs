@@ -1,6 +1,6 @@
 <% include header %>
 <p>Total Packages: <%= packages.length %></p>
-<ul>
+<ul class="all-packages">
 <% packages.forEach(function(p) { %>
   <li><a href="/package/<%= p %>"><%= p %></a></li>
 <% }) %>
