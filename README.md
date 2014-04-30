@@ -46,6 +46,7 @@ $ npm run reindex
 
 - packages sync server
 - data backup
+- spm build integration
 - documentation in english
   * some great features in index page
   * 1. getting started (introduce and hello-world)
