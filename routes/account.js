@@ -2,6 +2,7 @@ var request = require('request');
 var url = require('url');
 var account = require('../models/account');
 var anonymous = CONFIG.authorize.type === 'anonymous';
+var crypto = require('crypto');
 
 var githubToken = require('github-token')({
   githubClient: CONFIG.authorize.clientId,
@@ -68,7 +69,8 @@ exports.callback = function(req, res) {
       }, function(err, response, body) {
         if (!err && response.statusCode === 200) {
           var user = JSON.parse(body);
-          user.authkey = token.access_token;
+          // authkey is the md5 value of github token
+          user.authkey = crypto.createHash('md5').update(token.access_token).digest('hex');
           req.session.user = user;
           // save user to database
           account.save(user, function() {
