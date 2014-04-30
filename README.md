@@ -47,8 +47,14 @@ $ npm run reindex
 - packages sync server
 - data backup
 - spm build integration
+- great features in index page
+  * for browser
+  * commonjs and seajs
+  * local development
+  * document hosted
+  * css module
+  * powerful command line tool
 - documentation in english
-  * some great features in index page
   * 1. getting started (introduce and hello-world)
   * 2. delelop a module
   * 3. spm commands
