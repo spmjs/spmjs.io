@@ -33,7 +33,7 @@ exports.user = function(req, res, next) {
     if (user) {
       var profile = user;
       // not show token in public profile
-      profile.token = null;
+      profile.authkey = null;
       var packages = account.getPackages(profile.login);
       res.render('account', {
         title: CONFIG.website.title,
@@ -68,7 +68,7 @@ exports.callback = function(req, res) {
       }, function(err, response, body) {
         if (!err && response.statusCode === 200) {
           var user = JSON.parse(body);
-          user.token = token.access_token;
+          user.authkey = token.access_token;
           req.session.user = user;
           // save user to database
           account.save(user, function() {
@@ -95,7 +95,7 @@ exports.authorize = function(req, res) {
       });
     } else {
       res.send(403, {
-        message: 'username or token is wrong.'
+        message: 'username or authkey is wrong.'
       });
     }
   });
