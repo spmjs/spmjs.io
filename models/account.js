@@ -1,24 +1,29 @@
 var path = require('path');
-var nStore = require('nstore');
-nStore = nStore.extend(require('nstore/query')());
-var account = nStore.new(path.join(CONFIG.wwwroot, 'db', 'account.db'));
+var Datastore = require('nedb');
+var account = new Datastore({
+  filename: path.join(CONFIG.wwwroot, 'db', 'account.db'),
+  autoload: true
+});
+
 var Project = require('./project');
 
 var save = exports.save = function(user, callback) {
-  account.save(user.login, user, function(err) {
+  account.update({login: user.login}, user, {upsert: true}, function(err) {
     callback && callback(user);
   });
 };
 
-exports.get = function(id, callback) {
-  account.get(id, function(err, result) {
+var getAccount = exports.get = function(id, callback) {
+  account.findOne({
+    login: id
+  }, function(err, result) {
     callback && callback(result);
   });
 };
 
-exports.authorize = function(id, authKey, callback) {
-  account.get(id, function(err, result) {
-    if (result && result.token !== authKey) {
+exports.authorize = function(id, authkey, callback) {
+  getAccount(id, function(result) {
+    if (result && result.authkey !== authkey) {
       result = null;
     }
     callback && callback(result);
@@ -26,7 +31,7 @@ exports.authorize = function(id, authKey, callback) {
 };
 
 exports.delete = function(id, callback) {
-  account.remove(id, callback);
+  account.remove({login: id}, {}, callback);
 };
 
 var getPackages = exports.getPackages = function(id) {
@@ -53,7 +58,7 @@ exports.checkPermission = function(id, name) {
 
 exports.getAccountByAuthkey = function(authkey, callback) {
   callback = callback || function() {};
-  account.find({token: authkey}, function(err, results) {
+  account.find({authkey: authkey}, function(err, results) {
     var keys = Object.keys(results);
     if (keys.length === 1) {
       callback(results[keys[0]].login);
@@ -72,7 +77,7 @@ exports.addPackage = function(id, name, callback) {
     callback();
     return;
   }
-  account.get(id, function(err, result) {
+  getAccount(id, function(result) {
     if (!result) {
       callback();
       return;
