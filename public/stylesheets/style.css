@@ -209,10 +209,16 @@ header #logo,
 .navigation li a i {
   margin-right: 3px;
   color: #aaa;
+  transition: all 0.4s ease-out;
 }
 
 .navigation li a:hover {
-  background: #4f4f4f;
+  background: #000;
+}
+
+.navigation li a:hover,
+.navigation li a:hover i {
+  color: #fff;
 }
 
 .main {
