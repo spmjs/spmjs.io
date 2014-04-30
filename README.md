@@ -1,7 +1,6 @@
 # spmjs.io
 
-The distributed packaging server perfectly matching with [spm3.x](https://github.com/spmjs/spm/tree/master).
-[Yuan](https://github.com/spmjs/yuan/) is the precursors. Now `spmjs.io` is rewrited in javascript, and it is faster, more powerful and easier to deploy.
+The distributed packaging server perfectly matching with [spm3.x](https://github.com/spmjs/spm/tree/master). Now `spmjs.io` is rewrited in javascript from [Yuan](https://github.com/spmjs/yuan/)(the precursors), and it is faster, more powerful and easier to deploy.
 
 ![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
 
