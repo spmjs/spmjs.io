@@ -8,7 +8,7 @@
   </p>
   <p>
     <label>Github:</label>
-    <a href="<%= profile.html_url %>"><%= profile.html_url %></a>
+    <a target="_blank" href="<%= profile.html_url %>"><%= profile.html_url %></a>
   </p>
   <p>
     <label>Email:</label>
@@ -16,7 +16,7 @@
   </p>
   <p>
     <label>Blog:</label>
-    <a href="<%= profile.blog %>"><%= profile.blog %></a>
+    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog %></a>
   </p>
   <% if (profile.authkey) { %>
   <p>
@@ -28,7 +28,7 @@
     <span class="security-tip">
       <i class="iconfont">&#xf00c9;</i>
       Copy authkey above for <em>spm login</em>, and do not tell it to anybody.
-      Revoke it in <a href="https://github.com/settings/applications">here</a>.
+      Revoke it in <a target="_blank" href="https://github.com/settings/applications">here</a>.
     </span>
   </p>
   <% } %>

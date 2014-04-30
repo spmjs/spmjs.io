@@ -6,12 +6,12 @@
   </h1>
   <aside class="aside-right">
     <% if (doclink) { %>
-    <a href="<%= doclink %>" title="Documentation hosted in spmjs">
+    <a target="_blank" href="<%= doclink %>" title="Documentation hosted in spmjs">
       <i class="iconfont iconfont-doclink">&#xf012b;</i>
     </a>
     <% } %>
     <% if (project.repository && project.repository.url) { %>
-    <a href="<%= project.repository.url %>" class="github-stars" title="github star count">
+    <a target="_blank" href="<%= project.repository.url %>" class="github-stars" title="github star count">
       <i class="iconfont iconfont-star">&#xf0290;</i>
       <span class="github-star-count"></span>
     </a>
@@ -50,13 +50,13 @@
     <% if (project.homepage) { %>
     <tr>
       <th>Homepage</th>
-      <td><a href="<%= project.homepage %>"><%= project.homepage %></a></td>
+      <td><a target="_blank" href="<%= project.homepage %>"><%= project.homepage %></a></td>
     </tr>
     <% } %>
     <% if (project.repository && project.repository.url) { %>
     <tr>
       <th>Repository</th>
-      <td><a href="<%= project.repository.url %>"><%= project.repository.url %></a></td>
+      <td><a target="_blank" href="<%= project.repository.url %>"><%= project.repository.url %></a></td>
     </tr>
     <% } %>
     <% if (project.latest.dependencies && project.latest.dependencies.length > 0) { %>
