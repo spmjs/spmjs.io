@@ -38,6 +38,7 @@ if (!fs.existsSync(path.join(CONFIG.wwwroot, 'repository'))) {
 var routes = require('./routes');
 var account = require('./routes/account');
 var repository = require('./routes/repository');
+var docs = require('./routes/docs');
 
 var app = express();
 
@@ -87,6 +88,8 @@ app.post('/repository/:name/:version', repository.package.checkPermission, repos
 app.put('/repository/:name/:version', repository.package.put);
 app.delete('/repository/:name/:version', repository.package.checkPermission, repository.package.delete);
 app.get('/repository/:name/:version/:filename', repository.filename.get);
+
+app.get('/docs/:name/:version/*', docs);
 
 // 404
 app.get('*', function(req, res){
