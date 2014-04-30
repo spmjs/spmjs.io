@@ -11,6 +11,7 @@ var elastical = require('elastical');
 var client = new elastical.Client();
 var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
+var _ = require('lodash');
 
 exports.index = function(req, res) {
   feed.stat(function(recentlyUpdates, submitors, publishCount) {
@@ -43,6 +44,9 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.latest.readme = marked(p.latest.readme || '');
+    p.dependents = _.uniq(p.dependents || [], function(d) {
+      return d.split('@')[0];
+    });
 
     var editable;
     if (p.owners && p.owners.length > 0 && req.session.user &&
