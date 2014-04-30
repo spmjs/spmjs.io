@@ -21,13 +21,14 @@
   <% if (profile.authkey) { %>
   <p>
     <label>Authkey:</label>
-    <input type="text" id="authkey" readonly size="38" value="<%= profile.authkey %>">
+    <input type="text" id="authkey" readonly size="30" value="<%= profile.authkey %>">
   </p>
   <p>
     <label></label>
     <span class="security-tip">
       <i class="iconfont">&#xf00c9;</i>
-      Copy authkey above for "spm login", and do not tell it to anybody.
+      Copy authkey above for <em>spm login</em>, and do not tell it to anybody.
+      Revoke it in <a href="https://github.com/settings/applications">here</a>.
     </span>
   </p>
   <% } %>
