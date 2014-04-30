@@ -355,6 +355,8 @@ footer a {
 
 .profile label {
   display: inline-block;
+  margin-right: 10px;
+  text-align: right;
   width: 60px;
 }
 
