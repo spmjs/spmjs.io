@@ -138,6 +138,44 @@ exports.badge = function(req, res) {
   badge(res, name, version);
 };
 
+var DocumentationOrder = {
+  'getting-started': 1,
+  'development-a-package': 2,
+  'package.json': 3,
+  'spm-commands': 4,
+  'difference-from-spm@2.x': 5
+};
+
+exports.documentation = function(req, res, next) {
+  var title = req.params.title || 'getting-started';
+  var content = (fs.readFileSync(path.join('documentation', title + '.md')) || '').toString();
+  content = marked(content);
+
+  var nav = fs.readdirSync('documentation');
+  nav = nav.map(function(item, i) {
+    item = item.replace('.md', '');
+    console.log(item, DocumentationOrder[item]);
+    return {
+      text: item,
+      current: (item === title),
+      index: DocumentationOrder[item] || 100
+    };
+  });
+
+  nav = nav.sort(function(a, b) {
+    return a.index - b.index;
+  });
+
+  res.render('documentation', {
+    title: title.replace(/-/g, ' ') + '- spm documentation',
+    user: req.session.user,
+    anonymous: anonymous,
+    nav: nav,
+    GA: CONFIG.website.GA,
+    content: content
+  });
+};
+
 function docLink(name) {
   if (fs.existsSync(path.join(CONFIG.wwwroot, 'docs', name, 'latest'))) {
     return '/docs/' + name + '/latest/';

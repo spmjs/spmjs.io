@@ -1,0 +1,16 @@
+<% include header %>
+<section class="documentation">
+  <aside class="documentation-nav">
+    <ol>
+    <% nav.forEach(function(item) { %>
+      <li class="<% if (item.current) { %>current<% } %>">
+        <a href="/documentation/<%= item.text %>"><%= item.text.replace(/-/g, ' ') %></a>
+      </li>
+    <% }) %>
+    </ol>
+  </aside>
+  <article class="documentation-content markdown readme">
+  <%- content %>
+  </article>
+</section>
+<% include footer %>

@@ -470,3 +470,25 @@ img.badge {
   margin-top: 10px;
   width: 400px;
 }
+
+.documentation {
+  margin-left: 320px;
+}
+
+.documentation-nav {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 280px;
+}
+
+.documentation-nav a {
+  display: block;
+  border-right: 4px solid #eee;
+  text-transform: capitalize;
+}
+
+.documentation-nav .current a {
+  border-color: #00B9F0;
+  font-weight: bold;
+}
