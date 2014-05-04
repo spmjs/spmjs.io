@@ -472,7 +472,7 @@ img.badge {
 }
 
 .documentation {
-  margin-left: 320px;
+  margin-left: 330px;
 }
 
 .documentation-nav {
@@ -482,13 +482,17 @@ img.badge {
   width: 280px;
 }
 
-.documentation-nav a {
-  display: block;
+.documentation-nav ol {
+  padding: 0;
+  list-style-position: inside;
+}
+
+.documentation-nav li {
   border-right: 4px solid #eee;
   text-transform: capitalize;
 }
 
-.documentation-nav .current a {
+.documentation-nav li.current {
   border-color: #00B9F0;
   font-weight: bold;
 }
