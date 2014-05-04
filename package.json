@@ -55,7 +55,8 @@
     "express-session": "~1.0.3",
     "github-token": "~0.1.0",
     "raw-body": "~1.1.4",
-    "nedb": "~0.10.5"
+    "nedb": "~0.10.5",
+    "node-static": "~0.7.3"
   },
   "devDependencies": {
     "forever": "~0.11.1"
