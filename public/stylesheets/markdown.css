@@ -101,12 +101,9 @@
 }
 .markdown blockquote {
   margin: 0 0 1.64em 0;
-  border-left: 3px solid #dadada;
+  border-left: 4px solid #dadada;
   padding-left: 12px;
-  color: #666664;
-}
-.markdown blockquote a {
-  color: #666664;
+  color: #777;
 }
 .markdown ul,
 .markdown ol {
@@ -144,11 +141,10 @@
 }
 .markdown code,
 .markdown tt {
-  color: #808080;
   font-size: 0.96em;
-  background-color: #FFFDEF;
-  padding: 1px 3px;
-  border-radius: 3px;
+  background-color: #FFFDD7;
+  padding: 1px 4px;
+  border-radius: 2px;
   font-family: "Inconsolata", "Menlo", monospace;
 }
 .markdown pre {
@@ -205,11 +201,6 @@
   background: none;
 }
 @media (min-width: 1100px) {
-  .markdown blockquote {
-    margin-left: -24px;
-    padding-left: 20px;
-    border-width: 4px;
-  }
   .markdown blockquote blockquote {
     margin-left: 0;
   }

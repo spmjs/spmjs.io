@@ -160,7 +160,7 @@ exports.badge = function(req, res) {
 
 var DocumentationOrder = {
   'getting-started': 1,
-  'development-a-package': 2,
+  'develop-a-package': 2,
   'package.json': 3,
   'spm-commands': 4,
   'difference-from-spm@2.x': 5
