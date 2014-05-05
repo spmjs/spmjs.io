@@ -6,6 +6,8 @@
 
 There is a simple list of them, and you can type `spm help [command]` to learn more detail.
 
+![](https://i.alipayobjects.com/i/localhost/png/201405/2alMyZIHqB.png)
+
 #### spm init
 Init a package from template.
 
