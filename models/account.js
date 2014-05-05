@@ -7,8 +7,8 @@ var account = new Datastore({
 
 var Project = require('./project');
 
-var save = exports.save = function(user, callback) {
-  account.update({login: user.login}, user, {upsert: true}, function(err) {
+var save = exports.save = function(id, user, callback) {
+  account.update({login: id}, user, {upsert: true}, function(err) {
     callback && callback(user);
   });
 };

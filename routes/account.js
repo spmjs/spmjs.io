@@ -73,7 +73,9 @@ exports.callback = function(req, res) {
           user.authkey = crypto.createHash('md5').update(token.access_token).digest('hex');
           req.session.user = user;
           // save user to database
-          account.save(user, function() {
+          account.save(user.login, {
+            $set: user
+          }, function() {
             res.redirect('/account');
           });
         }
