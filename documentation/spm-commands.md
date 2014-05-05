@@ -13,6 +13,7 @@ Init a package from template.
 Login for getting permission.
 
 #### spm install `[name[@version]]`
+Install dependencies and engines to local folder.
 
 #### spm publish
 Publish a package.
