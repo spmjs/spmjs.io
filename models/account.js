@@ -21,6 +21,12 @@ var getAccount = exports.get = function(id, callback) {
   });
 };
 
+exports.getAll = function(callback) {
+  account.find({}, function(err, result) {
+    callback && callback(result);
+  });
+};
+
 exports.authorize = function(id, authkey, callback) {
   getAccount(id, function(result) {
     if (result && result.authkey !== authkey) {

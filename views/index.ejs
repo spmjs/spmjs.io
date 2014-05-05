@@ -32,7 +32,7 @@
     <h2>Top submittors</h2>
     <ul>
     <% submitors.forEach(function(s) { %>
-      <li><a href="/account/<%= s.account %>"><%= s.account %></a> <%= s.count %> times</li>
+      <li><a href="/account/<%= s.login %>"><%= s.login %></a> <%= s.count %> packages</li>
     <% }) %>
     </ul>
   </section>

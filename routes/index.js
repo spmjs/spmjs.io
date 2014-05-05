@@ -1,5 +1,6 @@
 var Project = require('../models/project');
 var Package = require('../models/package');
+var account = require('../models/account');
 var feed = require('../lib/feed');
 var dependent = require('../lib/dependent');
 var marked = require('marked');
@@ -14,21 +15,40 @@ var anonymous = CONFIG.authorize.type === 'anonymous';
 var _ = require('lodash');
 
 exports.index = function(req, res) {
-  feed.stat(function(recentlyUpdates, submitors, publishCount) {
+  feed.stat(function(recentlyUpdates, publishCount) {
     recentlyUpdates.forEach(function(item) {
       item.fromNow = moment(item.time).fromNow();
     });
-    res.render('index', {
+    var data = {
       title: CONFIG.website.title,
       count: Project.getAll().length,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
       recentlyUpdates: recentlyUpdates,
-      submitors: submitors,
       publishCount: publishCount,
       mostDependents: dependent.getSortedDependents()
-    });
+    };
+    if (anonymous) {
+      res.render('index', data);
+    } else {
+      account.getAll(function(users) {
+        var submitors = [];
+        users.forEach(function(u) {
+          if (u.count && u.count > 0) {
+            submitors.push({
+              login: u.login,
+              count: u.count
+            });
+          }
+        });
+        data.submitors = submitors.sort(function(a, b) {
+          return b.count - a.count;
+        });
+        console.log(users, submitors);
+        res.render('index', data);
+      });
+    }
   });
 };
 

@@ -43,7 +43,7 @@ exports.project = {
     if (!project.packages) {
       abortify(res, { code: 404 });
     } else {
-      hook.emit('delete:project', project);
+      hook.emit('delete:project', project, req.body.publisher);
       project.delete();
       res.send(200, {
         status: 'info',
@@ -118,7 +118,7 @@ exports.package = {
     }
     Cache.project.update(data);
     if (isNewProject) {
-      hook.emit('create:project', Cache.project);
+      hook.emit('create:project', Cache.project, data.publisher);
     }
     res.send(200);
   },
