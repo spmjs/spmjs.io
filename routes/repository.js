@@ -250,8 +250,7 @@ exports.upload = function(req, res) {
 exports.search = function(req, res, next) {
   var query = req.query.q;
   if (!query) {
-    res.send(404);
-    return;
+    return abortify(res, { code: 404 });
   }
   client.search({
     query: query,
