@@ -45,7 +45,6 @@ exports.index = function(req, res) {
         data.submitors = submitors.sort(function(a, b) {
           return b.count - a.count;
         });
-        console.log(users, submitors);
         res.render('index', data);
       });
     }
@@ -174,7 +173,6 @@ exports.documentation = function(req, res, next) {
   var nav = fs.readdirSync('documentation');
   nav = nav.map(function(item, i) {
     item = item.replace('.md', '');
-    console.log(item, DocumentationOrder[item]);
     return {
       text: item,
       current: (item === title),
