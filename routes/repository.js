@@ -13,7 +13,12 @@ var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
   res.set('Content-Type', 'application/json');
-  res.send(200, JSON.stringify(Project.getAll()));
+  var data = JSON.stringify(Project.getAll(), null, 2);
+  if ('define' in req.query) {
+    res.set('Content-Type', 'application/javascript');
+    data = 'define(' + data + ');';
+  }
+  res.send(200, data);
 };
 
 exports.project = {
@@ -25,7 +30,12 @@ exports.project = {
       abortify(res, { code: 404 });
     } else {
       res.set('Content-Type', 'application/json');
-      res.send(200, JSON.stringify(p));
+      var data = JSON.stringify(p, null, 2);
+      if ('define' in req.query) {
+        res.set('Content-Type', 'application/javascript');
+        data = 'define(' + data + ');';
+      }
+      res.send(200, data);
     }
   },
   delete: function(req, res) {
@@ -53,8 +63,13 @@ exports.package = {
     if (!p.md5) {
       abortify(res, { code: 404 });
     } else {
+      var data = JSON.stringify(p, null, 2);
       res.set('Content-Type', 'application/json');
-      res.send(200, JSON.stringify(p));
+      if ('define' in req.query) {
+        res.set('Content-Type', 'application/javascript');
+        data = 'define(' + data + ');';
+      }
+      res.send(200, data);
     }
   },
   checkPermission: function(req, res, next) {
