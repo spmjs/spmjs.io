@@ -9,7 +9,7 @@ $ spm -V
 3.0.0
 ```
 
-It means spm@3.x is installed.
+Make sure that spm@3.x is installed.
 
 ## init
 
@@ -20,14 +20,14 @@ $ spm init
 
 ```
 Please answer the following:
-[?] Package name (now) 
+[?] Package name (now)
 [?] author afc163
-[?] Version (1.0.0) 
-[?] Description (The best project ever.) 
-[?] Project git repository (git://github.com/afc163/now.git) 
-[?] Project homepage (https://github.com/afc163/now) 
-[?] Licenses (MIT) 
-[?] Do you need to make any changes to the above before continuing? (y/N) 
+[?] Version (1.0.0)
+[?] Description (The best project ever.)
+[?] Project git repository (git://github.com/afc163/now.git)
+[?] Project homepage (https://github.com/afc163/now)
+[?] Licenses (MIT)
+[?] Do you need to make any changes to the above before continuing? (y/N)
 
 Writing .gitignore...OK
 Writing .spmignore...OK
@@ -45,7 +45,7 @@ Initialized from template "init-template".
 Done, without errors
 ```
 
-Then you have a package.
+Then you have a package named `now`.
 
 ## Install dependencies
 
@@ -66,7 +66,7 @@ $ spm install moment --save
 Edit `src/now.js` as follow, just like nodejs.
 
 ```js
-var moment = require('moment');
+var moment = require('moment'); // in
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 module.exports = now;
@@ -152,6 +152,33 @@ $ spm doc publish
 The documentation url is `http://spmjs.io/docs/{{name}}` for latest version and `http://spmjs.io/docs/{{name}}/{{version}}` for each versions.
 
 For example, http://spmjs.io/docs/now/.
+
+## Build
+
+```
+$ spm build
+```
+
+This command will build the files indicated by `spm.main` and `spm.output` field to `dist` folder. The `spm.buildArgs` would be executed as arguments.
+
+The build result is a package which cound be deployed at cdn. You can run it on the website where deployed [Sea.js](https://github.com/seajs/seajs/).
+
+
+```
+<script src="http://cdn.example.com/path/to/sea.js"></script>
+<script>
+  seajs.config({
+    base: 'http://cdn.example.com/',
+    alias: {
+      now: 'now/1.0.0/index.js'
+    }
+  });
+  // load http://cdn.example.com/??now/1.0.0/index.js,moment/2.6.0/moment.js
+  seajs.use(['now'], function(now) {
+    console.log(now);
+  });
+</script>
+```
 
 ## Congratulation
 

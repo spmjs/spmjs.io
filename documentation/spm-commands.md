@@ -39,4 +39,4 @@ Documentation management toolkit.
 Run test case in phantomjs.
 
 #### spm build
-Build package.
+Build package for browser.

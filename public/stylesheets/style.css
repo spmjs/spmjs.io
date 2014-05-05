@@ -38,7 +38,7 @@ html {
 
 body {
   font: 16px/1.62 "Open Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
-  color: #555;
+  color: #444;
 }
 
 a {
@@ -489,7 +489,8 @@ img.badge {
 
 .documentation-nav li {
   border-right: 4px solid #eee;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  line-height: 2;
 }
 
 .documentation-nav li.current {
