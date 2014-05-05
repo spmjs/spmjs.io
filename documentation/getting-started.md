@@ -4,7 +4,7 @@
 
 ## Introdution
 
-`spm` is a powerful and integrated static package manager designed for the browser-side solutions including JavaScript and Css.
+`spm` is a powerful and integrated static package manager designed for the browser-side solutions including JavaScript and Css, and a elegant solution of front-end package management.
 
 ![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
 
@@ -42,8 +42,9 @@ Publish the package to [spmjs.io](http://spmjs.io/)
 $ spm publish
 ```
 
-> You should run `spm login` first to get permission. The `authkey` will be shown at http://spmjs.io/account after signing in.
+> You should run `spm login` first to get permission. The `authkey` will be displayed at http://spmjs.io/account after signing in.
 
+Add `.spmignore` for ignoring useless files to avoid oversize of package.
 
 ## Contribution
 

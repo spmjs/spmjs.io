@@ -175,6 +175,10 @@
   margin-bottom: 1.5em;
   font-size: 0.96em;
 }
+.markdown table {
+  border-top: 3px solid #eee;
+  border-bottom: 3px solid #eee;
+}
 .markdown th,
 .markdown td {
   text-align: left;
@@ -183,7 +187,7 @@
 .markdown td {
   vertical-align: top;
 }
-.markdown tr:nth-child(odd) {
+.markdown tbody tr:nth-child(odd) {
   background-color: #fafafa;
 }
 .markdown iframe {
