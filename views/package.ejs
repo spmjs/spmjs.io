@@ -3,7 +3,7 @@
   <h1><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
   <hr>
   <p><%= package.description %></p>
-  <pre>spm install <%= package.name %></pre>
+  <pre>spm install <%= package.name %>@<%= package.version %></pre>
   <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
   <table class="meta">
     <tr>
