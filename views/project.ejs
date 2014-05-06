@@ -35,7 +35,7 @@
     </tr>
     <tr>
       <th>Updated</th>
-      <td><%= project.updated_at %></td>
+      <td title="<%= project.updated_at %>"><%= project.fromNow %></td>
     </tr>
     <% if (project.keywords && project.keywords.length > 0) { %>
     <tr>

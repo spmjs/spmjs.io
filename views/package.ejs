@@ -8,7 +8,7 @@
   <table class="meta">
     <tr>
       <th>Updated</th>
-      <td><%= package.updated_at %></td>
+      <td title="<%= package.updated_at %>"><%= package.fromNow %></td>
     </tr>
     <% if (package.publisher) { %>
     <tr>

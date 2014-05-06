@@ -62,6 +62,7 @@ exports.project = function(req, res, next) {
       version: p.version
     });
     p.versions = p.getVersions();
+    p.fromNow = moment(p.updated_at).fromNow();
     p.latest.readme = marked(p.latest.readme || '');
     // jquery@1.7.2 -> jquery
     p.latest.dependents = _.uniq((p.latest.dependents || []).map(function(d) {
@@ -97,6 +98,7 @@ exports.package = function(req, res, next) {
   });
   if (p.md5) {
     p.readme = marked(p.readme || '');
+    p.fromNow = moment(p.updated_at).fromNow();
     // jquery@1.7.2 -> jquery
     p.dependents = _.uniq((p.dependents || []).map(function(d) {
       return d.split('@')[0];
