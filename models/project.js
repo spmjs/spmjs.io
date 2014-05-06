@@ -109,13 +109,14 @@ Project.prototype = {
   },
 
   getVersions: function() {
-    return Object.keys(this.packages || []);
+    var versions = Object.keys(this.packages || []);
+    return versions.sort(function(a, b) {
+      return semver.lt(a, b);
+    });
   },
 
   getLatestVersion: function() {
-    return this.getVersions().sort(function(a, b) {
-      return semver.lt(a, b);
-    })[0];
+    return this.getVersions()[0];
   }
 };
 
