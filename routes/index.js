@@ -164,7 +164,7 @@ var DocumentationOrder = {
   'develop-a-package': 2,
   'package.json': 3,
   'spm-commands': 4,
-  'difference-from-spm@2.x': 5
+  'difference-from-2.x': 5
 };
 
 exports.documentation = function(req, res, next) {
