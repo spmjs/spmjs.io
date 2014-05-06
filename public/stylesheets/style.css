@@ -472,14 +472,14 @@ img.badge {
 }
 
 .documentation {
-  margin-left: 330px;
+  margin-left: 280px;
 }
 
 .documentation-nav {
   left: 0;
   position: absolute;
   top: 0;
-  width: 280px;
+  width: 240px;
 }
 
 .documentation-nav ol {
