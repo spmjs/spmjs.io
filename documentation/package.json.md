@@ -2,7 +2,7 @@
 
 ---
 
-package.json of `spm` share most fileds with package.json of `npm`, but add a `spm` filed to indicate some custom attributes.
+package.json of `spm` share most fileds with package.json of `npm`, but add a `spm` filed containing some custom attributes.
 
 ### Fields
 
@@ -69,7 +69,7 @@ spm.buildArgs | specify the cli arguments for `spm build`
       "seajs-style": "1.0.2"
     },
     "tests": "tests/*-spec.js"
-    "buildArgs": "--exclude $",
+    "buildArgs": "--ignore $",
   }
 }
 ```

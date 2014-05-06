@@ -8,7 +8,17 @@
 
 ![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
 
-All packages of `spm` is organized by CommonJS, run on [Sea.js](https://github.com/seajs/seajs). We supply a complete lifecycle managment of package by using [spm](https://github.com/spmjs/spm), including initialization, install dependencies, local development, publishing on [spmjs.io](http://spmjs.io), test case runner, documentation host and dist-file build.
+`spmjs.io` is a brand new version of [spmjs.org](https://spmjs.org/) which is based on the old `spm@2.x`.
+
+All packages of `spm` is organized by CommonJS, run on [Sea.js](https://github.com/seajs/seajs). We supply a complete lifecycle managment of package by using [spm](https://github.com/spmjs/spm), including the following features:
+
+- Initialization
+- Dependencies Installation
+- Local Development
+- Publishing on [spmjs.io](http://spmjs.io)
+- Test Runner
+- Documentation Host
+- Build
 
 [spmjs.io](http://spmjs.io/) is packages management service for spm. You can browse for packages you need, or publish your package here.
 
