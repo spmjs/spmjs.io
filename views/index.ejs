@@ -29,7 +29,7 @@
   </section>
   <% if (!anonymous) { %>
   <section class="index-list">
-    <h2>Top submittors</h2>
+    <h2>Top submitters</h2>
     <ul>
     <% submitors.forEach(function(s) { %>
       <li><a href="/account/<%= s.login %>"><%= s.login %></a> <%= s.count %> packages</li>
