@@ -60,7 +60,7 @@ Project.prototype = {
       this.version = this.getLatestVersion();
       this.save();
     }
-    return this;
+    return Object.keys(this.packages).length;
   },
 
   update: function(data) {

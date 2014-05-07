@@ -171,7 +171,10 @@ exports.package = {
       abortify(res, { code: 404 });
     } else {
       hook.emit('delete:package', package);
-      project.remove(package.version);
+      var leftPackageCount = project.remove(package.version);
+      if (leftPackageCount <= 0) {
+        hook.emit('delete:project', project, req.body.publisher);
+      }
       res.send(200, {
         status: 'info',
         message: 'Package is deleted.'
