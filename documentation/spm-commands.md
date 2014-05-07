@@ -40,3 +40,8 @@ Run test case in phantomjs.
 
 #### spm build
 Build package for browser.
+
+* -O [dir] `output directory, default: dist`
+* --include [include] `determine which files will be included, optional: self, relative, all, standalone`
+* --ignore [ignore] `determine which id will not be transported`
+* --idleading [idleading] `prefix of module name, default: {{name}}/{{version}}`
