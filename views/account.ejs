@@ -4,7 +4,7 @@
   <h2><%= profile.login %></h2>
   <p>
     <label>Name:</label>
-    <%= profile.name %>
+    <%= profile.name || '' %>
   </p>
   <p>
     <label>Github:</label>
@@ -12,11 +12,11 @@
   </p>
   <p>
     <label>Email:</label>
-    <a href="mailto:<%= profile.email %>"><%= profile.email %></a>
+    <a href="mailto:<%= profile.email %>"><%= profile.email || '' %></a>
   </p>
   <p>
     <label>Blog:</label>
-    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog %></a>
+    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog || '' %></a>
   </p>
   <% if (profile.authkey) { %>
   <p>
