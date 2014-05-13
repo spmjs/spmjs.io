@@ -10,14 +10,18 @@
     <label>Github:</label>
     <a target="_blank" href="<%= profile.html_url %>"><%= profile.html_url %></a>
   </p>
+  <% if (profile.email) { %>
   <p>
     <label>Email:</label>
-    <a href="mailto:<%= profile.email %>"><%= profile.email || '' %></a>
+    <a href="mailto:<%= profile.email %>"><%= profile.email %></a>
   </p>
+  <% } %>
+  <% if (profile.blog) { %>
   <p>
     <label>Blog:</label>
-    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog || '' %></a>
+    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog %></a>
   </p>
+  <% } %>
   <% if (profile.authkey) { %>
   <p>
     <label>Authkey:</label>
