@@ -18,7 +18,7 @@ exports.index = function(req, res) {
   } else {
     var profile = req.session.user;
     res.render('account', {
-      title: CONFIG.website.title,
+      title: req.session.user + ' - ' + CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -37,7 +37,7 @@ exports.user = function(req, res, next) {
       profile.authkey = null;
       var packages = account.getPackages(profile.login);
       res.render('account', {
-        title: CONFIG.website.title,
+        title: user.login + ' - ' + CONFIG.website.title,
         user: req.session.user,
         anonymous: anonymous,
         GA: CONFIG.website.GA,
