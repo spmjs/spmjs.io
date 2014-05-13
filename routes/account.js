@@ -18,7 +18,7 @@ exports.index = function(req, res) {
   } else {
     var profile = req.session.user;
     res.render('account', {
-      title: req.session.user + ' - ' + CONFIG.website.title,
+      title: 'my account - ' + CONFIG.website.title,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
