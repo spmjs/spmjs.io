@@ -8,7 +8,7 @@ package.json of `spm` share most fileds with package.json of `npm`, but add a `s
 
 Field | Description |
 ------------ | ------------- |
-name* | name of your package, all lowercase, use a "-" as a separator between words
+name* | name of your package, all lowercase, use a `-` or `.` as a separator between words
 version* | Semantic Versioning like 1.0.0
 description | a brief description of your package
 keywords | a array contains keywords
