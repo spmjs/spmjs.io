@@ -269,7 +269,7 @@ footer a {
   background: #4880AE;
   color: #fff;
   padding: 20px 0 40px;
-  text-shadow: 0 0 90px #fff, 0 0 200px #fff;
+  -moz-text-shadow: 0 0 90px #fff, 0 0 200px #fff;
 }
 
 .index-banner h2 {
