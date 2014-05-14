@@ -1,5 +1,7 @@
 # spmjs.io
 
+[![David Status](https://david-dm.org/spmjs/spmjs.io.png)](https://david-dm.org/spmjs/spmjs.io) 
+
 `spmjs.io` is the distributed packaging server perfectly matching with [spm@3.x](https://github.com/spmjs/spm/tree/master). Now it is rewrited in javascript from [Yuan](https://github.com/spmjs/yuan/)(the precursors), and is faster, more powerful and easier to deploy.
 
 ![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
@@ -45,17 +47,4 @@ $ npm run reindex
 
 - packages sync server
 - data backup
-- spm build integration
-- great features in index page
-  * for browser
-  * commonjs and seajs
-  * local development
-  * document hosted
-  * css module
-  * powerful command line tool
-- documentation in english
-  * 1. getting started (introduce and hello-world)
-  * 2. delelop a module
-  * 3. spm commands
-  * 4. diff from spm2.x
 - spm owner [ls|add|rm] ?
