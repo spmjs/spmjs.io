@@ -148,6 +148,10 @@ seajs.use('$', function($) {
       var repo = match[1];
       $.ajax({
         url: 'https://api.github.com/repos/' + repo,
+        data: {
+          client_id: 'b780a6efae6389352673',
+          client_secret: '35d009a30759ab3b9da4794128d336007030a466'
+        },
         dataType: 'jsonp',
         success: function(data) {
           var count = data.data.stargazers_count;
