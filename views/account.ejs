@@ -19,7 +19,7 @@
   <% if (profile.blog) { %>
   <p>
     <label>Blog:</label>
-    <a target="_blank" href="<%= profile.blog %>"><%= profile.blog %></a>
+    <a target="_blank" href="<%= (profile.blog.indexOf('http') >= 0 ? '' : 'http://') + profile.blog %>"><%= profile.blog %></a>
   </p>
   <% } %>
   <% if (profile.authkey) { %>
