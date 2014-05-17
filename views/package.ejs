@@ -2,7 +2,7 @@
 <div class="markdown">
   <h1><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
   <hr>
-  <p><%= package.description %></p>
+  <p><%= package.description || "No description" %></p>
   <pre>spm install <%= package.name %>@<%= package.version %></pre>
   <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
   <table class="meta">
