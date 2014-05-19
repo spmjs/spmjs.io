@@ -124,7 +124,7 @@ See tests result.
 $ spm test
 ```
 
-You can also open [http://127.0.0.1:8000/tests-runner.html](http://127.0.0.1:8000/tests-runner.html) in browser.
+You can also open [http://127.0.0.1:8000/tests/runner.html](http://127.0.0.1:8000/tests/runner.html) in browser.
 
 ## Publish
 
