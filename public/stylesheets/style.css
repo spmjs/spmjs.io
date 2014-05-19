@@ -258,6 +258,7 @@ footer {
   padding: 20px 0;
   font-size: 14px;
   font-style: italic;
+  clear: both;
 }
 
 footer a {

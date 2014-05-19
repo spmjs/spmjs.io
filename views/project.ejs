@@ -18,7 +18,7 @@
     <% } %>
   </aside>
   <hr>
-  <p><%= project.description %></p>
+  <p><%= project.description || "No description" %></p>
   <pre>spm install <%= project.name %></pre>
   <p>
     Latest version: <strong><%= project.latest.version %></strong>
