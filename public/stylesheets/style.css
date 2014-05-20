@@ -350,6 +350,12 @@ footer a {
   margin: 0;
 }
 
+.cell i {
+  float: right;
+  font-weight: normal;
+  color: #aaa;
+}
+
 .search-count {
   color: #888;
   font-style: italic;
