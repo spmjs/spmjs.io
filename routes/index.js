@@ -45,6 +45,7 @@ exports.index = function(req, res) {
         data.submitors = submitors.sort(function(a, b) {
           return b.count - a.count;
         });
+        data.submitors = data.submitors.slice(0, 10);
         res.render('index', data);
       });
     }
@@ -144,6 +145,12 @@ exports.search = function(req, res, next) {
       GA: CONFIG.website.GA,
       query: query,
       result: results.hits.map(function(item) {
+        var p = new Project({
+          name: item._source.name
+        });
+        if (p && p.packages) {
+          item._source.version = p.getLatestVersion();
+        }
         return item._source;
       })
     });

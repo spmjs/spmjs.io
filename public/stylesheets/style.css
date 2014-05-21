@@ -2,14 +2,14 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(/fonts/OpenSans.woff) format('woff');
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/fonts/OpenSans-Bold.woff) format('woff');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
 
 @font-face {
@@ -258,6 +258,7 @@ footer {
   padding: 20px 0;
   font-size: 14px;
   font-style: italic;
+  clear: both;
 }
 
 footer a {
@@ -347,6 +348,12 @@ footer a {
 .cell h3,
 .cell p {
   margin: 0;
+}
+
+.cell i {
+  float: right;
+  font-weight: normal;
+  color: #aaa;
 }
 
 .search-count {
@@ -463,7 +470,7 @@ img.badge {
 
 .all-packages li {
   float: left;
-  width: 150px;
+  width: 172px;
 }
 
 .page-404 img {

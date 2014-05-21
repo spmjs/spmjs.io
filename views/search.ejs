@@ -3,7 +3,7 @@
 <p class="search-count"><%= result.length %> packages about <strong>"<%= query %>"</strong>.</p>
 <% result.forEach(function(item) { %>
 <div class="cell">
-  <h3><a href="/package/<%= item.name %>"><%= item.name %></a></h3>
+  <h3><a href="/package/<%= item.name %>"><%= item.name %></a> <i><%= item.version %></i></h3>
   <p><%= item.description %></p>
 </div>
 <% }) %>

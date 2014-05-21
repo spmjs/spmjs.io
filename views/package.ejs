@@ -2,13 +2,13 @@
 <div class="markdown">
   <h1><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
   <hr>
-  <p><%= package.description %></p>
+  <p><%= package.description || "No description" %></p>
   <pre>spm install <%= package.name %>@<%= package.version %></pre>
   <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
   <table class="meta">
     <tr>
-      <th>Updated</th>
-      <td title="<%= package.updated_at %>"><%= package.fromNow %></td>
+      <th width="20%">Updated</th>
+      <td width="80%" title="<%= package.updated_at %>"><%= package.fromNow %></td>
     </tr>
     <% if (package.publisher) { %>
     <tr>

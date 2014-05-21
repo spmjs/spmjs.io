@@ -8,7 +8,7 @@ package.json of `spm` share most fileds with package.json of `npm`, but add a `s
 
 Field | Description |
 ------------ | ------------- |
-name* | name of your package, all lowercase, use a "-" as a separator between words
+name* | name of your package, all lowercase, use a `-` or `.` as a separator between words
 version* | Semantic Versioning like 1.0.0
 description | a brief description of your package
 keywords | a array contains keywords
@@ -32,8 +32,13 @@ spm.buildArgs | specify the cli arguments for `spm build`
 ```json
 {
   "name": "arale-calendar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Calendar widget.",
+  "keywords": [
+    "widget",
+    "month",
+    "datepicker"
+  ],
   "author": "Hsiaoming Yang <me@lepture.com>",
   "maintainers": [
     "hotoo <hotoo.cn@gmail.com>",
@@ -47,29 +52,28 @@ spm.buildArgs | specify the cli arguments for `spm build`
   "bugs": {
     "url": "https://github.com/aralejs/calendar/issues"
   },
-  "keywords": ["widget", "month", "datepicker"],
   "license": "MIT",
   "spm": {
-    "main": "src/calendar.js",
+    "main": "calendar.js",
     "dependencies": {
       "jquery": "1.7.2",
-      "moment": "2.0.0",
-      "arale-base": "1.0.0",
-      "arale-position": "1.0.0",
-      "arale-iframe-shim": "1.0.2",
-      "handlebars": "1.0.2",
-      "arale-widget": "1.1.1"
+      "moment": "2.6.0",
+      "arale-base": "1.1.0",
+      "arale-position": "1.1.0",
+      "arale-iframe-shim": "1.1.0",
+      "handlebars": "1.3.0",
+      "arale-widget": "1.2.0"
     },
     "devDenpendencies": {
-      "expect": "0.2.0"
+      "expect.js": "0.3.1"
     },
     "engines": {
-      "seajs": "2.1.1",
+      "seajs": "2.2.1",
       "seajs-text": "1.0.3",
       "seajs-style": "1.0.2"
     },
     "tests": "tests/*-spec.js"
-    "buildArgs": "--ignore $",
+    "buildArgs": "--ignore jquery"
   }
 }
 ```

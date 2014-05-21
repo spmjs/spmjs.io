@@ -96,6 +96,9 @@ $ spm doc watch
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
 
+Use three ` is a basic way to write code in Markdown file.
+
+Here you can also use four ` to wrap your code. It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
 
 ## Add Test Case
 
@@ -120,7 +123,7 @@ See tests result.
 $ spm test
 ```
 
-You can also open [http://127.0.0.1:8000/tests-runner.html](http://127.0.0.1:8000/tests-runner.html) in browser.
+You can also open [http://127.0.0.1:8000/tests/runner.html](http://127.0.0.1:8000/tests/runner.html) in browser.
 
 ## Publish
 
