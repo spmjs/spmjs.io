@@ -8,7 +8,7 @@ var githubToken = require('github-token')({
   githubClient: CONFIG.authorize.clientId,
   githubSecret: CONFIG.authorize.clientSecret,
   baseURL: CONFIG.authorize.baseURL,
-  callbackURI: '/callback',
+  callbackURI: 'callback',
   scope: 'user' // optional, default scope is set to user
 });
 
