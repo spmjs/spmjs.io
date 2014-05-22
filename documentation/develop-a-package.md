@@ -102,10 +102,10 @@ Here you can also use four ` to wrap your code. It is a special rule that make y
 
 ## Add Test Case
 
-Edit test file at `tests/now-spec.js`. We introduce a default assert package [expect](http://spmjs.io/package/expect).
+Edit test file at `tests/now-spec.js`. We introduce a default assert solution [expect.js](http://spmjs.io/package/expect.js).
 
 ```
-var expect = require('expect');
+var expect = require('expect.js');
 var now = require('../index');
 
 describe('now', function() {
