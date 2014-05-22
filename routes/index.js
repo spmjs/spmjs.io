@@ -135,6 +135,7 @@ exports.search = function(req, res, next) {
   client.search({
     query: query,
     index: 'spmjs',
+    size: 100,
     type: 'package',
   }, function(err, results) {
     results = results || { hits: [] };
