@@ -40,7 +40,7 @@ url = http://127.0.0.1:3000
 Reindex the packages for elastic search.
 
 ```bash
-$ npm reindex
+$ npm run reindex
 ```
 
 ## TODO:
