@@ -23,11 +23,11 @@ Modify `config/base.yaml` as you need.
 Start and stop server by a simple command.
 
 ```bash
-$ npm run start
+$ npm start
 ```
 
 ```bash
-$ npm run stop
+$ npm stop
 ```
 
 Then you have a complete package source server which can interact with [spm3.x](https://github.com/spmjs/spm/tree/master) after add the server address to `~/.spm/spmrc-3x`.
@@ -40,7 +40,7 @@ url = http://127.0.0.1:3000
 Reindex the packages for elastic search.
 
 ```bash
-$ npm run reindex
+$ npm reindex
 ```
 
 ## TODO:
