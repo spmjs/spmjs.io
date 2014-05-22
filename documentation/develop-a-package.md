@@ -34,10 +34,9 @@ Writing .spmignore...OK
 Writing .travis.yml...OK
 Writing HISTORY.md...OK
 Writing README.md...OK
-Writing nows/index.md...OK
+Writing examples/index.md...OK
 Writing index.js...OK
 Writing package.json...OK
-Writing src/now.js...OK
 Writing tests/now-spec.js...OK
 
 Initialized from template "init-template".
