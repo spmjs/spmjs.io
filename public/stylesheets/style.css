@@ -23,7 +23,7 @@
 
 .iconfont {
   font-family: 'iconfont';
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal!important;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
@@ -37,7 +37,7 @@ html {
 }
 
 body {
-  font: 16px/1.62 "Open Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font: 18px/1.62 "Open Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
   color: #444;
 }
 
@@ -142,7 +142,7 @@ header a:hover {
 
 header #logo {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   text-shadow: 0 0 70px #fff;
   transition: all 0.3s ease;
 }
@@ -158,7 +158,7 @@ header #logo,
 }
 
 .search-form {
-  margin-left: 60px;
+  margin-left: 50px;
   width: 30%;
   position: relative;
 }
@@ -192,7 +192,7 @@ header #logo,
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
+  font-size: 16px;
   display: inline-block;
   float: right;
 }
@@ -327,7 +327,7 @@ footer a {
   right: 0;
   top: -130px;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .index-stat p {
@@ -412,7 +412,7 @@ footer a {
   color: #A95151;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   header {
     height: auto;
     overflow: hidden;
@@ -508,4 +508,9 @@ img.badge {
 .index-banner-fade {
   opacity: 0.18;
   font-size: 24px;
+}
+
+.markdown h1.package-name {
+  font-size: 2.4em;
+  line-height: 1.2;
 }

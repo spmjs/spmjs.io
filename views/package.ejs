@@ -1,6 +1,6 @@
 <% include header %>
 <div class="markdown">
-  <h1><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
+  <h1 class="package-name"><a href="/package/<%= package.name %>/"><%= package.name %></a></h1>
   <hr>
   <p><%= package.description || "No description" %></p>
   <pre>spm install <%= package.name %>@<%= package.version %></pre>
