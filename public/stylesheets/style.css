@@ -359,7 +359,7 @@ footer a {
   display: inline-block;
   margin-right: 10px;
   text-align: right;
-  width: 60px;
+  width: 74px;
 }
 
 .add-ownership-form {
@@ -401,7 +401,7 @@ footer a {
   color: #A95151;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1030px) {
   header {
     height: auto;
     overflow: hidden;
