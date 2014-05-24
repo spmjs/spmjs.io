@@ -13,6 +13,7 @@ var client = new elastical.Client();
 var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var _ = require('lodash');
+var capitalize = require('capitalize');
 
 exports.index = function(req, res) {
   feed.stat(function(recentlyUpdates, publishCount) {
@@ -195,7 +196,7 @@ exports.documentation = function(req, res, next) {
   });
 
   res.render('documentation', {
-    title: title.replace(/-/g, ' ') + '- spm documentation',
+    title: capitalize.words(title.replace(/-/g, ' ')) + '- spm documentation',
     user: req.session.user,
     anonymous: anonymous,
     nav: nav,
