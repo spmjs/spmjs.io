@@ -210,7 +210,7 @@ header #logo,
 
 .main {
   min-height: 400px;
-  margin-top: 20px;
+  margin-top: 36px;
   position: relative;
 }
 
@@ -316,7 +316,7 @@ footer a {
 
 .index-stat {
   position: absolute;
-  top: -80px;
+  top: -90px;
   font-size: 14px;
   text-align: center;
   width: 100%;
