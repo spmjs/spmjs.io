@@ -52,30 +52,17 @@ a:hover {
 }
 
 .button {
-  -moz-user-select: none;
-  -webkit-font-smoothing: antialiased;
-  background-color: #FAFAFA;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
-  border: medium none;
-  border-radius: 0.25em;
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-  color: #808080;
-  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.5;
+  border-radius: 4px;
+  padding: 8px 25px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transition: border .25s linear, color .25s linear, background-color .25s linear;
+  color: #fff;
+  background-color: #bdc3c7;
   display: inline-block;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1;
-  margin: 0;
-  min-height: 1em;
-  outline: 0 none;
-  padding: 0.8em 1.3em;
-  text-align: center;
-  text-decoration: none;
-  transition: opacity 0.25s ease 0s, background-color 0.25s ease 0s, color 0.25s ease 0s, background 0.25s ease 0s, box-shadow 0.25s ease 0s;
-  vertical-align: middle;
-  background-color: #5BBD72;
-  color: #FFFFFF;
 }
 
 .button:hover {
@@ -86,22 +73,22 @@ a:hover {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2) inset;
 }
 
-.button.positive {
-  background-color: #5BBD72;
+.button.button-blue {
+  background-color: #4293CC;
   color: #fff;
 }
 
-.button.positive:hover {
-  background-color: #58CB73;
+.button.button-blue:hover {
+  background-color: #3498DB;
 }
 
-.button.negative {
-  background-color: #D95C5C;
+.button.button-red {
+  background-color: #E16445;
   color: #fff;
 }
 
-.button.negative:hover {
-  background-color: #E75869;
+.button.button-red:hover {
+  background-color: #F46744;
 }
 
 .button .iconfont {
@@ -129,7 +116,7 @@ input[type=text]:focus {
 header {
   height: 60px;
   line-height: 60px;
-  background: #3D3D3D;
+  background: #444;
 }
 
 header a {
@@ -223,7 +210,7 @@ header #logo,
 
 .main {
   min-height: 400px;
-  margin-top: 40px;
+  margin-top: 20px;
   position: relative;
 }
 
@@ -267,16 +254,21 @@ footer a {
 
 .index-banner {
   display: none;
-  background: #4880AE;
-  color: #fff;
-  padding: 20px 0 40px;
-  -moz-text-shadow: 0 0 90px #fff, 0 0 200px #fff;
+  background: #eee;
+  text-align: center;
+  padding: 20px 0 80px;
 }
 
 .index-banner h2 {
-  font-size: 56px;
+  font-size: 58px;
   margin: 0;
   line-height: 1.5;
+  color: #555;
+}
+
+.index-banner-fade {
+  opacity: 0.3;
+  font-size: 24px;
 }
 
 .index-banner p {
@@ -324,18 +316,15 @@ footer a {
 
 .index-stat {
   position: absolute;
-  right: 0;
-  top: -130px;
-  color: #fff;
-  font-size: 16px;
-}
-
-.index-stat p {
-  margin: 0;
+  top: -80px;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
 }
 
 .index-stat i {
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .cell {
@@ -468,9 +457,14 @@ img.badge {
   margin-top: 40px;
 }
 
+.all-packages {
+  margin: 0;
+  padding: 0;
+}
+
 .all-packages li {
-  float: left;
-  width: 172px;
+  display: inline;
+  margin-right: 6px;
 }
 
 .page-404 img {
@@ -479,14 +473,14 @@ img.badge {
 }
 
 .documentation {
-  margin-left: 280px;
+  margin-left: 290px;
 }
 
 .documentation-nav {
   left: 0;
   position: absolute;
   top: 0;
-  width: 240px;
+  width: 250px;
 }
 
 .documentation-nav ol {
@@ -495,19 +489,16 @@ img.badge {
 }
 
 .documentation-nav li {
-  border-right: 4px solid #eee;
   text-transform: uppercase;
   line-height: 2;
+  border-radius: 3px;
+  padding: 3px 12px;
 }
 
 .documentation-nav li.current {
-  border-color: #00B9F0;
   font-weight: bold;
-}
-
-.index-banner-fade {
-  opacity: 0.18;
-  font-size: 24px;
+  background: #FEFFEF;
+  border-width: 2px 0;
 }
 
 .markdown h1.package-name {
