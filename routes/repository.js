@@ -196,6 +196,11 @@ exports.filename = {
       if (path.extname(req.params.filename) === '.json') {
         res.set('Content-Type', 'application/json');
       }
+      var package = new Package({
+        name: req.params.name,
+        version: req.params.version
+      });
+      hook.emit('download:package', package);
       res.send(data);
     });
   }

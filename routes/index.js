@@ -2,6 +2,7 @@ var Project = require('../models/project');
 var Package = require('../models/package');
 var account = require('../models/account');
 var feed = require('../lib/feed');
+var download = require('../lib/download');
 var dependent = require('../lib/dependent');
 var marked = require('marked');
 var moment = require('moment');
@@ -16,40 +17,43 @@ var _ = require('lodash');
 var capitalize = require('capitalize');
 
 exports.index = function(req, res) {
-  feed.stat(function(recentlyUpdates, publishCount) {
-    recentlyUpdates.forEach(function(item) {
-      item.fromNow = moment(item.time).fromNow();
-    });
-    var data = {
-      title: CONFIG.website.title,
-      count: Project.getAll().length,
-      user: req.session.user,
-      anonymous: anonymous,
-      GA: CONFIG.website.GA,
-      recentlyUpdates: recentlyUpdates,
-      publishCount: publishCount,
-      mostDependents: dependent.getSortedDependents()
-    };
-    if (anonymous) {
-      res.render('index', data);
-    } else {
-      account.getAll(function(users) {
-        var submitors = [];
-        users.forEach(function(u) {
-          if (u.count && u.count > 0) {
-            submitors.push({
-              login: u.login,
-              count: u.count
-            });
-          }
-        });
-        data.submitors = submitors.sort(function(a, b) {
-          return b.count - a.count;
-        });
-        data.submitors = data.submitors.slice(0, 10);
-        res.render('index', data);
+  download.todayCount(function(todayCount) {
+    feed.stat(function(recentlyUpdates, publishCount) {
+      recentlyUpdates.forEach(function(item) {
+        item.fromNow = moment(item.time).fromNow();
       });
-    }
+      var data = {
+        title: CONFIG.website.title,
+        count: Project.getAll().length,
+        user: req.session.user,
+        anonymous: anonymous,
+        GA: CONFIG.website.GA,
+        recentlyUpdates: recentlyUpdates,
+        publishCount: publishCount,
+        todayCount: todayCount,
+        mostDependents: dependent.getSortedDependents()
+      };
+      if (anonymous) {
+        res.render('index', data);
+      } else {
+        account.getAll(function(users) {
+          var submitors = [];
+          users.forEach(function(u) {
+            if (u.count && u.count > 0) {
+              submitors.push({
+                login: u.login,
+                count: u.count
+              });
+            }
+          });
+          data.submitors = submitors.sort(function(a, b) {
+            return b.count - a.count;
+          });
+          data.submitors = data.submitors.slice(0, 10);
+          res.render('index', data);
+        });
+      }
+    });
   });
 };
 
