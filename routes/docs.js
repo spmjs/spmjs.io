@@ -75,7 +75,11 @@ module.exports = function(req, res) {
 function cssDependencies(basePath) {
   var ret = {};
   var modulesPath = path.join(basePath, 'sea-modules');
-  var packages = fs.readdirSync(modulesPath);
+  try {
+    var packages = fs.readdirSync(modulesPath);
+  } catch(e) {
+    return ret;
+  }
   packages.forEach(function(p) {
     var versions = fs.readdirSync(path.join(modulesPath, p));
     versions.forEach(function(v) {
