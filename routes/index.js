@@ -4,7 +4,6 @@ var account = require('../models/account');
 var feed = require('../lib/feed');
 var download = require('../lib/download');
 var dependent = require('../lib/dependent');
-var marked = require('marked');
 var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
@@ -15,6 +14,22 @@ var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var _ = require('lodash');
 var capitalize = require('capitalize');
+
+var marked = require('marked');
+var renderer = new marked.Renderer();
+renderer.heading = function(text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+  return '<h' + level + '>' + text + '<a name="' + escapedText +
+         '" class="anchor" href="#' + escapedText +
+         '"><span class="header-link">⚓︎</span></a></h' + level + '>';
+};
+
+// Synchronous highlighting with highlight.js
+marked.setOptions({
+  highlight: function (code) {
+    return require('highlight.js').highlightAuto(code).value;
+  }
+});
 
 exports.index = function(req, res) {
   download.todayCount(function(todayCount) {
@@ -183,7 +198,9 @@ var DocumentationOrder = {
 exports.documentation = function(req, res, next) {
   var title = req.params.title || 'getting-started';
   var content = (fs.readFileSync(path.join('documentation', title + '.md')) || '').toString();
-  content = marked(content);
+  content = marked(content, {
+    renderer: renderer
+  });
 
   var nav = fs.readdirSync('documentation');
   nav = nav.map(function(item, i) {
