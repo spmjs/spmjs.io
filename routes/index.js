@@ -19,7 +19,7 @@ var marked = require('marked');
 var renderer = new marked.Renderer();
 renderer.heading = function(text, level) {
   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-  return '<h' + level + '>' + text + '<a name="' + escapedText +
+  return '<h' + level + ' id="' + escapedText + '">' + text + '<a name="' + escapedText +
          '" class="anchor" href="#' + escapedText +
          '"><span class="header-link">⚓︎</span></a></h' + level + '>';
 };
