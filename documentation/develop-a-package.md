@@ -13,7 +13,7 @@ Make sure that spm@3.x is installed.
 
 ## init
 
-```
+```bash
 $ mkdir now
 $ spm init
 ```
@@ -50,13 +50,13 @@ Then you have a package named `now`.
 
 Install default engines and devDependencies first.
 
-```
+```bash
 $ spm install
 ```
 
 We need [moment](http://momentjs.com) as a dependency which can be found [here](http://spmjs.io/package/moment).
 
-```
+```bash
 $ spm install moment --save
 ```
 
@@ -90,7 +90,7 @@ seajs.use('index', function(now) {
 
 Run `spm doc watch` to start a documentation service at `127.0.0.1:8000` .
 
-```
+```bash
 $ spm doc watch
 ```
 
@@ -104,7 +104,7 @@ Here you can also use four ` to wrap your code. It is a special rule that make y
 
 Edit test file at `tests/now-spec.js`. We introduce a default assert solution [expect.js](http://spmjs.io/package/expect.js).
 
-```
+```js
 var expect = require('expect.js');
 var now = require('../index');
 
@@ -119,7 +119,7 @@ describe('now', function() {
 
 See tests result.
 
-```
+```bash
 $ spm test
 ```
 
@@ -129,13 +129,13 @@ You can also open [http://127.0.0.1:8000/tests/runner.html](http://127.0.0.1:800
 
 Now you have a great package having wonderful function and complete tests case, you can publish the package to [spmjs.io](http://spmjs.io/).
 
-```
+```bash
 $ spm publish
 ```
 
 You should run `spm login` first to get permission, otherwise it would propmt the authorization problem. 
 
-```
+```bash
 $ spm login
 ```
 
@@ -147,7 +147,7 @@ $ spm login
 
 spmjs.io can host your package's documentation. What all you need to do is editing 'README.md' and 'examples', preview it by `spm doc watch`, then publish it to spmjs.io.
 
-```
+```bash
 $ spm doc publish
 ```
 
@@ -157,7 +157,7 @@ For example, http://spmjs.io/docs/now/.
 
 ## Build
 
-```
+```bash
 $ spm build
 ```
 
@@ -166,7 +166,7 @@ This command will build the files indicated by `spm.main` and `spm.output` field
 The build result is a package which cound be deployed at cdn. You can run it on the website where deployed [Sea.js](https://github.com/seajs/seajs/).
 
 
-```
+```html
 <script src="http://cdn.example.com/path/to/sea.js"></script>
 <script>
   seajs.config({

@@ -24,7 +24,7 @@ All packages of `spm` is organized by CommonJS, run on [Sea.js](https://github.c
 
 ## Installation
 
-```
+```bash
 $ npm install spm@ninja -g
 ```
 
@@ -34,21 +34,21 @@ Add tag `ninja` for the 3.x version, which distinguish from old `spm@2.x`.
 
 Init a spm package.
 
-```
+```bash
 $ mkdir example
 $ spm init
 ```
 
 Install dependencies.
 
-```
+```bash
 $ spm install jquery --save
 $ spm install moment@2.6.0 --save
 ```
 
 Publish the package to [spmjs.io](http://spmjs.io/)
 
-```
+```bash
 $ spm publish
 ```
 

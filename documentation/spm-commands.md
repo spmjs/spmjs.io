@@ -46,21 +46,21 @@ Build package for browser.
   - relative `default`
 
     Only contain relative dependencies. Absolute dependencies should also be deployed so that it can run on Sea.js.
-    ```
-    seajs.use('abc');
+    ```js
     // would load abc, and abc's dependencies separately.
+    seajs.use('abc');
     ```
   - all
 
     Contain relative and absolute dependencies.
-    ```
-    seajs.use('abc');
+    ```js
     // only need to load abc.
+    seajs.use('abc');
     ```
   - standalone
 
     Build a standalone package that could be used in script tag way without any loader.
-    ```
+    ```html
     <script src="path/to/abc.js"></script>
     ```
 
