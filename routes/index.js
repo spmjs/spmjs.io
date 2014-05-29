@@ -21,7 +21,7 @@ renderer.heading = function(text, level) {
   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
   return '<h' + level + ' id="' + escapedText + '">' + text + '<a name="' + escapedText +
          '" class="anchor" href="#' + escapedText +
-         '"><span class="header-link">⚓︎</span></a></h' + level + '>';
+         '"><span class="header-link iconfont">&#xe601;</span></a></h' + level + '>';
 };
 
 // Synchronous highlighting with highlight.js
