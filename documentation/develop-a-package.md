@@ -163,7 +163,7 @@ $ spm build
 
 This command will build the files indicated by `spm.main` and `spm.output` field to `dist` folder. The `spm.buildArgs` would be executed as arguments.
 
-The default build result is a package which cound be deployed at cdn. You can run it on the website where deployed [Sea.js](https://github.com/seajs/seajs/).
+The default build result is a package which cound be deployed at cdn. You can run it on the website where deployed [Sea.js](https://github.com/seajs/seajs/), [seajs@2.2.1](https://raw.githubusercontent.com/seajs/seajs/2.2.1/dist/sea.js) for example.
 
 
 ```html
