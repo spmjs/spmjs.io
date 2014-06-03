@@ -28,10 +28,10 @@
       <td><a target="_blank" href="<%= package.homepage %>"><%= package.homepage %></a></td>
     </tr>
     <% } %>
-    <% if (package.repository && package.repository.url) { %>
+    <% if (package.repositoryurl) { %>
     <tr>
       <th>Repository</th>
-      <td><a target="_blank" href="<%= package.repository.url %>"><%= package.repository.url %></a></td>
+      <td><a target="_blank" href="<%= package.repositoryurl %>"><%= package.repository.url %></a></td>
     </tr>
     <% } %>
     <% if (package.dependencies && package.dependencies.length > 0) { %>

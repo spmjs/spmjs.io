@@ -14,6 +14,7 @@ var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var _ = require('lodash');
 var capitalize = require('capitalize');
+var gu = require('githuburl');
 
 var marked = require('marked');
 var renderer = new marked.Renderer();
@@ -95,6 +96,9 @@ exports.project = function(req, res, next) {
         !anonymous && p.owners.indexOf(req.session.user.login) >= 0) {
       editable = true;
     }
+    if (p.repository && p.repository.url) {
+      p.repositoryurl = gu(p.repository.url).https_href;
+    }
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
       user: req.session.user,
@@ -124,6 +128,9 @@ exports.package = function(req, res, next) {
     p.dependents = _.uniq((p.dependents || []).map(function(d) {
       return d.split('@')[0];
     }));
+    if (p.repository && p.repository.url) {
+      p.repositoryurl = gu(p.repository.url).https_href;
+    }
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       user: req.session.user,

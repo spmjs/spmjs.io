@@ -53,11 +53,11 @@
       <td><a target="_blank" href="<%= project.homepage %>"><%= project.homepage %></a></td>
     </tr>
     <% } %>
-    <% if (project.repository && project.repository.url) { %>
+    <% if (project.repositoryurl) { %>
     <tr>
       <th>Repository</th>
       <td>
-        <a target="_blank" href="<%= project.repository.url %>"><%= project.repository.url %></a>
+        <a target="_blank" href="<%= project.repositoryurl %>"><%= project.repository.url %></a>
       </td>
     </tr>
     <% } %>
