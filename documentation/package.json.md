@@ -26,6 +26,7 @@ spm.devDependencies | specify dependencies relation of the package in developing
 spm.engines | specify the loader envirement of executing the package, it would be used for local demo debugging.
 spm.tests | specify all test files, support glob patterns: `tests/*-spec.js`
 spm.buildArgs | specify the cli arguments for `spm build`
+spm.ignore | a array of ignore files in package, same function as `.spmignore`
 
 ### A basic example
 
