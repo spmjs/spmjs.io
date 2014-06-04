@@ -97,7 +97,7 @@ exports.project = function(req, res, next) {
       editable = true;
     }
     if (p.repository && p.repository.url) {
-      p.repositoryurl = gu(p.repository.url).https_href;
+      p.repositoryurl = gu(p.repository.url).http_href;
     }
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
