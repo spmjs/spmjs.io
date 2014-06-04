@@ -99,7 +99,6 @@ input[type=text] {
   border-radius: 3px;
   border: 1px solid #ccc;
   padding: 9px 12px;
-  vertical-align: middle;
 }
 
 input[type=text]:focus {
