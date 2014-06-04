@@ -64,8 +64,8 @@ $ spm install moment --save
 
 Edit `src/now.js` as follow, just like nodejs.
 
-```js
-var moment = require('moment'); // in
+```javascript
+var moment = require('moment');
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 module.exports = now;
@@ -104,7 +104,7 @@ Here you can also use four ` to wrap your code. It is a special rule that make y
 
 Edit test file at `tests/now-spec.js`. We introduce a default assert solution [expect.js](http://spmjs.io/package/expect.js).
 
-```js
+```javascript
 var expect = require('expect.js');
 var now = require('../index');
 
