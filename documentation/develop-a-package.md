@@ -96,9 +96,19 @@ $ spm doc watch
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
 
-Use three ` is a basic way to write code in Markdown file.
+Except using three ` in Markdown file, you can also use four ` to wrap your code.
 
-Here you can also use four ` to wrap your code. It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
+It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
+
+If you want to insert a iframe in your demo, make your code to `iframe` type.
+
+<pre>
+
+````iframe:600
+<div>I am in a iframe, height 600px<div>
+````
+</pre>
+
 
 ## Add Test Case
 
@@ -145,7 +155,7 @@ $ spm login
 
 ## Documentation
 
-spmjs.io can host your package's documentation. What all you need to do is editing 'README.md' and 'examples', preview it by `spm doc watch`, then publish it to spmjs.io.
+spmjs.io can host your package's documentation. What all you need to do is editing `README.md` and `examples` folder, preview it by `spm doc watch`, then publish it to spmjs.io.
 
 ```bash
 $ spm doc publish
