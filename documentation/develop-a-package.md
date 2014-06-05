@@ -103,9 +103,8 @@ It is a special rule that make your code highlighted and would be inserted to do
 If you want to insert a iframe in your demo, make your code to `iframe` type.
 
 <pre>
-
 ````iframe:600
-<div>I am in a iframe, height 600px<div>
+I am in a iframe of 600px high
 ````
 </pre>
 
