@@ -143,7 +143,7 @@ seajs.use('$', function($) {
   $('.github-stars').each(function(i, item) {
     item = $(item);
     var url = item.attr('href');
-    var match = url.match('github\.com[/:](.*)(\.git)$');
+    var match = url.match('github\.com[/:](.*)(\.git)?$');
     if (match) {
       var repo = match[1];
       $.ajax({
