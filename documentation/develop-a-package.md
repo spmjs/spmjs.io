@@ -62,7 +62,7 @@ $ spm install moment --save
 
 ## Code and Debug
 
-Edit `src/now.js` as follow, just like nodejs.
+Edit `index.js` as follow, just like nodejs.
 
 ```javascript
 var moment = require('moment');
