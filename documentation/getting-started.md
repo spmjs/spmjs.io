@@ -25,10 +25,10 @@ All packages of `spm` is organized by CommonJS, run on [Sea.js](https://github.c
 ## Installation
 
 ```bash
-$ npm install spm@ninja -g
+$ npm install spm -g
 ```
 
-Add tag `ninja` for the 3.x version, which distinguish from old `spm@2.x`.
+> `npm install spm@2.x -g` for old spm2.
 
 ## Basic Usage
 
