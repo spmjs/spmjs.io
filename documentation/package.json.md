@@ -70,8 +70,7 @@ spm.ignore | a array of ignore files in package, same function as `.spmignore`
     },
     "engines": {
       "seajs": "2.2.1",
-      "seajs-text": "1.0.3",
-      "seajs-style": "1.0.2"
+      "seajs-text": "1.1.0"
     },
     "tests": "tests/*-spec.js",
     "ignore": ["examples"],
