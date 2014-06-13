@@ -6,7 +6,7 @@ You can follow the steps to develop a package using spm (should install spm@3.x 
 
 ```
 $ spm -V
-3.0.0
+3.0.x
 ```
 
 Make sure that spm@3.x is installed.
@@ -59,7 +59,7 @@ $ spm install moment --save
 
 ## Code and Debug
 
-Edit `src/now.js` as follow, just like nodejs.
+Edit `index.js` as follow, just like nodejs.
 
 ```javascript
 var moment = require('moment');
@@ -93,9 +93,18 @@ $ spm doc watch
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
 
-Use three ` is a basic way to write code in Markdown file.
+Except using three ` in Markdown file, you can also use four ` to wrap your code.
 
-Here you can also use four ` to wrap your code. It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
+It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
+
+If you want to insert a iframe in your demo, make your code to `iframe` type.
+
+<pre>
+````iframe:600
+I am in a iframe of 600px high
+````
+</pre>
+
 
 ## Add Test Case
 
@@ -142,7 +151,7 @@ $ spm login
 
 ## Documentation
 
-spmjs.io can host your package's documentation. What all you need to do is editing 'README.md' and 'examples', preview it by `spm doc watch`, then publish it to spmjs.io.
+spmjs.io can host your package's documentation. What all you need to do is editing `README.md` and `examples` folder, preview it by `spm doc watch`, then publish it to spmjs.io.
 
 ```bash
 $ spm doc publish

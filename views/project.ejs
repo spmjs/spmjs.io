@@ -10,8 +10,8 @@
       <i class="iconfont iconfont-doclink">&#xf012b;</i>
     </a>
     <% } %>
-    <% if (project.repository && project.repository.url) { %>
-    <a target="_blank" href="<%= project.repository.url %>" class="github-stars" title="github star count">
+    <% if (project.repositoryurl) { %>
+    <a target="_blank" href="<%= project.repositoryurl %>" class="github-stars" title="github star count">
       <i class="iconfont iconfont-star">&#xf0290;</i>
       <span class="github-star-count"></span>
     </a>
@@ -143,7 +143,7 @@ seajs.use('$', function($) {
   $('.github-stars').each(function(i, item) {
     item = $(item);
     var url = item.attr('href');
-    var match = url.match('github\.com[/:](.*)(\.git)$');
+    var match = url.match('github\.com[/:](.*)(\.git)?$');
     if (match) {
       var repo = match[1];
       $.ajax({
