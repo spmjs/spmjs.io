@@ -93,7 +93,7 @@ $ spm doc watch
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
 
-Except using three ` in Markdown file, you can also use four ` to wrap your code.
+Except using three &#96; in Markdown file, you can also use four &#96; to wrap your code.
 
 It is a special rule that make your code highlighted and would be inserted to document page as a script block so they can be excuted at the same time. That is very useful for debugging your demo and writing a beautiful documentation both.
 
