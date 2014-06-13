@@ -21,12 +21,9 @@ $ spm init
 ```
 Please answer the following:
 [?] Package name (now)
-[?] author afc163
 [?] Version (1.0.0)
-[?] Description (The best project ever.)
+[?] Description
 [?] Project git repository (git://github.com/afc163/now.git)
-[?] Project homepage (https://github.com/afc163/now)
-[?] Licenses (MIT)
 [?] Do you need to make any changes to the above before continuing? (y/N)
 
 Writing .gitignore...OK
