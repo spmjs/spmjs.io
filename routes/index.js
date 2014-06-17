@@ -97,7 +97,11 @@ exports.project = function(req, res, next) {
       editable = true;
     }
     if (p.repository && p.repository.url) {
-      p.repositoryurl = gu(p.repository.url).http_href;
+      try {
+        p.repositoryurl = gu(p.repository.url).http_href;
+      } catch(e) {
+        p.repositoryurl = '';
+      }
     }
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
@@ -129,7 +133,11 @@ exports.package = function(req, res, next) {
       return d.split('@')[0];
     }));
     if (p.repository && p.repository.url) {
-      p.repositoryurl = gu(p.repository.url).https_href;
+      try {
+        p.repositoryurl = gu(p.repository.url).http_href;
+      } catch(e) {
+        p.repositoryurl = '';
+      }
     }
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
