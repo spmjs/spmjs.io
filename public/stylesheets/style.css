@@ -313,6 +313,16 @@ footer a {
   list-style-position: inside;
 }
 
+.index-list li {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.index-list li a {
+  font-size: 18px;
+  font-style: normal;
+}
+
 .index-stat {
   position: absolute;
   top: -90px;
