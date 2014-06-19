@@ -35,6 +35,18 @@ Show the dependencies tree of the package.
 #### spm doc `[build|watch|publish]`
 Documentation management toolkit.
 
+* spm doc build
+
+  Build a demo package to `_site` folder.
+
+* spm doc watch
+
+  Build and start a watching server at http://127.0.0.1:8000.
+
+* spm doc publish
+
+  Publish `_site` folder to [spmjs.io](http://spmjs.io/). The demo url is `http://spmjs.io/docs/{{package-name}}`
+
 #### spm test
 Run test case in phantomjs.
 
