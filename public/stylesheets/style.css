@@ -430,8 +430,12 @@ footer a {
   .search-form .iconfont {
     display: none;
   }
+  .index-box {
+    display: block;
+  }
   .index-list {
-    float: none;
+    float: left;
+    margin-left: 20px;
   }
 }
 

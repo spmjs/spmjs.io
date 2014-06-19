@@ -15,6 +15,7 @@ var anonymous = CONFIG.authorize.type === 'anonymous';
 var _ = require('lodash');
 var capitalize = require('capitalize');
 var gu = require('githuburl');
+var async = require('async');
 
 var marked = require('marked');
 var renderer = new marked.Renderer();
@@ -33,43 +34,69 @@ marked.setOptions({
 });
 
 exports.index = function(req, res) {
-  download.todayCount(function(todayCount) {
-    feed.stat(function(recentlyUpdates, publishCount) {
-      recentlyUpdates.forEach(function(item) {
-        item.fromNow = moment(item.time).fromNow();
+  async.parallel([
+    function(callback) {
+      download.stat(function(downloadResult) {
+        callback(null, downloadResult);
       });
-      var data = {
-        title: CONFIG.website.title,
-        count: Project.getAll().length,
-        user: req.session.user,
-        anonymous: anonymous,
-        GA: CONFIG.website.GA,
-        recentlyUpdates: recentlyUpdates,
-        publishCount: publishCount,
-        todayCount: todayCount,
-        mostDependents: dependent.getSortedDependents()
-      };
+    },
+    function(callback) {
+      feed.stat(function(recentlyUpdates, publishCount) {
+        callback(null, {
+          recentlyUpdates: recentlyUpdates,
+          publishCount: publishCount
+        });
+      });
+    },
+    function(callback) {
       if (anonymous) {
-        res.render('index', data);
+        callback();
       } else {
         account.getAll(function(users) {
-          var submitors = [];
-          users.forEach(function(u) {
-            if (u.count && u.count > 0) {
-              submitors.push({
-                login: u.login,
-                count: u.count
-              });
-            }
-          });
-          data.submitors = submitors.sort(function(a, b) {
-            return b.count - a.count;
-          });
-          data.submitors = data.submitors.slice(0, 10);
-          res.render('index', data);
+          callback(null, users);
         });
       }
+    }
+  ],
+  // optional callback
+  function(err, results) {
+    var todayCount = results[0].todayCount;
+    var recentlyPackages = results[0].recentlyPackages;
+    var recentlyUpdates = results[1].recentlyUpdates;
+    var publishCount = results[1].publishCount;
+    var users = results[2];
+
+    recentlyUpdates.forEach(function(item) {
+      item.fromNow = moment(item.time).fromNow();
     });
+    var data = {
+      title: CONFIG.website.title,
+      count: Project.getAll().length,
+      user: req.session.user,
+      anonymous: anonymous,
+      GA: CONFIG.website.GA,
+      recentlyUpdates: recentlyUpdates,
+      publishCount: publishCount,
+      todayCount: todayCount,
+      recentlyPackages: recentlyPackages,
+      mostDependents: dependent.getSortedDependents()
+    };
+    if (!anonymous) {
+      var submitors = [];
+      users.forEach(function(u) {
+        if (u.count && u.count > 0) {
+          submitors.push({
+            login: u.login,
+            count: u.count
+          });
+        }
+      });
+      data.submitors = submitors.sort(function(a, b) {
+        return b.count - a.count;
+      });
+      data.submitors = data.submitors.slice(0, 10);
+    }
+    res.render('index', data);
   });
 };
 

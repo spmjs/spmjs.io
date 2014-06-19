@@ -21,6 +21,14 @@
     </ul>
   </section>
   <section class="index-list">
+    <h2>Recently Download</h2>
+    <ul>
+    <% recentlyPackages.forEach(function(d) { %>
+      <li><a href="/package/<%= d.package.replace('@', '/') %>"><%= d.package %></a> <%= d.fromNow %></li>
+    <% }) %>
+    </ul>
+  </section>
+  <section class="index-list">
     <h2>Most Depended Upon</h2>
     <ul>
     <% mostDependents.forEach(function(d) { %>
