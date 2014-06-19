@@ -4,7 +4,7 @@
 
 ## Introdution
 
-`spm` is a powerful and integrated static package manager designed for browser-side solutions including JavaScript and CSS, and an elegant solution of front-end package management.
+`spm` is a powerful and integrated static package manager designed for browser-side solutions including JavaScript, CSS and template.
 
 ![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
 
