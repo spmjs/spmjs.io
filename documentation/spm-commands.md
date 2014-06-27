@@ -2,7 +2,7 @@
 
 ---
 
-`spm` have a collection of commands for pakcage lifecycle management.
+`spm` have a collection of commands for package lifecycle management.
 
 There is a simple list of them, and you can type `spm help [command]` to learn more details.
 
@@ -24,7 +24,7 @@ Publish a package.
 Unpublish a package.
 
 #### spm info `[name[@version]]`
-Show infomation by package name.
+Show information by package name.
 
 #### spm search `[query]`
 Search packages.
