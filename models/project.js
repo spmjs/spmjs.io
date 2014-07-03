@@ -111,7 +111,11 @@ Project.prototype = {
   getVersions: function() {
     var versions = Object.keys(this.packages || []);
     return versions.sort(function(a, b) {
-      return semver.lt(a, b);
+      if (semver.lt(a, b)) {
+        return 1;
+      } else {
+        return -1;
+      }
     });
   },
 
