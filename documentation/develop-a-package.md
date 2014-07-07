@@ -188,7 +188,7 @@ The default build result is a package which could be deployed at cdn. Then you c
 </script>
 ```
 
-You can also build a [standalone](/documentation/spm-commands#spm-build) package by adding a argument.
+You can also build a [standalone](/documentation/spm-commands#spm-build) package by adding an argument.
 
 ```bash
 $ spm build --include standalone
