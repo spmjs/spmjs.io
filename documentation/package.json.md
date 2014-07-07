@@ -66,7 +66,7 @@ spm.ignore | an array of ignore files in package, same function as `.spmignore`
       "handlebars": "1.3.0",
       "arale-widget": "1.2.0"
     },
-    "devDenpendencies": {
+    "devDependencies": {
       "expect.js": "0.3.1"
     },
     "engines": {
