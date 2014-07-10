@@ -3,12 +3,13 @@ default:
     port: 3000
   website:
     title: 'spmjs'
-    GA: 'UA-50522089-1'
+    GA: '' # Google Analytics ID
   wwwroot: 'data'
   authorize:
-    type: 'github' # or anonymous
+    type: 'anonymous' # or github
     # https://github.com/organizations/spmjs/settings/applications
-    clientId: 'b780a6efae6389352673'
-    clientSecret: '35d009a30759ab3b9da4794128d336007030a466'
+    # for github authorize type
+    clientId: ''
+    clientSecret: ''
     baseURL: 'http://127.0.0.1:3000'
-  reservedWords: 'root admin administrator bot robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback tag tags badge unknown undefined null node spm spmjs owner ownership'
+  reservedWords: 'root admin administrator bot www robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback tag tags badge unknown undefined null node spm spmjs owner ownership'
