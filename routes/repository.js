@@ -288,6 +288,20 @@ exports.search = function(req, res, next) {
   });
 };
 
+exports.data = function(req, res) {
+  var query = req.query;
+  var data = Project.getData({
+    projects: query.projects ? query.projects.split(",") : null,
+    fields: query.fields ? query.fields.split(",") : null
+  });
+  res.send(200, {
+    data: {
+      total: data.length,
+      results: data
+    }
+  });
+};
+
 function abortify(res, options) {
   code = options.code || 401;
   status = options.status || 'error';
