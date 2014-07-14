@@ -194,8 +194,15 @@ exports.search = function(req, res, next) {
     next();
     return;
   }
+
+  // http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
   client.search({
-    query: query,
+    query: {
+      "multi_match" : {
+        "query" : query,
+        "fields" : [ "name^3", "description", "keywords" ]
+      }
+    },
     index: 'spmjs',
     size: 100,
     type: 'package',
