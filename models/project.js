@@ -128,4 +128,30 @@ Project.getAll = function() {
   return fs.readdirSync(path.join(CONFIG.wwwroot, 'repository'));
 };
 
+Project.getData = function(filter) {
+  var projectNames = filter.projects;
+  var fieldNames = filter.fields;
+  var allProjectNames = Project.getAll();
+  var results = [];
+  for (var i = 0, q = allProjectNames.length; i < q; i++) {
+    var name = allProjectNames[i];
+    if (!projectNames || projectNames.indexOf(name) > -1) {
+      var prj = new Project({
+        name: name
+      });
+      var project = fieldNames ? {} : prj;
+      if (fieldNames) {
+        for (var k = 0, n = fieldNames.length; k < n; k++) {
+          var field = fieldNames[k];
+          if (field in prj) {
+            project[field] = prj[field];
+          }
+        }
+      }
+      results.push(project);
+    }
+  }
+  return results;
+};
+
 module.exports = Project;
