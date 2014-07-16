@@ -372,6 +372,12 @@ footer a {
   width: 74px;
 }
 
+.profile-stat {
+  font-size: 12px;
+  color: #bbb;
+  font-weight: bold;
+}
+
 .add-ownership-form {
   margin: 15px 0;
 }

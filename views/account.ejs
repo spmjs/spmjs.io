@@ -4,7 +4,9 @@
   <h2><%= profile.login %></h2>
   <p>
     <label>Name:</label>
-    <%= profile.name || '' %>
+    <%= profile.name || '' %> -
+    <%= profile.followers || 0 %> <span class="profile-stat">Followers</span> -
+    <%= profile.public_repos || 0 %> <span class="profile-stat">Repos</span>
   </p>
   <p>
     <label>Github:</label>
@@ -20,6 +22,12 @@
   <p>
     <label>Blog:</label>
     <a target="_blank" href="<%= (profile.blog.indexOf('http') >= 0 ? '' : 'http://') + profile.blog %>"><%= profile.blog %></a>
+  </p>
+  <% } %>
+  <% if (profile.location) { %>
+  <p>
+    <label>Location:</label>
+    <span><%= profile.location %></span>
   </p>
   <% } %>
   <% if (profile.authkey) { %>
