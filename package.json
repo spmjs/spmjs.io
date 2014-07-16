@@ -1,8 +1,8 @@
 {
   "name": "spmjs.io",
-  "descrition": "The distributed packaging server for spm@3.x",
+  "descrition": "The packaging server for spm@3.x",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "afc163 <afc163@gmail.com>",
   "keywords": [
     "spm",

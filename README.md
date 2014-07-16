@@ -1,6 +1,6 @@
 # spmjs.io
 
-[![David Status](https://david-dm.org/spmjs/spmjs.io.png)](https://david-dm.org/spmjs/spmjs.io) 
+[![David Status](https://david-dm.org/spmjs/spmjs.io.png)](https://david-dm.org/spmjs/spmjs.io)
 
 `spmjs.io` is the distributed packaging server perfectly matching with [spm@3.x](https://github.com/spmjs/spm/tree/master). Now it is rewrited in javascript from [Yuan](https://github.com/spmjs/yuan/)(the precursors), and is faster, more powerful and easier to deploy.
 
