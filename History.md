@@ -6,6 +6,7 @@
   * 文档托管服务使用 [serve-spm](https://github.com/spmjs/serve-spm) 进行重构。#43
   * 更新了 badge 的样式。
   * 更新了默认的 base.yaml 配置。
+  * 更新了底部UI。
   * 更新了部分文档。
   * 修复搜索结果排序的问题。#42
   * 修复最新版本号排序错误的问题。
