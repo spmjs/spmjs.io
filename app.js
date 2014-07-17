@@ -15,6 +15,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var serveStatic = require('serve-static');
 var fs = require('fs-extra');
+var spmjsioVersion = require('./package').version;
 
 // load global config
 var yaml = require('node-yaml-config');
@@ -99,6 +100,7 @@ app.get('/docs/:name/:version/*', docs);
 app.get('*', function(req, res){
   res.render('404.ejs', {
     title: 'No Found - ' + CONFIG.website.title,
+    spmjsioVersion: spmjsioVersion,
     anonymous: CONFIG.authorize.type === 'anonymous',
     user: req.session.user,
     GA: CONFIG.website.GA
