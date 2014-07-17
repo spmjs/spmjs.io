@@ -157,7 +157,7 @@ spmjs.io can host your package's documentation. What all you need to do is editi
 $ spm doc publish
 ```
 
-The documentation url is `http://spmjs.io/docs/{{name}}` for latest version and `http://spmjs.io/docs/{{name}}/{{version}}` for each versions.
+The documentation url is `http://spmjs.io/docs/{{name}}/` for latest version and `http://spmjs.io/docs/{{name}}/{{version}}/` for each versions.
 
 For example, http://spmjs.io/docs/now/.
 
