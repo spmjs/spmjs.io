@@ -245,6 +245,9 @@ footer {
   font-size: 14px;
   font-style: italic;
   clear: both;
+  background: #fafafa;
+  margin-top: 40px;
+  text-align: center;
 }
 
 footer a {

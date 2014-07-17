@@ -3,6 +3,7 @@ var url = require('url');
 var account = require('../models/account');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var crypto = require('crypto');
+var spmjsioVersion = require('../package').version;
 
 var githubToken = require('github-token')({
   githubClient: CONFIG.authorize.clientId,
@@ -19,6 +20,7 @@ exports.index = function(req, res) {
     var profile = req.session.user;
     res.render('account', {
       title: 'My account - ' + CONFIG.website.title,
+      spmjsioVersion: spmjsioVersion,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -38,6 +40,7 @@ exports.user = function(req, res, next) {
       var packages = account.getPackages(profile.login);
       res.render('account', {
         title: user.login + ' - ' + CONFIG.website.title,
+        spmjsioVersion: spmjsioVersion,
         user: req.session.user,
         anonymous: anonymous,
         GA: CONFIG.website.GA,

@@ -16,6 +16,7 @@ var _ = require('lodash');
 var capitalize = require('capitalize');
 var gu = require('githuburl');
 var async = require('async');
+var spmjsioVersion = require('../package').version;
 
 var marked = require('marked');
 var renderer = new marked.Renderer();
@@ -71,6 +72,7 @@ exports.index = function(req, res) {
     });
     var data = {
       title: CONFIG.website.title,
+      spmjsioVersion: spmjsioVersion,
       count: Project.getAll().length,
       user: req.session.user,
       anonymous: anonymous,
@@ -132,6 +134,7 @@ exports.project = function(req, res, next) {
     }
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
+      spmjsioVersion: spmjsioVersion,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -168,6 +171,7 @@ exports.package = function(req, res, next) {
     }
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
+      spmjsioVersion: spmjsioVersion,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -181,6 +185,7 @@ exports.package = function(req, res, next) {
 exports.all = function(req, res) {
   res.render('packages', {
     title: 'All Packages - ' + CONFIG.website.title,
+    spmjsioVersion: spmjsioVersion,
     user: req.session.user,
     anonymous: anonymous,
     GA: CONFIG.website.GA,
@@ -210,6 +215,7 @@ exports.search = function(req, res, next) {
     results = results || { hits: [] };
     res.render('search', {
       title: 'Search Result - ' + CONFIG.website.title,
+      spmjsioVersion: spmjsioVersion,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -267,6 +273,7 @@ exports.documentation = function(req, res, next) {
 
   res.render('documentation', {
     title: capitalize.words(title.replace(/-/g, ' ')) + '- spm documentation',
+    spmjsioVersion: spmjsioVersion,
     user: req.session.user,
     anonymous: anonymous,
     nav: nav,
