@@ -16,6 +16,10 @@ $ npm install
 
 ## Config
 
+```bash
+$ cp config/base.default.yaml config/base.yaml
+```
+
 Modify `config/base.yaml` as you need.
 
 ## Deploy
