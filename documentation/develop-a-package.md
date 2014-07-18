@@ -6,7 +6,7 @@ You can follow the steps to develop a package using spm (should install spm@3.x 
 
 ```
 $ spm -V
-3.0.x
+3.x.x
 ```
 
 Make sure that spm@3.x is installed.
@@ -15,6 +15,7 @@ Make sure that spm@3.x is installed.
 
 ```bash
 $ mkdir now
+$ cd now
 $ spm init
 ```
 

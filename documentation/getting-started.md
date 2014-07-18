@@ -36,6 +36,7 @@ Init a spm package.
 
 ```bash
 $ mkdir example
+$ cd example
 $ spm init
 ```
 
