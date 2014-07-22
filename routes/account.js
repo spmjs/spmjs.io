@@ -10,7 +10,7 @@ var githubToken = require('github-token')({
   githubSecret: CONFIG.authorize.clientSecret,
   baseURL: CONFIG.authorize.baseURL,
   callbackURI: 'callback',
-  scope: 'user' // optional, default scope is set to user
+  scope: 'empty' // optional, default scope is set to user, have to set a 'empty'
 });
 
 exports.index = function(req, res) {
