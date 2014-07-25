@@ -5,7 +5,7 @@
 You can follow the steps to develop a package using spm (should install spm@3.x first).
 
 ```
-$ spm -V
+$ spm --version
 3.x.x
 ```
 
