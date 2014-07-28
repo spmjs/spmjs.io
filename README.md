@@ -47,6 +47,10 @@ Reindex the packages for elastic search.
 $ npm run reindex
 ```
 
+## elasticsearch
+
+Require Java 7 environment : https://github.com/Homebrew/homebrew/issues/29910
+
 ## TODO:
 
 - packages sync server
