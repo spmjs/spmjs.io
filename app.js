@@ -84,6 +84,7 @@ app.delete('/ownership', account.ownership);
 app.get('/repository', repository.index);
 app.post('/repository/upload', multipartMiddleware, repository.package.checkPermission, repository.upload);
 app.get('/repository/search', repository.search);
+app.get('/repository/since', repository.since);
 app.get('/repository/:name', repository.project.get);
 app.delete('/repository/:name', repository.package.checkPermission, repository.project.delete);
 app.get('/repository/:name/:version', repository.package.get);
