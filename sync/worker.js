@@ -1,10 +1,7 @@
 var debug = require('debug')('spmjs.io:sync:worker');
 var fs = require('fs');
 var join = require('path').join;
-var dirname = require('path').dirname;
-var request = require('request');
 var async = require('async');
-var mkdirp = require('mkdirp');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var rimraf = require('rimraf');
@@ -67,22 +64,22 @@ Worker.prototype._sync = function(name, pkg, callback) {
   var missVersions = getMissVersions(pkg, localPkg);
   debug('  miss versions: %s', missVersions);
 
-  if (!missVersions.length) {
-    return this.next();
-  }
-
   var self = this;
 
-  async.eachSeries(missVersions, function(version, callback) {
-    self._syncOneVersion(pkg.packages[version], callback);
-  }, function(err) {
+  if (missVersions.length) {
+    async.eachSeries(missVersions, function(version, callback) {
+      self._syncOneVersion(pkg.packages[version], callback);
+    }, syncPackageInfo);
+  } else {
+    syncPackageInfo();
+  }
 
+  function syncPackageInfo() {
     remote.syncPackageInfo(name, function() {
       self.next();
       debug('  done');
     });
-
-  });
+  }
 };
 
 Worker.prototype._syncOneVersion = function(pkg, callback) {
