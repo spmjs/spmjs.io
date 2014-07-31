@@ -68,7 +68,13 @@ Worker.prototype._sync = function(name, pkg, callback) {
 
   if (missVersions.length) {
     async.eachSeries(missVersions, function(version, callback) {
-      self._syncOneVersion(pkg.packages[version], callback);
+      var _pkg = pkg.packages[version];
+      if (!_pkg.filename) {
+        // pkg is not exists if no filename.
+        return callback(null);
+      } else {
+        self._syncOneVersion(_pkg, callback);
+      }
     }, syncPackageInfo);
   } else {
     syncPackageInfo();

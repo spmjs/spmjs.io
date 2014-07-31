@@ -19,7 +19,6 @@ exports.getPackages = function(info, callback) {
   } else {
     api = '/repository/since?update_after=' + (info.last_sync_time - ms('10m'));
   }
-  console.log(CONFIG.syncSource + api);
   request(CONFIG.syncSource + api, {json:true}, function(err, res, packages) {
     callback(err, packages);
   });
