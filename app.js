@@ -22,6 +22,9 @@ var yaml = require('node-yaml-config');
 var CONFIG = yaml.load('./config/base.yaml');
 global.CONFIG = CONFIG;
 
+// start sync
+require('./sync');
+
 // mkdir data directory
 if (!fs.existsSync(CONFIG.wwwroot)) {
   fs.mkdirSync(CONFIG.wwwroot);
