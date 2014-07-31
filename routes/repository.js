@@ -90,6 +90,11 @@ exports.package = {
     var p = new Project({
       name: name
     });
+
+    if (p.sync_from_remote) {
+      return abortify(res, { code: 403 });
+    }
+
     if (anonymous) {
       next();
     } else {

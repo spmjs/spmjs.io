@@ -63,7 +63,7 @@ app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(require('errorhandler')())
+  app.use(require('errorhandler')());
 }
 
 app.get('/', routes.index);
