@@ -1,4 +1,3 @@
-var debug = require('debug')('spmjs.io:sync:worker');
 var fs = require('fs');
 var join = require('path').join;
 var async = require('async');
@@ -6,8 +5,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var rimraf = require('rimraf');
 var remote = require('./remote');
-
-var debug = console.log;
+var log = require('./log');
 
 function Worker(options) {
   EventEmitter.call(this);
@@ -28,6 +26,8 @@ Worker.prototype.next = function() {
     return setImmediate(this.finish.bind(this));
   }
 
+  log(name);
+  log('  getting package info');
   remote.getPackage(name, function(err, pkg) {
     this._sync(name, pkg);
   }.bind(this));
@@ -38,7 +38,7 @@ Worker.prototype.finish = function() {
 };
 
 Worker.prototype._sync = function(name, pkg, callback) {
-  debug('--sync: %s', name);
+  log('  start sync');
 
   var localPkg = getLocalPkg(name);
 
@@ -56,13 +56,13 @@ Worker.prototype._sync = function(name, pkg, callback) {
   }
 
   var unpublishedVersions = getUnpublishedVersions(pkg, localPkg);
-  debug('  unpublished versions: %s', unpublishedVersions);
+  log('  unpublished versions: %s', unpublishedVersions);
   unpublishedVersions.forEach(function(version) {
     deleteLocalVersionPackage(localPkg.packages[version]);
   });
 
   var missVersions = getMissVersions(pkg, localPkg);
-  debug('  miss versions: %s', missVersions);
+  log('  miss versions: %s', missVersions);
 
   var self = this;
 
@@ -81,15 +81,15 @@ Worker.prototype._sync = function(name, pkg, callback) {
   }
 
   function syncPackageInfo() {
+    log('  sync index.json for package');
     remote.syncPackageInfo(name, function() {
       self.next();
-      debug('  done');
     });
   }
 };
 
 Worker.prototype._syncOneVersion = function(pkg, callback) {
-  debug('  sync %s@%s', pkg.name, pkg.version);
+  log('  sync tarball and index.json for %s@%s', pkg.name, pkg.version);
   async.parallel([
       // 1. index.json
       function(callback) {
@@ -147,13 +147,13 @@ function getMissVersions(pkg, localPkg) {
 }
 
 function deleteLocalPackage(name) {
-  debug('  delete local package: %s', name);
+  log('  delete local package: %s', name);
   var localPath = join(CONFIG.wwwroot, 'repository', name);
   rimraf.sync(localPath);
 }
 
 function deleteLocalVersionPackage(pkg) {
-  debug('  delete local package: %s@%s', pkg.name, pkg.version);
+  log('  delete local package: %s@%s', pkg.name, pkg.version);
   var localPath = join(CONFIG.wwwroot, 'repository', pkg.name, pkg.version);
   rimraf.sync(localPath);
 }

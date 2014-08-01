@@ -1,25 +1,24 @@
-var debug = require('debug')('spmjs.io:sync:index');
 var ms = require('ms');
 var async = require('async');
 var syncModel = require('./model');
 var Worker = require('./worker');
 var remote = require('./remote');
-debug = console.log;
+var log = require('./log');
 
 var syncing = false;
 
 var handleSync = function() {
   if (syncing) return;
   syncing = true;
-  debug('start syncing');
+  log('start');
   sync(function(err, data) {
-    debug('end syncing');
+    log('end');
     syncing = false;
   });
 };
 
 var syncPackages = function(packages, callback) {
-  debug('Total %d packages to sync', packages.length);
+  log('total %d packages to sync', packages.length);
   var worker = new Worker({
     names: packages
   });
