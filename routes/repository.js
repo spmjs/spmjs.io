@@ -91,6 +91,20 @@ exports.package = {
       name: name
     });
 
+    if (CONFIG.whitelistOnly) {
+      var abort = true;
+      for (var k in CONFIG.whitelist) {
+        var whiteRe = new RegExp(CONFIG.whitelist[k]);
+        if (whiteRe.test(name)) {
+          abort = false;
+          break;
+        }
+      }
+      if (abort) {
+        return abortify(res, { code: 403 });
+      }
+    }
+
     if (p.sync_from_remote) {
       return abortify(res, { code: 403 });
     }
