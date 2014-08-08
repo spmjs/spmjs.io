@@ -179,6 +179,11 @@ exports.package = {
       });
     }
 
+    var force = req.headers['x-yuan-force'];
+    if(package.md5 && !force) {
+      return abortify(res, { code: 444 });
+    }
+
     package.md5 = crypto.createHash('md5').update(req.body).digest('hex');
     var md5 = req.headers['x-package-md5'];
     if (md5 && md5 !== package.md5) {
