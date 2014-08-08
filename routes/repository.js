@@ -6,6 +6,7 @@ var path = require('path');
 var tempfile = require('tempfile');
 var tar = require('tarball-extract');
 var hook = require('../lib/hook');
+var feed = require('../lib/feed');
 var elastical = require('elastical');
 var client = new elastical.Client();
 var account = require('../models/account');
@@ -19,6 +20,17 @@ exports.index = function(req, res) {
     data = 'define(' + data + ');';
   }
   res.send(200, data);
+};
+
+exports.since = function(req, res, next) {
+  var updateAfter = parseInt(req.query.update_after, 10);
+  if (!updateAfter) {
+    return abortify(res, { code: 404 });
+  }
+  feed.updateAfter(updateAfter, function(data) {
+    res.set('Content-Type', 'application/javascript');
+    res.send(200, data);
+  });
 };
 
 exports.project = {
@@ -78,6 +90,25 @@ exports.package = {
     var p = new Project({
       name: name
     });
+
+    if (CONFIG.whitelistOnly) {
+      var abort = true;
+      for (var k in CONFIG.whitelist) {
+        var whiteRe = new RegExp(CONFIG.whitelist[k]);
+        if (whiteRe.test(name)) {
+          abort = false;
+          break;
+        }
+      }
+      if (abort) {
+        return abortify(res, { code: 403 });
+      }
+    }
+
+    if (p.sync_from_remote) {
+      return abortify(res, { code: 403 });
+    }
+
     if (anonymous) {
       next();
     } else {
