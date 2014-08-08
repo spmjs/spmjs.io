@@ -12,4 +12,11 @@ default:
     clientId: ''
     clientSecret: ''
     baseURL: 'http://127.0.0.1:3000'
-  reservedWords: 'root admin administrator bot www robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback tag tags badge unknown undefined null node spm spmjs owner ownership'
+  reservedWords: 'root admin administrator bot www robot master webmaster account people user users project projects search action favorite like love team teams group groups organization organizations package packages org com net help doc docs demo document documentation blog bbs forum forums static assets repository public private mac windows ios lab callback tag tags badge unknown undefined null node spm spmjs owner ownership since'
+
+  whitelistOnly: off
+  whitelist:
+
+  sync: off
+  syncInterval: '10m'
+  syncSource: 'http://spmjs.io'

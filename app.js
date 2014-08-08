@@ -22,6 +22,9 @@ var yaml = require('node-yaml-config');
 var CONFIG = yaml.load('./config/base.yaml');
 global.CONFIG = CONFIG;
 
+// start sync
+require('./sync');
+
 // mkdir data directory
 if (!fs.existsSync(CONFIG.wwwroot)) {
   fs.mkdirSync(CONFIG.wwwroot);
@@ -60,7 +63,7 @@ app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(require('errorhandler')())
+  app.use(require('errorhandler')());
 }
 
 app.get('/', routes.index);
@@ -84,6 +87,7 @@ app.delete('/ownership', account.ownership);
 app.get('/repository', repository.index);
 app.post('/repository/upload', multipartMiddleware, repository.package.checkPermission, repository.upload);
 app.get('/repository/search', repository.search);
+app.get('/repository/since', repository.since);
 app.get('/repository/:name', repository.project.get);
 app.delete('/repository/:name', repository.package.checkPermission, repository.project.delete);
 app.get('/repository/:name/:version', repository.package.get);
