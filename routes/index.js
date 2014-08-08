@@ -116,6 +116,9 @@ exports.project = function(req, res, next) {
     p.fromNow = moment(p.updated_at).fromNow();
     p.latest.readme = marked(p.latest.readme || '');
     // jquery@1.7.2 -> jquery
+    p.latest.dependencies = _.uniq((p.latest.dependencies || []).map(function(d) {
+      return d.split('@')[0];
+    }));
     p.latest.dependents = _.uniq((p.latest.dependents || []).map(function(d) {
       return d.split('@')[0];
     }));

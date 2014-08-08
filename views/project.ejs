@@ -64,7 +64,11 @@
     <% if (project.latest.dependencies && project.latest.dependencies.length > 0) { %>
     <tr>
       <th>Dependencies</th>
-      <td><%= project.latest.dependencies.join(', ') %></td>
+      <td>
+        <% project.latest.dependencies.forEach(function(d, i) { %>
+          <a href="/package/<%= d %>"><%= d %></a><% if(i!==project.latest.dependencies.length-1){ %>,<% } %>
+        <% }) %>
+      </td>
     </tr>
     <% } %>
     <% if (project.latest.dependents && project.latest.dependents.length > 0) { %>

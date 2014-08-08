@@ -39,8 +39,7 @@
       <th>Dependencies</th>
       <td>
         <% package.dependencies.forEach(function(d, i) { %>
-          <% d = d.split('@'); %>
-          <a href="/package/<%= d[0] %>"><%= d[0] %></a>@<%= d[1] %><% if(i!==package.dependencies.length-1){ %>,<% } %>
+          <a href="/package/<%= d.replace('@', '/') %>"><%= d %></a><% if(i!==package.dependencies.length-1){ %>,<% } %>
         <% }) %>
       </td>
     </tr>
