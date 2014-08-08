@@ -41,6 +41,14 @@
       <td><%= package.spm.main %></td>
     </tr>
     <% } %>
+    <% if (package.filename) { %>
+    <tr>
+      <th>Tarfile</th>
+      <td>
+        <a href="/repository/<%= package.name %>/<%= package.version %>/<%= package.filename %>"><%= package.filename %></a>
+      </td>
+    </tr>
+    <% } %>
     <% if (package.publisher) { %>
     <tr>
       <th>Publisher</th>
