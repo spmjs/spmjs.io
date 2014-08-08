@@ -91,7 +91,7 @@ exports.package = {
       name: name
     });
 
-    if (CONFIG.whitelistOnly) {
+    if (CONFIG.whitelistOnly === 'on') {
       var abort = true;
       for (var k in CONFIG.whitelist) {
         var whiteRe = new RegExp(CONFIG.whitelist[k]);
