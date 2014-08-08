@@ -13,18 +13,6 @@
       <th width="20%">Updated</th>
       <td width="80%" title="<%= package.updated_at %>"><%= package.fromNow %></td>
     </tr>
-    <% if (package.publisher) { %>
-    <tr>
-      <th>Publisher</th>
-      <td>
-        <% if (anonymous) { %>
-          <%= package.publisher %>
-        <% } else { %>
-          <a href="/account/<%= package.publisher %>"><%= package.publisher %></a>
-        <% } %>
-      </td>
-    </tr>
-    <% } %>
     <% if (package.homepage) { %>
     <tr>
       <th>Homepage</th>
@@ -61,6 +49,18 @@
     <tr>
       <th>Main</th>
       <td><%= package.spm.main %></td>
+    </tr>
+    <% } %>
+    <% if (package.publisher) { %>
+    <tr>
+      <th>Publisher</th>
+      <td>
+        <% if (anonymous) { %>
+          <%= package.publisher %>
+        <% } else { %>
+          <a href="/account/<%= package.publisher %>"><%= package.publisher %></a>
+        <% } %>
+      </td>
     </tr>
     <% } %>
   </table>
