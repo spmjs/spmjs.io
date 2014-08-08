@@ -35,16 +35,6 @@
       </td>
     </tr>
     <% } %>
-    <% if (package.dependents && package.dependents.length > 0) { %>
-    <tr>
-      <th>Dependents</th>
-      <td>
-        <% package.dependents.forEach(function(d, i) { %>
-          <a href="/package/<%= d %>"><%= d %></a><% if(i!==package.dependents.length-1){ %>,<% } %>
-        <% }) %>
-      </td>
-    </tr>
-    <% } %>
     <% if (package.spm.main) { %>
     <tr>
       <th>Main</th>
