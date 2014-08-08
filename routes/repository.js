@@ -140,9 +140,15 @@ exports.package = {
     data.spm = data.spm || {};
     data.spm.main = data.spm.main || 'index.js';
 
+    Cache.package = new Package(data);
+
+    var force = req.headers['x-yuan-force'];
+    if(Cache.package.md5 && !force) {
+      return abortify(res, { code: 444 });
+    }
+
     var isNewProject;
     Cache.project = new Project(data);
-    Cache.package = new Package(data);
     var isNewProject = !Cache.project['created_at'];
     if (isNewProject) {
       data.owners = [data.publisher];
@@ -171,11 +177,6 @@ exports.package = {
         code: 415,
         message: 'Only gziped tar file is allowed.'
       });
-    }
-
-    var force = req.headers['x-yuan-force'];
-    if(package.md5 && !force) {
-      return abortify(res, { code: 444 });
     }
 
     package.md5 = crypto.createHash('md5').update(req.body).digest('hex');
