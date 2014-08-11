@@ -157,7 +157,7 @@ exports.package = {
     if (isNewProject) {
       hook.emit('create:project', Cache.project, data.publisher);
     }
-    res.send(200);
+    res.send(200, {});
   },
   put: function(req, res) {
     var data = req.body;
