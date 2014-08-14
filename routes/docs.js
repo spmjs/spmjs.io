@@ -6,7 +6,8 @@ module.exports = function(req, res, next) {
   var packageDir = path.join('docs', req.params.name, req.params.version);
 
   serveSpm(path.resolve(path.join(CONFIG.wwwroot, packageDir)), {
-    dist: '/docs/' + req.params.name + '/' + req.params.version,
-    distTpl: '{{dist}}'
+    paths: [
+      ['/docs/' + req.params.name + '/' + req.params.version, '']
+    ]
   })(req, res, next);
 };
