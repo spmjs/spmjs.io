@@ -17,8 +17,7 @@ function Package(package) {
   } else {
     pkg = {};
   }
-  _.merge(this, pkg);
-  _.merge(this, package);
+  _.extend(this, pkg, package);
   return this;
 }
 
