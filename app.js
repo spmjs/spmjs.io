@@ -101,7 +101,7 @@ app.get('/repositories', repository.data);
 app.get('/docs/:name/:version/*', docs);
 
 // 404
-app.get('*', function(req, res){
+app.get('*', function(req, res) {
   res.render('404.ejs', {
     title: 'No Found - ' + CONFIG.website.title,
     spmjsioVersion: spmjsioVersion,
@@ -111,6 +111,6 @@ app.get('*', function(req, res){
   });
 });
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
