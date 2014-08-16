@@ -224,6 +224,7 @@ header #logo,
 .aside-right a,
 .aside-right i {
   color: #777!important;
+  outline: none;
 }
 
 .aside-right a:hover {
