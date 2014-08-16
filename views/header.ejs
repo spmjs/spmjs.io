@@ -53,6 +53,9 @@
                     description: item.description
                   }
                 });
+                data = data.sort(function(a, b) {
+                  return a.value.length - b.value.length;
+                });
                 done(data);
               });
               return false;
