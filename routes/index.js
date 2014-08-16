@@ -202,7 +202,6 @@ exports.search = function(req, res, next) {
     next();
     return;
   }
-
   // http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
   client.search({
     query: {
@@ -233,6 +232,32 @@ exports.search = function(req, res, next) {
         return item._source;
       })
     });
+  });
+};
+
+exports.suggest = function(req, res, next) {
+  var query = req.query.q;
+  if (!query) {
+    next();
+    return;
+  }
+  // http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
+  client.search({
+    query: {
+      "prefix": {
+        "suggest": {
+          "value": query
+        }
+      }
+    },
+    index: 'spmjs',
+    size: 6,
+    type: 'package',
+  }, function(err, results) {
+    results = results || { hits: [] };
+    res.status(200).send(results.hits.map(function(item) {
+      return item._source;
+    }));
   });
 };
 
