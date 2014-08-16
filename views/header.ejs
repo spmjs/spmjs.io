@@ -23,7 +23,8 @@
     <script>
     seajs.config({
       alias: {
-        '$': 'jquery/jquery/1.10.1/jquery'
+        '$': 'jquery/jquery/1.10.1/jquery',
+        'autocomplete': 'arale/autocomplete/1.2.3/autocomplete'
       }
     });
     </script>
@@ -34,9 +35,49 @@
       <h1 id="logo" title="spmjs - static package manager"><a href="/">spmjs</a></h1>
       <div class="search-form">
         <form method="get" action="/search">
-          <input class="text" name="q" type="search" placeholder="Search Packages">
+          <input class="text" name="q" type="search" autocomplete="off" placeholder="Search Packages">
         </form>
         <i class="iconfont">&#xe605;</i>
+        <script>
+        // search hint
+        seajs.use(['$', 'autocomplete'], function($, AutoComplete) {
+          var auto = new AutoComplete({
+            trigger: 'input[name=q]',
+            dataSource: function(query, done) {
+              var that = this;
+              $.get('/suggest?q=' + query).success(function(data) {
+                data = data.map(function(item) {
+                  return {
+                    value: item.name,
+                    label: item.name,
+                    description: item.description
+                  }
+                });
+                done(data);
+              });
+              return false;
+            },
+            template:
+                '<div class="{{classPrefix}}">\
+                    <ul class="{{classPrefix}}-ctn" data-role="items">\
+                        {{#each items}}\
+                            <li data-role="item" class="{{../classPrefix}}-item" data-value="{{matchKey}}">\
+                                <a href="" class="ui-autocomplete-item-label">{{label}}</a>\
+                                <div class="ui-autocomplete-item-description">{{description}}</div>\
+                            </li>\
+                        {{/each}}\
+                    </ul>\
+                 </div>',
+          })
+          .render()
+          .before('show', function() {
+            this.set('width', $(this.get('trigger')).outerWidth(true));
+          }).on('itemSelect', function(item) {
+            $(this.get('trigger')).attr('disabled', 'disabled');
+            location.href = '/package/' + item.label;
+          });
+        });
+        </script>
       </div>
       <ul class="navigation">
         <li>

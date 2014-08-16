@@ -154,7 +154,7 @@ header #logo,
   left: 12px;
   top: 1px;
   font-size: 20px;
-  color: #555;
+  color: #999;
 }
 
 .search-form input {
@@ -169,7 +169,7 @@ header #logo,
 }
 
 .search-form input:focus {
-  width: 120%;
+  width: 130%;
   background: rgba(0,0,0,1);
   outline: none;
 }
@@ -558,4 +558,38 @@ img.badge {
 .markdown h6:hover .anchor {
   text-decoration: none;
   display: inline;
+}
+
+.ui-autocomplete {
+  background: #fff;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 2px #ccc;
+}
+
+.ui-autocomplete ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-autocomplete ul li {
+  font-size: 18px;
+  padding: 3px 12px;
+}
+
+.ui-autocomplete ul li a {
+  text-decoration: none;
+}
+
+.ui-autocomplete-item-label {
+  font-weight: bold;
+}
+
+.ui-autocomplete-item-description {
+  font-size: 14px;
+  color: #999;
+}
+
+.ui-autocomplete-item-hover {
+  background: #f3f3f4;
 }

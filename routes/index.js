@@ -238,7 +238,7 @@ exports.search = function(req, res, next) {
 exports.suggest = function(req, res, next) {
   var query = req.query.q;
   if (!query) {
-    next();
+    res.status(200).send([]);
     return;
   }
   // http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
