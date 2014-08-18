@@ -338,8 +338,12 @@ footer a {
 
 .index-stat i {
   margin-right: 10px;
-  margin-left: 10px;
+  margin-left: 20px;
   font-size: 18px;
+}
+
+.index-number {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
 .cell {
