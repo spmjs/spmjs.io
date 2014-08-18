@@ -7,7 +7,7 @@
   <aside class="aside-right">
     <% if (doclink) { %>
     <a target="_blank" href="<%= doclink %>" title="Documentation hosted in spmjs">
-      <i class="iconfont iconfont-doclink">&#xf012b;</i>
+      <i class="iconfont iconfont-doclink">&#xf00f6;</i>
     </a>
     <% } %>
     <% if (project.repositoryurl) { %>
@@ -113,7 +113,10 @@
   <form action="/ownership" method="POST">
     <input type="text" name="account" placeholder="Input account name">
     <input type="hidden" name="package" value="<%= project.name %>">
-    <button class="button button-blue">Add Ownership</button>
+    <button class="button button-blue">
+      <i class="iconfont">&#xe600;</i>
+      Add Owner
+    </button>
     <% if (errormessage) { %>
     <span class="error-message"><%= errormessage %></span>
     <% } %>
