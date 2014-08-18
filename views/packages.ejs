@@ -2,7 +2,7 @@
 <p>Total Packages: <%= packages.length %></p>
 <ul class="all-packages">
 <% packages.forEach(function(p) { %>
-  <li><a href="/package/<%= p %>"><%= p %></a></li>
+  <li><a title="<%= p %>" href="/package/<%= p %>"><%= p %></a></li>
 <% }) %>
 </ul>
 <% include footer %>

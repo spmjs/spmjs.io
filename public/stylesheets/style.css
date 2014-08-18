@@ -495,12 +495,15 @@ img.badge {
 .all-packages a {
   background: none repeat scroll 0 0 #fafafa;
   border-radius: 2px;
-  box-shadow: 1px 2px 0 #f1f1f1;
+  border-bottom: 3px solid #F0F1F1;
   display: inline-block;
   margin-bottom: 8px;
   margin-right: 4px;
-  min-width: 153px;
+  width: 152px;
   padding: 1px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .page-404 img {
