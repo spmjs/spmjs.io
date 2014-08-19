@@ -62,7 +62,7 @@
     "semver": "^3.0.0",
     "serve-spm": "^0.5.1",
     "serve-static": "^1.2.1",
-    "static-favicon": "^1.0.2",
+    "serve-favicon": "^2.0.1",
     "tarball-extract": "~0.0.3",
     "tempfile": "~1.0.0"
   },
