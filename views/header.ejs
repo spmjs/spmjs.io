@@ -65,7 +65,7 @@
                     <ul class="{{classPrefix}}-ctn" data-role="items">\
                         {{#each items}}\
                             <li data-role="item" class="{{../classPrefix}}-item" data-value="{{matchKey}}">\
-                                <a href="" class="ui-autocomplete-item-label">{{label}}</a>\
+                                <a href="/package/{{label}}" class="ui-autocomplete-item-label">{{label}}</a>\
                                 <div class="ui-autocomplete-item-description">{{description}}</div>\
                             </li>\
                         {{/each}}\
@@ -76,7 +76,7 @@
           .before('show', function() {
             this.set('width', $(this.get('trigger')).outerWidth(true));
           }).on('itemSelect', function(item) {
-            $(this.get('trigger')).attr('disabled', 'disabled');
+            this.set('submitOnEnter', false);
             location.href = '/package/' + item.label;
           });
         });
