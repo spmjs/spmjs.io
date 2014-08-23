@@ -24,7 +24,7 @@ Modify `config/base.yaml` as you need.
 
 ## Deploy
 
-Start and stop server by a simple command.
+Start and stop server by a simple command. (For Unix/Linux)
 
 ```bash
 $ npm start
