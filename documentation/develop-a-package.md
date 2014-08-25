@@ -107,6 +107,8 @@ I am in a iframe of 600px high
 </pre>
 
 
+> If you don't want to debug your code by `spm doc watch`, you can try [seajs-wrap](https://github.com/seajs/seajs-wrap) or [spm-server](https://github.com/spmjs/spm-server/) to debug `CommonJS` modules in development.
+
 ## Add Test Case
 
 Edit test file at `tests/now-spec.js`. We introduce a default assert solution [expect.js](http://spmjs.io/package/expect.js).
@@ -175,6 +177,7 @@ The default build result is a package which could be deployed at cdn. Then you c
 
 ```html
 <script src="http://cdn.example.com/path/to/sea.js"></script>
+<script src="http://cdn.example.com/path/to/seajs-combo.js"></script><!-- If your need that -->
 <script>
   seajs.config({
     base: 'http://cdn.example.com/',
