@@ -145,7 +145,7 @@
   background-color: #FFFDD7;
   padding: 1px 4px;
   border-radius: 2px;
-  font-family: "Inconsolata", "Menlo", monospace;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .markdown pre {
   margin: 1.64em 0;
