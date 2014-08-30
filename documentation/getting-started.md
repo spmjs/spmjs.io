@@ -4,11 +4,11 @@
 
 ## Introdution
 
-`spm` is a powerful and integrated static package manager designed for browser-side solutions including JavaScript, CSS and template.
+[spm](https://github.com/spmjs/spm) is a powerful and integrated static package manager designed for browser-side solutions including JavaScript, CSS and template.
 
-![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)
+[![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)](https://github.com/spmjs/spm)
 
-All packages of `spm` are organized by CommonJS, run on [Sea.js](https://github.com/seajs/seajs). We supply a complete lifecycle managment of package by using [spm](https://github.com/spmjs/spm), including the following features:
+All packages in `spmjs.io` are organized by CommonJS, run on [Sea.js](https://github.com/seajs/seajs). We supply a complete lifecycle managment of package by using [spm](https://github.com/spmjs/spm), including the following features:
 
 - Initialization
 - Dependencies Installation
@@ -64,3 +64,4 @@ Anyone is welcome to contribute by the following ways.
 - [Bug reports](https://github.com/spmjs/spm/issues)
 - [Feature requests](https://github.com/spmjs/spm/issues)
 - [Pull requests](https://github.com/spmjs/spm/pulls)
+- Promote spm on your social network.

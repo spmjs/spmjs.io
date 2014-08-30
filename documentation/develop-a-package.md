@@ -2,7 +2,7 @@
 
 ---
 
-You can follow the steps to develop a package using spm (should install spm@3.x first).
+You can follow the steps to develop a package using [spm](https://github.com/spmjs/spm).
 
 ```
 $ spm --version
