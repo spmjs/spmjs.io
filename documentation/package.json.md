@@ -24,7 +24,6 @@ spm.main | the only entry point of package, default `index.js`, could be a json 
 spm.output | an array of other files need to output
 spm.dependencies | specify dependencies relation of the package
 spm.devDependencies | specify dependencies relation of the package in developing situation
-spm.engines | specify the loader enviroment of executing the package, it would be used for local demo debugging.
 spm.tests | specify all test files, support glob patterns: `tests/*-spec.js`
 spm.buildArgs | specify the cli arguments for `spm build`
 spm.ignore | an array of ignore files in package, same function as `.spmignore`
@@ -68,10 +67,6 @@ spm.ignore | an array of ignore files in package, same function as `.spmignore`
     },
     "devDependencies": {
       "expect.js": "0.3.1"
-    },
-    "engines": {
-      "seajs": "2.2.1",
-      "seajs-text": "1.1.0"
     },
     "tests": "tests/*-spec.js",
     "ignore": ["dist"],
