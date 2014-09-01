@@ -2,7 +2,7 @@
 
 ---
 
-package.json of `spm` share most fileds with package.json of `npm`, but add a `spm` filed containing some custom attributes.
+`spm` use the exactly smae file `package.json` as `npm` to descripe a package, sharing most fileds, expect an extra `spm` filed for containing some custom attributes.
 
 ### Fields
 
