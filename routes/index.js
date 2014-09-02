@@ -1,7 +1,7 @@
 var Project = require('../models/project');
 var Package = require('../models/package');
 var account = require('../models/account');
-var feed = require('../lib/feed');
+var history= require('../lib/history');
 var download = require('../lib/download');
 var dependent = require('../lib/dependent');
 var moment = require('moment');
@@ -42,7 +42,7 @@ exports.index = function(req, res) {
       });
     },
     function(callback) {
-      feed.stat(function(recentlyUpdates, publishCount) {
+      history.stat(function(recentlyUpdates, publishCount) {
         callback(null, {
           recentlyUpdates: recentlyUpdates,
           publishCount: publishCount
