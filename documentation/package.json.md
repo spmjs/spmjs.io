@@ -20,7 +20,7 @@ repository | Specify the place where your code lives. `{ "type": "git", "url": "
 bugs | The url to your project's issue tracker and / or the email address to which issues should be reported.
 license | license
 **spm*** |
-spm.main | the only entry point of package, default `index.js`, could be a json or css file
+spm.main | the only entry point of package, default `index.js`, or could be set to `index.css` for a css only package 
 spm.output | an array of other files need to output
 spm.dependencies | specify dependencies relation of the package
 spm.devDependencies | specify dependencies relation of the package in developing situation
