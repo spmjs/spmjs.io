@@ -324,8 +324,14 @@ footer a {
 }
 
 .index-list li a {
+  display: inline-block;
   font-size: 18px;
   font-style: normal;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
 }
 
 .index-stat {
