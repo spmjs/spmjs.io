@@ -2,7 +2,7 @@
 
 ---
 
-package.json of `spm` share most fileds with package.json of `npm`, but add a `spm` filed containing some custom attributes.
+`spm` use the exactly same file `package.json` as `npm` to descripe a package, sharing most fileds, expect an extra `spm` filed for containing some custom attributes.
 
 ### Fields
 
@@ -20,11 +20,10 @@ repository | Specify the place where your code lives. `{ "type": "git", "url": "
 bugs | The url to your project's issue tracker and / or the email address to which issues should be reported.
 license | license
 **spm*** |
-spm.main | the only entry point of package, default `index.js`, could be a json or css file
+spm.main | the only entry point of package, default `index.js`, or could be set to `index.css` for a css only package 
 spm.output | an array of other files need to output
 spm.dependencies | specify dependencies relation of the package
 spm.devDependencies | specify dependencies relation of the package in developing situation
-spm.engines | specify the loader enviroment of executing the package, it would be used for local demo debugging.
 spm.tests | specify all test files, support glob patterns: `tests/*-spec.js`
 spm.buildArgs | specify the cli arguments for `spm build`
 spm.ignore | an array of ignore files in package, same function as `.spmignore`
@@ -68,10 +67,6 @@ spm.ignore | an array of ignore files in package, same function as `.spmignore`
     },
     "devDependencies": {
       "expect.js": "0.3.1"
-    },
-    "engines": {
-      "seajs": "2.2.1",
-      "seajs-text": "1.1.0"
     },
     "tests": "tests/*-spec.js",
     "ignore": ["dist"],
