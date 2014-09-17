@@ -301,6 +301,7 @@ exports.search = function(req, res, next) {
     query: query,
     index: 'spmjs',
     type: 'package',
+    size: 100,
   }, function(err, results) {
     var data = [];
     results = results || { hits: [] };
@@ -310,18 +311,27 @@ exports.search = function(req, res, next) {
       });
       data.push({
         name: p.name,
+        version: p.version,
         description: p.description,
         keywords: p.keywords,
         homepage: p.homepage,
-        repository: p.repository && p.repository.url
+        repository: p.repository && p.repository.url,
+        created_at: p.created_at,
       });
     });
-    res.send(200, {
+
+    data = {
       data: {
         total: data.length,
         results: data
       }
-    });
+    };
+    if ('define' in req.query) {
+      res.set('Content-Type', 'application/javascript');
+      data = JSON.stringify(data, null, 2);
+      data = 'define(' + data + ');';
+    }
+    res.send(200, data);
   });
 };
 
