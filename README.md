@@ -37,8 +37,7 @@ $ npm stop
 Then you have a complete package source server which can interact with [spm3.x](https://github.com/spmjs/spm/tree/master) after add the server address to `~/.spm/spmrc-3x`.
 
 ```ini
-[source:default]
-url = http://127.0.0.1:3000
+registry = http://127.0.0.1:3000
 ```
 
 Reindex the packages for elastic search.
