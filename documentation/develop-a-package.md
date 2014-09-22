@@ -20,33 +20,20 @@ $ spm init
 ```
 
 ```
-Please answer the following:
-[?] Package name (now)
-[?] Version (1.0.0)
-[?] Description
-[?] Project git repository (git://github.com/afc163/now.git)
-[?] Do you need to make any changes to the above before continuing? (y/N)
+Creating a spm package:
+[?] Package name: (now)
+[?] Version: (1.0.0)
+[?] Description:
+[?] Author: afc163 <afc163@gmail.com>
 
-Writing .gitignore...OK
-Writing .spmignore...OK
-Writing .travis.yml...OK
-Writing HISTORY.md...OK
-Writing README.md...OK
-Writing examples/index.md...OK
-Writing index.js...OK
-Writing package.json...OK
-Writing tests/now-spec.js...OK
-
-Initialized from template "init-template".
-
-Done, without errors
+Initialize a spm package Succeccfully!
 ```
 
 Then you have a package named `now`.
 
 ## Install dependencies
 
-Install default engines and devDependencies first.
+Install default devDependencies first.
 
 ```bash
 $ spm install
