@@ -111,7 +111,7 @@
 <% if (editable) { %>
 <div class="add-ownership-form">
   <form action="/ownership" method="POST">
-    <input type="text" name="account" placeholder="Input account name">
+    <input required type="text" name="account" placeholder="Input account name">
     <input type="hidden" name="package" value="<%= project.name %>">
     <button class="button button-blue">
       <i class="iconfont">&#xe600;</i>
