@@ -2,7 +2,7 @@
 
 ---
 
-## Introdution
+## Introduction
 
 [spm](https://github.com/spmjs/spm) is a powerful and integrated static package manager designed for browser-side solutions including JavaScript, CSS and template.
 
