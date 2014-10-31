@@ -4,7 +4,7 @@
 
 [spm@3.x](https://github.com/spmjs/spm/tree/master) is new version of [spm@2.x](https://github.com/spmjs/spm/tree/2.x), we have a collection of updates now.
 
-- [spmjs.org](https://spmjs.org) is package service for spm@2.x, now is [spmjs.io](http://spmjs.io) which is prettier and easier to [deploy in your compony](https://github.com/spmjs/spmjs.io/).
+- [spmjs.org](https://spmjs.org) is package service for spm@2.x, now is [spmjs.io](http://spmjs.io) which is prettier and easier to [deploy in your company](https://github.com/spmjs/spmjs.io/).
 
 - Change spm profile from `~/.spm/spmrc` to `~/.spm/spmrc-3x`.
 
