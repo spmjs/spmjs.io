@@ -2,26 +2,26 @@
 
 ---
 
-`spm` use the exactly same file `package.json` as `npm` to descripe a package, sharing most fileds, expect an extra `spm` filed for containing some custom attributes.
+`spm` use the exactly same file `package.json` as `npm` to describe a package, which shares most fileds, except an extra `spm` filed for containing some custom attributes.
 
 ### Fields
 
 Field | Description |
 ------------ | ------------- |
-name* | name of your package, all lowercase, use a `-` or `.` as a separator between words
-version* | Semantic Versioning like 1.0.0
+name* | name of the package in lowercase, use a `-` or `.` as a separator between words
+version* | semantic versioning like 1.0.0
 private | prevent accidental publication of private repositories, default `false`
-description | a brief description of your package
-keywords | an array contains keywords
-homepage | url of your package's website
-author | author of this package: `Hsiaoming Yang <me@lepture.com>` or `{ "name": "Hsiaoming Yang", "email": "me@lepture.com" }`
+description | a brief description of the package
+keywords | an array of keywords
+homepage | url of the package's website
+author | author of the package: `Hsiaoming Yang <me@lepture.com>` or `{ "name": "Hsiaoming Yang", "email": "me@lepture.com" }`
 maintainers | an array of maintainers, just like author
-repository | Specify the place where your code lives. `{ "type": "git", "url": "http://github.com/isaacs/npm.git" }`
-bugs | The url to your project's issue tracker and / or the email address to which issues should be reported.
+repository | specify the place where the code is hosted. `{ "type": "git", "url": "http://github.com/isaacs/npm.git" }`
+bugs | the url to the package's issue tracker and / or the email address to which issues should be reported.
 license | license
 **spm*** |
-spm.main | the only entry point of package, default `index.js`, or could be set to `index.css` for a css only package 
-spm.output | an array of other files need to output
+spm.main | the only entry point of the package, default `index.js`, or could be set to `index.css` for a css-only package 
+spm.output | an array of other files needed to be output
 spm.dependencies | specify dependencies relation of the package
 spm.devDependencies | specify dependencies relation of the package in developing situation
 spm.tests | specify all test files, support glob patterns: `tests/*-spec.js`
