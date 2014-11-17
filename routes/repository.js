@@ -148,8 +148,7 @@ exports.package = {
 
     Cache.package = new Package(data);
 
-    var force = req.headers['x-yuan-force'];
-    if(Cache.package.md5 && !force) {
+    if(Cache.package.md5) {
       return abortify(res, { code: 444 });
     }
 
@@ -367,7 +366,7 @@ function abortify(res, options) {
     406: 'Not acceptable.',
     415: 'Unsupported media type.',
     426: 'Upgrade required.',
-    444: 'Force option required.'
+    444: 'Cannot modify pre-existing version.'
   };
   message = options.message || msgs[code];
   res.send(code, {
