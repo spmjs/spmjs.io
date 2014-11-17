@@ -60,7 +60,7 @@
     "request": "~2.39.0",
     "rimraf": "~2.2.8",
     "semver": "~3.0.0",
-    "serve-spm": "~0.5.1",
+    "serve-spm": "~0.7.1",
     "serve-static": "~1.2.1",
     "serve-favicon": "~2.0.1",
     "tarball-extract": "~0.0.3",
