@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var request = require('request');
 var elastical = require('elastical');
+var semver = require('semver');
 var client = new elastical.Client();
 var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
@@ -153,7 +154,11 @@ exports.project = function(req, res, next) {
 
 exports.package = function(req, res, next) {
   var name = req.params.name;
-  var version = req.params.version;
+  var project = new Project({
+    name: req.params.name
+  });
+  var version = semver.maxSatisfying(Object.keys(project.packages), req.params.version);
+
   var p = new Package({
     name: name,
     version: version

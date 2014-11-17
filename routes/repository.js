@@ -5,6 +5,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var tempfile = require('tempfile');
 var tar = require('tarball-extract');
+var semver = require('semver');
 var hook = require('../lib/hook');
 var history = require('../lib/history');
 var elastical = require('elastical');
@@ -68,9 +69,14 @@ exports.project = {
 var Cache = {};
 exports.package = {
   get: function(req, res) {
+    var project = new Project({
+      name: req.params.name
+    });
+    var version = semver.maxSatisfying(Object.keys(project.packages), req.params.version);
+
     var p = new Package({
       name: req.params.name,
-      version: req.params.version
+      version: version
     });
     if (!p.md5) {
       abortify(res, { code: 404 });
@@ -370,3 +376,5 @@ function abortify(res, options) {
     message: message
   });
 }
+
+
