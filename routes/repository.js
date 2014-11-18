@@ -152,20 +152,19 @@ exports.package = {
       return abortify(res, { code: 444 });
     }
 
-    var isNewProject;
     Cache.project = new Project(data);
     var isNewProject = !Cache.project['created_at'];
     if (isNewProject) {
       data.owners = [data.publisher];
     }
     Cache.project.update(data);
+    delete Cache.project.unpublished;
     if (isNewProject) {
       hook.emit('create:project', Cache.project, data.publisher);
     }
     res.send(200, {});
   },
   put: function(req, res) {
-    var data = req.body;
     var package = Cache.package;
     var project = Cache.project;
     if (!package) {
