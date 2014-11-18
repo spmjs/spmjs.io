@@ -123,6 +123,9 @@ exports.project = function(req, res, next) {
     p.latest.dependents = _.uniq((p.latest.dependents || []).map(function(d) {
       return d.split('@')[0];
     }));
+    if (p.unpublished) {
+      p.unpublished.fromNow = moment(p.unpublished.time).fromNow();
+    }
 
     var editable;
     if (p.owners && p.owners.length > 0 && req.session.user &&

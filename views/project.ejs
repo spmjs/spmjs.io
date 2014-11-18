@@ -18,13 +18,31 @@
     <% } %>
   </aside>
   <hr>
+  <% if (project.unpublished) { %>
+  <p>This package has been unpublished.</p>
+  <% } else { %>
   <p><%= project.description || "No description" %></p>
   <pre>spm install <%= project.name %></pre>
   <p>
     Latest version: <strong><%= project.latest.version %></strong>
     <span>~ <%= project.latest.tag %></span>
   </p>
+  <% } %>
   <table class="meta">
+    <% if (project.unpublished) { %>
+    <tr>
+      <th width="20%">Description</th>
+      <td width="80%">
+        <%= project.description || "No description" %>
+      </td>
+    </tr>
+    <tr>
+      <th>Unpublished On</th>
+      <td>
+        <%= project.unpublished.fromNow %>
+      </td>
+    </tr>
+    <% } else { %>
     <tr>
       <th width="20%">Versions</th>
       <td width="80%">
@@ -81,7 +99,8 @@
       </td>
     </tr>
     <% } %>
-    <% if (project.latest.spm.main) { %>
+    <% } %>
+    <% if (project.latest.spm && project.latest.spm.main) { %>
     <tr>
       <th>Main</th>
       <td><%= project.latest.spm.main %></td>
