@@ -97,11 +97,11 @@ exports.authorize = function(req, res) {
   var authkey = req.body.authkey;
   account.authorize(id, authkey, function(result) {
     if (result) {
-      res.send(200, {
+      res.status(200).send({
         data: authkey
       });
     } else {
-      res.send(403, {
+      res.status(403).send({
         message: 'username or authkey is wrong.'
       });
     }
@@ -110,7 +110,7 @@ exports.authorize = function(req, res) {
 
 exports.ownership =  function(req, res) {
   if (!req.session.user) {
-    res.send(401);
+    res.status(401).send();
     return;
   }
   var errormessage;
@@ -130,11 +130,11 @@ exports.ownership =  function(req, res) {
     }
     if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
       if (errormessage) {
-        res.send(403, {
+        res.status(403).send({
           errormessage: errormessage
         });
       } else {
-        res.send(200);
+        res.status(200).send();
       }
     } else {
       res.redirect(url.parse(req.headers.referer).pathname + errormessage);

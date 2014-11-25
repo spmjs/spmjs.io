@@ -19,7 +19,7 @@ exports.index = function(req, res) {
     res.set('Content-Type', 'application/javascript');
     data = 'define(' + data + ');';
   }
-  res.send(200, data);
+  res.status(200).send(data);
 };
 
 exports.since = function(req, res, next) {
@@ -29,7 +29,7 @@ exports.since = function(req, res, next) {
   }
   history.updateAfter(updateAfter, function(data) {
     res.set('Content-Type', 'application/javascript');
-    res.send(200, data);
+    res.status(200).send(data);
   });
 };
 
@@ -47,7 +47,7 @@ exports.project = {
         res.set('Content-Type', 'application/javascript');
         data = 'define(' + data + ');';
       }
-      res.send(200, data);
+      res.status(200).send(data);
     }
   },
   delete: function(req, res) {
@@ -57,7 +57,7 @@ exports.project = {
     } else {
       hook.emit('delete:project', project, req.body.publisher);
       project.delete();
-      res.send(200, {
+      res.status(200).send({
         status: 'info',
         message: 'Project is deleted.'
       });
@@ -81,7 +81,7 @@ exports.package = {
         res.set('Content-Type', 'application/javascript');
         data = 'define(' + data + ');';
       }
-      res.send(200, data);
+      res.status(200).send(data);
     }
   },
   checkPermission: function(req, res, next) {
@@ -157,7 +157,7 @@ exports.package = {
     if (isNewProject) {
       hook.emit('create:project', Cache.project, data.publisher);
     }
-    res.send(200, {});
+    res.status(200).send({});
   },
   put: function(req, res) {
     var data = req.body;
@@ -199,7 +199,7 @@ exports.package = {
     project.save();
     hook.emit('update:package', package);
 
-    res.send(200, package);
+    res.status(200).send(package);
   },
   delete: function(req, res) {
     var package = new Package(req.params);
@@ -212,7 +212,7 @@ exports.package = {
       if (leftPackageCount <= 0) {
         hook.emit('delete:project', project, req.body.publisher);
       }
-      res.send(200, {
+      res.status(200).send({
         status: 'info',
         message: 'Package is deleted.'
       });
@@ -285,7 +285,7 @@ exports.upload = function(req, res) {
 
     fs.copySync(fpath, dest);
 
-    res.send(200, {
+    res.status(200).send({
       status: 'info',
       message: 'Upload docs success.'
     });
@@ -331,7 +331,7 @@ exports.search = function(req, res, next) {
       data = JSON.stringify(data, null, 2);
       data = 'define(' + data + ');';
     }
-    res.send(200, data);
+    res.status(200).send(data);
   });
 };
 
@@ -341,7 +341,7 @@ exports.data = function(req, res) {
     projects: query.projects ? query.projects.split(",") : null,
     fields: query.fields ? query.fields.split(",") : null
   });
-  res.send(200, {
+  res.status(200).send({
     data: {
       total: data.length,
       results: data
@@ -364,7 +364,7 @@ function abortify(res, options) {
     444: 'Force option required.'
   };
   message = options.message || msgs[code];
-  res.send(code, {
+  res.status(code).send({
     statusCode: code,
     status: status,
     message: message
