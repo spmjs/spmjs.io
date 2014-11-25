@@ -2,7 +2,7 @@
 ==================
 
 * [提升了首页的加载性能](https://github.com/spmjs/spmjs.io/commit/573d7d39dc32ae1d7cfcfc2aff872e8220e0f436)。
-* 修复解析 md 文件里长 html 字符串时太慢的问题。 spmjs/spm#1067
+* 修复解析 md 文件里长 html 字符串时太慢的[问题](https://github.com/spmjs/spm/issues/1067)。
 * 简化了 badge 的文案。
 * [改进了 `/repository/search` 的输出格式](https://github.com/spmjs/spmjs.io/commit/7d91382dd6696e98c21f4e9713f6272bc5d9506d)。
 * 部分依赖升级。
