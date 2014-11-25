@@ -51,14 +51,19 @@ app.set('port', CONFIG.server.port || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(require('./middlewares/raw-body')({
   contentTypes: ['application/x-tar'],
   limit: '50mb'
 }));
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser('spmjs'));
-app.use(session({ secret: 'keyboard cat', key: 'sid' }));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
