@@ -30,6 +30,7 @@ renderer.heading = function(text, level) {
 
 // Synchronous highlighting with highlight.js
 marked.setOptions({
+  pedantic: true,
   highlight: function (code) {
     return require('highlight.js').highlightAuto(code).value;
   }
