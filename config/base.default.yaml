@@ -17,6 +17,8 @@ default:
   whitelistOnly: off
   whitelist:
 
+  admin:
+
   sync: off
   syncInterval: '10m'
   syncSource: 'http://spmjs.io'
