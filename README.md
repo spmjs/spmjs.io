@@ -58,6 +58,5 @@ Require Java 7 environment : https://github.com/Homebrew/homebrew/issues/29910
 
 ## TODO:
 
-- packages sync server
 - data backup
-- spm owner [ls|add|rm] ?
+- spm owner [ls|add|rm]
