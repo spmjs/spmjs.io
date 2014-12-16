@@ -43,7 +43,7 @@ registry = http://127.0.0.1:3000
 You can set it via `spm config`
 
 ```bash
-$ spm config register=http://your_spm_server.com
+$ spm config register http://your_spm_server.com
 ```
 
 Reindex the packages for elastic search.
