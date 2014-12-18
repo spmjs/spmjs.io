@@ -43,7 +43,12 @@ Package.prototype = {
   },
 
   delete: function() {
-    fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name, this.version));
+    var now = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+    this['unpublished'] = {
+      time: now
+    };
+    fs.outputJsonSync(this.datafile(), this);
+    fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name, this.version, this.filename));
     return this;
   }
 };

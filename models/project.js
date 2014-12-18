@@ -38,7 +38,12 @@ Project.prototype = {
     this.getVersions().forEach(function(version) {
       that.remove(version);
     });
-    fs.removeSync(path.join(CONFIG.wwwroot, 'repository', this.name));
+
+    var now = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+    this['unpublished'] = {
+      time: now
+    };
+    fs.outputJsonSync(this.datafile(), this);
     return this;
   },
 
