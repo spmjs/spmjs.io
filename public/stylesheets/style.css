@@ -540,14 +540,13 @@ img.badge {
 .documentation-nav li {
   text-transform: uppercase;
   line-height: 2;
-  border-radius: 3px;
   padding: 3px 12px;
 }
 
 .documentation-nav li.current {
   font-weight: bold;
-  background: #FEFFEF;
-  border-width: 2px 0;
+  background: #F8F8F8;
+  border-left: 5px solid #93C7DD;
 }
 
 .markdown h1.package-name {
