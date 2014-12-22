@@ -563,6 +563,7 @@ img.badge {
 .markdown .anchor {
   display: none;
   margin-left: 8px;
+  position: absolute;
 }
 
 .markdown .header-link {
