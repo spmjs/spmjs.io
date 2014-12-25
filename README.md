@@ -9,7 +9,7 @@
 ## Install
 
 ```bash
-$ git clone git://github.com/spmjs/spmjs.io.git
+$ git clone git://github.com/spmjs/spmjs.io.git --depth=1
 $ cd spmjs.io
 $ npm install
 ```
