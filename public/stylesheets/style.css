@@ -503,17 +503,27 @@ img.badge {
 }
 
 .all-packages a {
-  background: none repeat scroll 0 0 #fafafa;
-  border-radius: 2px;
-  border-bottom: 3px solid #F0F1F1;
+  background: #FAFAFA;
+  border-radius: 5px;
+  border-left: 4px solid rgb(240, 241, 241);
+  border-bottom: 2px solid rgb(240, 241, 241);
   display: inline-block;
   margin-bottom: 8px;
-  margin-right: 4px;
-  width: 152px;
-  padding: 1px 8px;
+  margin-right: 3px;
+  width: 148px;
+  padding: 2px 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.all-packages a:hover {
+  background: #f8f8f9;
+  border-left: 3px solid #ddd;
+  border-bottom: 2px solid #ddd;
 }
 
 .page-404 img {
