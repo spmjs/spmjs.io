@@ -171,7 +171,7 @@ exports.package = function(req, res, next) {
     version: version
   });
   if (p.md5) {
-    p.readme = marked(p.readme || '');
+    p.readme = md.render(p.readme || '');
     p.fromNow = moment(p.updated_at).fromNow();
     // jquery@1.7.2 -> jquery
     p.dependents = _.uniq((p.dependents || []).map(function(d) {
@@ -293,9 +293,7 @@ var DocumentationOrder = {
 exports.documentation = function(req, res, next) {
   var title = req.params.title || 'getting-started';
   var content = (fs.readFileSync(path.join('documentation', title + '.md')) || '').toString();
-  content = marked(content, {
-    renderer: renderer
-  });
+  content = md.render(content);
 
   var nav = fs.readdirSync('documentation');
   nav = nav.map(function(item, i) {
