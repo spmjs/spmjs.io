@@ -18,21 +18,24 @@ var capitalize = require('capitalize');
 var gu = require('githuburl');
 var async = require('async');
 var spmjsioVersion = require('../package').version;
+var hljs = require('highlight.js');
 
-var marked = require('marked');
-var renderer = new marked.Renderer();
-renderer.heading = function(text, level) {
-  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-  return '<h' + level + ' id="' + escapedText + '">' + text + '<a name="' + escapedText +
-         '" class="anchor" href="#' + escapedText +
-         '"><span class="header-link iconfont">&#xe601;</span></a></h' + level + '>';
-};
+var md = require('markdown-it')('full', {
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (err) {}
+    }
 
-// Synchronous highlighting with highlight.js
-marked.setOptions({
-  pedantic: true,
-  highlight: function (code) {
-    return require('highlight.js').highlightAuto(code).value;
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (err) {}
+
+    return ''; // use external default escaping
   }
 });
 
@@ -116,7 +119,7 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.fromNow = moment(p.updated_at).fromNow();
-    p.latest.readme = marked(p.latest.readme || '');
+    p.latest.readme = md.render(p.latest.readme || '');
     // jquery@1.7.2 -> jquery
     p.latest.dependencies = _.uniq((p.latest.dependencies || []).map(function(d) {
       return d.split('@')[0];
