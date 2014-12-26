@@ -27,8 +27,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "./node_modules/pm2/bin/pm2 start app.js --name spmjs && nohup ./node_modules/elasticsearch-package/bin/elasticsearch -p .spmjspid >/dev/null 2>&1 &",
-    "stop": "./node_modules/pm2/bin/pm2 stop spmjs && kill -9 `cat .spmjspid`",
+    "start": "./node_modules/.bin/pm2 start app.js --name spmjs && ./node_modules/.bin/pm2 start ./node_modules/elasticsearch-package/bin/elasticsearch -x --interpreter bash",
+    "stop": "./node_modules/.bin/pm2 stop spmjs && ./node_modules/.bin/pm2 stop elasticsearch",
     "reindex": "node elastic/reindexPackages.js"
   },
   "dependencies": {
