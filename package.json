@@ -27,8 +27,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "./node_modules/forever/bin/forever start app.js && nohup ./node_modules/elasticsearch-package/bin/elasticsearch -p .spmjspid >/dev/null 2>&1 &",
-    "stop": "./node_modules/forever/bin/forever stop app.js && kill -9 `cat .spmjspid`",
+    "start": "./node_modules/pm2/bin/pm2 start app.js --name spmjs && nohup ./node_modules/elasticsearch-package/bin/elasticsearch -p .spmjspid >/dev/null 2>&1 &",
+    "stop": "./node_modules/pm2/bin/pm2 stop spmjs && kill -9 `cat .spmjspid`",
     "reindex": "node elastic/reindexPackages.js"
   },
   "dependencies": {
@@ -67,6 +67,6 @@
     "tempfile": "^1.1.0"
   },
   "devDependencies": {
-    "forever": "*"
+    "pm2": "*"
   }
 }
