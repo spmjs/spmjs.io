@@ -323,6 +323,7 @@ exports.search = function(req, res, next) {
       data.push({
         name: p.name,
         version: p.version,
+        versions: p.getVersions(),
         description: p.description,
         keywords: p.keywords,
         homepage: p.homepage,
