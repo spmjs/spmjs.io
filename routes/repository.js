@@ -328,7 +328,7 @@ exports.search = function(req, res, next) {
         keywords: p.keywords,
         homepage: p.homepage,
         repository: p.repository && p.repository.url,
-        created_at: p.created_at,
+        created_at: p.created_at
       });
     });
 
