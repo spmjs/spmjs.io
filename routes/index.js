@@ -24,7 +24,7 @@ var md = require('markdown-it')('full', {
   html: true,
   linkify: true,
   typographer: true,
-  highlight: function (str, lang) {
+  highlight: function(str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(lang, str).value;
@@ -36,6 +36,21 @@ var md = require('markdown-it')('full', {
     return ''; // use external default escaping
   }
 });
+
+// Add anchor for heading
+// https://github.com/spmjs/spmjs.io/blob/3bcd34319a67a22ee1f7ce897011742bf041ed4c/routes/index.js#L23
+md.renderer.rules.heading_open = function(tokens, idx) {
+  var escapedText = tokens[idx+1].content.toLowerCase().replace(/[^\w]+/g, '-');
+  return '<h' + tokens[idx].hLevel + ' id="' + escapedText + '">';
+};
+
+md.renderer.rules.heading_close = function(tokens, idx) {
+  var escapedText = tokens[idx-1].content.toLowerCase().replace(/[^\w]+/g, '-');
+  return '<a name="' + escapedText +
+         '" class="anchor" href="#' + escapedText + '">' +
+         '<span class="header-link iconfont">&#xe601;</span></a>' +
+         '</h' + tokens[idx].hLevel + '>\n';
+};
 
 exports.index = function(req, res) {
   async.parallel([
