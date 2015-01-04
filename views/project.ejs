@@ -4,31 +4,31 @@
     <a href="/package/<%= project.name %>/"><%= project.name %></a>
     <img class="badge" src="/badge/<%= project.name %>">
   </h1>
-  <aside class="aside-right">
+  <hr>
+  <div class="flex-container meta">
+  <div class="flex-column">
+    <% if (project.unpublished) { %>
+    <p>This package has been unpublished.</p>
+    <% } else { %>
+    <p><%= project.description || "No description" %></p>
+    <pre>spm install <%= project.name %></pre>
+    <p class="meta-links">
     <% if (doclink) { %>
-    <a target="_blank" href="<%= doclink %>" title="Documentation hosted in spmjs">
-      <i class="iconfont iconfont-doclink">&#xf00f6;</i>
-    </a>
+      <a target="_blank" href="<%= doclink %>" title="Documentation hosted in spmjs">
+        <i class="iconfont iconfont-doclink">&#xf00f6;</i>
+      </a>
     <% } %>
     <% if (project.repositoryurl) { %>
-    <a target="_blank" href="<%= project.repositoryurl %>" class="github-stars" title="github star count">
-      <i class="iconfont iconfont-star">&#xf0290;</i>
-      <span class="github-star-count"></span>
-    </a>
+      <a target="_blank" href="<%= project.repositoryurl %>" class="github-stars" title="github star count">
+        <i class="iconfont iconfont-star">&#xf0290;</i>
+        <span class="github-star-count"></span>
+      </a>
     <% } %>
-  </aside>
-  <hr>
-  <% if (project.unpublished) { %>
-  <p>This package has been unpublished.</p>
-  <% } else { %>
-  <p><%= project.description || "No description" %></p>
-  <pre>spm install <%= project.name %></pre>
-  <p>
-    Latest version: <strong><%= project.latest.version %></strong>
-    <span>~ <%= project.latest.tag %></span>
-  </p>
-  <% } %>
-  <table class="meta">
+    </p>
+    <% } %>
+  </div>
+  <div class="flex-column-2">
+  <table>
     <% if (project.unpublished) { %>
     <tr>
       <th width="20%">Description</th>
@@ -126,6 +126,8 @@
     </tr>
     <% } %>
   </table>
+  </div>
+  </div>
 </div>
 <% if (editable) { %>
 <div class="add-ownership-form">

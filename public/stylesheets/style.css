@@ -214,34 +214,6 @@ header #logo,
   position: relative;
 }
 
-.aside-right {
-  font-style: italic;
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.aside-right,
-.aside-right a,
-.aside-right i {
-  color: #777!important;
-  outline: none;
-}
-
-.aside-right a:hover {
-  text-decoration: none;
-}
-
-.aside-right i {
-  margin-left: 15px;
-  margin-right: -4px;
-  font-size: 20px;
-}
-
-.github-stars {
-  display: none;
-}
-
 footer {
   padding: 20px 0;
   font-size: 14px;
@@ -433,44 +405,6 @@ footer a {
   color: #A95151;
 }
 
-@media (max-width: 1030px) {
-  header {
-    height: auto;
-    overflow: hidden;
-  }
-  .navigation {
-    display: block;
-    float: none;
-    font-size: 16px;
-  }
-  header #logo,
-  .navigation li,
-  .search-form {
-    display: block;
-    text-align: center;
-  }
-  .search-form {
-    width: 100%;
-    margin-left: 0;
-  }
-  .search-form input {
-    padding: 0.5em 1em;
-  }
-  .search-form input:focus {
-    width: 80%;
-  }
-  .search-form .iconfont {
-    display: none;
-  }
-  .index-box {
-    display: block;
-  }
-  .index-list {
-    float: left;
-    margin-left: 20px;
-  }
-}
-
 .security-tip {
   font-size: 14px;
   font-weight: bold;
@@ -622,4 +556,115 @@ img.badge {
 
 .ui-autocomplete-item-hover {
   background: #f3f3f4;
+}
+
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-column {
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.flex-column-2 {
+  -webkit-flex: 2;
+          flex: 2;
+}
+
+.flex-column-3 {
+  -webkit-flex: 3;
+          flex: 3;
+}
+
+.meta {
+  border-bottom: 3px solid #EEE;
+}
+
+.meta div:first-child {
+  padding-right: 50px;
+  font-size: 16px;
+}
+
+.markdown .meta table {
+  border: none;
+  width: auto;
+  white-space: nowrap;
+}
+
+.markdown .meta table tbody tr {
+  background: none;
+}
+
+.markdown .meta table tbody th,
+.markdown .meta table tbody td {
+  padding: 0 12px 5px;
+}
+
+.meta-links,
+.meta-links a,
+.meta-links i {
+  color: #888!important;
+  outline: none;
+}
+
+.meta-links a {
+  margin-right: 12px;
+}
+
+.meta-links a:hover,
+.meta-links a:hover i {
+  text-decoration: none;
+  color: #666!important;
+}
+
+.meta-links i {
+  margin-right: -2px;
+  font-size: 20px;
+}
+
+.github-stars {
+  display: none;
+}
+
+@media (max-width: 1030px) {
+  header {
+    height: auto;
+    overflow: hidden;
+  }
+  .navigation {
+    display: block;
+    float: none;
+    font-size: 16px;
+  }
+  header #logo,
+  .navigation li,
+  .search-form {
+    display: block;
+    text-align: center;
+  }
+  .search-form {
+    width: 100%;
+    margin-left: 0;
+  }
+  .search-form input {
+    padding: 0.5em 1em;
+  }
+  .search-form input:focus {
+    width: 80%;
+  }
+  .search-form .iconfont {
+    display: none;
+  }
+  .index-box {
+    display: block;
+  }
+  .index-list {
+    float: left;
+    margin-left: 20px;
+  }
+  .flex-container {
+    display: block;
+  }
 }
