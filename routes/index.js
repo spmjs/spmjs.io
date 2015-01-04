@@ -30,11 +30,9 @@ var md = require('markdown-it')('full', {
         return hljs.highlight(lang, str).value;
       } catch (err) {}
     }
-
     try {
       return hljs.highlightAuto(str).value;
     } catch (err) {}
-
     return ''; // use external default escaping
   }
 });
