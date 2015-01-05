@@ -4,6 +4,11 @@ var request = require('request');
 var ms = require('ms');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
+var crypto = require('crypto');
+var appendFile = require('fs').appendFileSync;
+var readFile = require('fs').readFileSync;
+var log = require('./log');
+var moment = require('moment');
 
 exports.getPackage = function(name, callback) {
   var url = CONFIG.syncSource + '/repository/' + name;
@@ -37,7 +42,14 @@ exports.syncVersionTarball = function(pkg, callback) {
   var localPath = join(CONFIG.wwwroot, 'repository', pkg.name, pkg.version, pkg.filename);
   mkdirp.sync(dirname(localPath));
   request(remotePath, callback)
-    .pipe(fs.createWriteStream(localPath));
+    .pipe(fs.createWriteStream(localPath))
+    .on('finish', function() {
+      if (md5file(localPath) !== pkg.md5 + 1) {
+        log('  sync tarball error: %s@%s', pkg.name, pkg.version);
+        var msg = '['+moment().format('YYYY-MM-DD HH:mm:SS')+'] ' + pkg.name + '@' + pkg.version;
+        appendFile(join(CONFIG.wwwroot, 'sync.error.log'), msg);
+      }
+    });
 };
 
 exports.syncPackageInfo = function(name, callback) {
@@ -58,3 +70,8 @@ exports.syncPackageInfo = function(name, callback) {
     callback();
   });
 };
+
+function md5file(fpath) {
+  var md5 = crypto.createHash('md5');
+  return md5.update(readFile(fpath)).digest('hex');
+}
