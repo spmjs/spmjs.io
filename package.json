@@ -49,6 +49,7 @@
     "github-token": "~0.1.1",
     "githuburl": "~0.1.6",
     "highlight.js": "^8.4.0",
+    "inquirer": "~0.8.0",
     "lodash": "~2.4.1",
     "markdown-it": "~3.0.0",
     "mkdirp": "~0.5.0",
