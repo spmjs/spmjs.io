@@ -177,7 +177,7 @@ exports.package = function(req, res, next) {
   var project = new Project({
     name: req.params.name
   });
-  var version = semver.maxSatisfying(Object.keys(project.packages), req.params.version);
+  var version = semver.maxSatisfying(Object.keys(project.packages || {}), req.params.version);
 
   var p = new Package({
     name: name,
