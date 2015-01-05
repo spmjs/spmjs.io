@@ -53,71 +53,45 @@ md.renderer.rules.heading_close = function(tokens, idx) {
 };
 
 exports.index = function(req, res) {
-  async.parallel([
-    function(callback) {
-      download.stat(function(downloadResult) {
-        callback(null, downloadResult);
-      });
-    },
-    function(callback) {
-      history.stat(function(recentlyUpdates, publishCount) {
-        callback(null, {
-          recentlyUpdates: recentlyUpdates,
-          publishCount: publishCount
-        });
-      });
-    },
-    function(callback) {
-      if (anonymous) {
-        callback();
-      } else {
-        account.getAll(function(users) {
-          callback(null, users);
+  var results = global.indexResults;
+  var todayCount = results[0].todayCount;
+  var recentlyPackages = results[0].recentlyPackages;
+  var recentlyUpdates = results[1].recentlyUpdates;
+  var publishCount = results[1].publishCount;
+  var users = results[2];
+
+  recentlyUpdates.forEach(function(item) {
+    item.fromNow = moment(item.time).fromNow();
+  });
+  var data = {
+    title: CONFIG.website.title,
+    spmjsioVersion: spmjsioVersion,
+    count: Project.getAll().length,
+    user: req.session.user,
+    anonymous: anonymous,
+    GA: CONFIG.website.GA,
+    recentlyUpdates: recentlyUpdates,
+    publishCount: publishCount,
+    todayCount: todayCount,
+    recentlyPackages: recentlyPackages,
+    mostDependents: results[3]
+  };
+  if (!anonymous) {
+    var submitors = [];
+    users.forEach(function(u) {
+      if (u.count && u.count > 0) {
+        submitors.push({
+          login: u.login,
+          count: u.count
         });
       }
-    }
-  ],
-  // optional callback
-  function(err, results) {
-    var todayCount = results[0].todayCount;
-    var recentlyPackages = results[0].recentlyPackages;
-    var recentlyUpdates = results[1].recentlyUpdates;
-    var publishCount = results[1].publishCount;
-    var users = results[2];
-
-    recentlyUpdates.forEach(function(item) {
-      item.fromNow = moment(item.time).fromNow();
     });
-    var data = {
-      title: CONFIG.website.title,
-      spmjsioVersion: spmjsioVersion,
-      count: Project.getAll().length,
-      user: req.session.user,
-      anonymous: anonymous,
-      GA: CONFIG.website.GA,
-      recentlyUpdates: recentlyUpdates,
-      publishCount: publishCount,
-      todayCount: todayCount,
-      recentlyPackages: recentlyPackages,
-      mostDependents: dependent.getSortedDependents()
-    };
-    if (!anonymous) {
-      var submitors = [];
-      users.forEach(function(u) {
-        if (u.count && u.count > 0) {
-          submitors.push({
-            login: u.login,
-            count: u.count
-          });
-        }
-      });
-      data.submitors = submitors.sort(function(a, b) {
-        return b.count - a.count;
-      });
-      data.submitors = data.submitors.slice(0, 10);
-    }
-    res.render('index', data);
-  });
+    data.submitors = submitors.sort(function(a, b) {
+      return b.count - a.count;
+    });
+    data.submitors = data.submitors.slice(0, 10);
+  }
+  res.render('index', data);
 };
 
 exports.project = function(req, res, next) {

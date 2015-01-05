@@ -26,6 +26,9 @@ global.CONFIG = CONFIG;
 // start sync
 require('./sync');
 
+// start index cache
+require('./lib/cacheIndex');
+
 // mkdir data directory
 if (!fs.existsSync(CONFIG.wwwroot)) {
   fs.mkdirSync(CONFIG.wwwroot);
@@ -122,3 +125,4 @@ app.get('*', function(req, res) {
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
