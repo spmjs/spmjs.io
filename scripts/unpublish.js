@@ -14,7 +14,7 @@ var yaml = require('node-yaml-config');
 var CONFIG = yaml.load('./config/base.yaml');
 global.CONFIG = CONFIG;
 
-var inquirer = require('inquirer');
+var confirm = require('confirm-cli');
 var remove = require('fs-extra').removeSync;
 var join = require('path').join;
 var hook = require('../lib/hook');
@@ -41,13 +41,7 @@ if (!pkg) {
   process.exit(1);
 }
 
-inquirer.prompt([{
-  message: 'Confirm to unpublish ' + pkg + '?',
-  name: 'confirm',
-  type: 'confirm'
-}], function(answer) {
-  if (!answer.confirm) return;
-
+confirm('Confirm to unpublish ' + pkg + '?', function() {
   var hasVersion = pkg.indexOf('@') > -1;
   if (hasVersion) {
     pkg = pkg.split('@');
