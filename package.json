@@ -29,7 +29,7 @@
   "scripts": {
     "start": "./node_modules/pm2/bin/pm2 start app.js --name spmjs && ./node_modules/pm2/bin/pm2 start ./node_modules/elasticsearch-package/bin/elasticsearch -x --interpreter bash",
     "stop": "./node_modules/pm2/bin/pm2 stop spmjs && ./node_modules/pm2/bin/pm2 stop elasticsearch",
-    "reindex": "node elastic/reindexPackages.js"
+    "reindex": "node scripts/reindexPackages.js"
   },
   "dependencies": {
     "async": "~0.9.0",
