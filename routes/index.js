@@ -20,7 +20,7 @@ var async = require('async');
 var spmjsioVersion = require('../package').version;
 var hljs = require('highlight.js');
 
-var md = require('markdown-it')('full', {
+var md = require('markdown-it')({
   html: true,
   linkify: true,
   typographer: true,
