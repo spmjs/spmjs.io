@@ -22,3 +22,5 @@ default:
   sync: off
   syncInterval: '10m'
   syncSource: 'http://spmjs.io'
+
+  indexCacheInterval: '1m'
