@@ -123,14 +123,9 @@ exports.package = {
           return abortify(res, { code: 401 });
         }
 
-        var isAdmin = 'admin' in CONFIG && CONFIG.admin.split(' ').indexOf(publisher) > -1;
-        if (isAdmin) {
-          req.body.isAdmin = true;
-        } else {
-          var permission = (!p.created_at) || account.checkPermission(publisher, name);
-          if (!permission) {
-            return abortify(res, { code: 403 });
-          }
+        var permission = (!p.created_at) || account.checkPermission(publisher, name);
+        if (!permission) {
+          return abortify(res, { code: 403 });
         }
         req.body.publisher = publisher;
         next();
@@ -154,8 +149,7 @@ exports.package = {
 
     Cache.package = new Package(data);
 
-    var force = req.headers['x-yuan-force'];
-    if(Cache.package.md5 && (!req.body.isAdmin || (req.body.isAdmin && !force))) {
+    if (Cache.package.md5) {
       return abortify(res, { code: 444 });
     }
 
@@ -190,8 +184,7 @@ exports.package = {
       });
     }
 
-    var force = req.headers['x-yuan-force'];
-    if(package.md5 && !force) {
+    if(package.md5) {
       return abortify(res, { code: 444 });
     }
 
