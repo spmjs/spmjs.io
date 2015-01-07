@@ -20,37 +20,21 @@ var async = require('async');
 var spmjsioVersion = require('../package').version;
 var hljs = require('highlight.js');
 
-var md = require('markdown-it')({
-  html: true,
-  linkify: true,
-  typographer: true,
-  highlight: function(str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (err) {}
-    }
-    try {
-      return hljs.highlightAuto(str).value;
-    } catch (err) {}
-    return ''; // use external default escaping
+var kramed = require('kramedx');
+var renderer = new kramed.Renderer();
+renderer.heading = function(text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+  return '<h' + level + ' id="' + escapedText + '">' + text + '<a name="' + escapedText +
+    '" class="anchor" href="#' + escapedText +
+    '"><span class="header-link iconfont">&#xe601;</span></a></h' + level + '>';
+};
+// Synchronous highlighting with highlight.js
+kramed.setOptions({
+  renderer: renderer,
+  highlight: function (code) {
+    return hljs.highlightAuto(code).value;
   }
 });
-
-// Add anchor for heading
-// https://github.com/spmjs/spmjs.io/blob/3bcd34319a67a22ee1f7ce897011742bf041ed4c/routes/index.js#L23
-md.renderer.rules.heading_open = function(tokens, idx) {
-  var escapedText = tokens[idx+1].content.toLowerCase().replace(/[^\w]+/g, '-');
-  return '<h' + tokens[idx].hLevel + ' id="' + escapedText + '">';
-};
-
-md.renderer.rules.heading_close = function(tokens, idx) {
-  var escapedText = tokens[idx-1].content.toLowerCase().replace(/[^\w]+/g, '-');
-  return '<a name="' + escapedText +
-         '" class="anchor" href="#' + escapedText + '">' +
-         '<span class="header-link iconfont">&#xe601;</span></a>' +
-         '</h' + tokens[idx].hLevel + '>\n';
-};
 
 exports.index = function(req, res) {
   async.parallel([
@@ -132,7 +116,7 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.fromNow = moment(p.updated_at).fromNow();
-    p.latest.readme = md.render(p.latest.readme || '');
+    p.latest.readme = kramed(p.latest.readme || '');
     // jquery@1.7.2 -> jquery
     p.latest.dependencies = _.uniq((p.latest.dependencies || []).map(function(d) {
       return d.split('@')[0];
@@ -184,7 +168,7 @@ exports.package = function(req, res, next) {
     version: version
   });
   if (p.md5) {
-    p.readme = md.render(p.readme || '');
+    p.readme = kramed(p.readme || '');
     p.fromNow = moment(p.updated_at).fromNow();
     // jquery@1.7.2 -> jquery
     p.dependents = _.uniq((p.dependents || []).map(function(d) {
@@ -306,7 +290,7 @@ var DocumentationOrder = {
 exports.documentation = function(req, res, next) {
   var title = req.params.title || 'getting-started';
   var content = (fs.readFileSync(path.join('documentation', title + '.md')) || '').toString();
-  content = md.render(content);
+  content = kramed(content);
 
   var nav = fs.readdirSync('documentation');
   nav = nav.map(function(item, i) {
