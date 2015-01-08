@@ -66,17 +66,16 @@ Then edit `examples/index.md`:
 ## Normal usage
 
 ````javascript
-seajs.use('index', function(now) {
-  alert(now); // add this
-});
+var now = require(../index);
+console.log(now);
 ````
 </pre>
 
 
-Run `spm doc watch` to start a documentation service at `127.0.0.1:8000` .
+Run `spm doc` to start a documentation service at `127.0.0.1:8000` .
 
 ```bash
-$ spm doc watch
+$ spm doc
 ```
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
