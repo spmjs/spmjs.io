@@ -27,7 +27,7 @@ global.CONFIG = CONFIG;
 require('./sync');
 
 // start index cache
-require('./lib/cacheIndex');
+require('./lib/cacheIndex')();
 
 // mkdir data directory
 if (!fs.existsSync(CONFIG.wwwroot)) {
