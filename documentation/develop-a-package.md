@@ -93,7 +93,7 @@ I am in a iframe of 600px high
 </pre>
 
 
-> If you don't want to debug your code by `spm doc watch`, you can try [seajs-wrap](https://github.com/seajs/seajs-wrap) or [spm-server](https://github.com/spmjs/spm-server/) to debug `CommonJS` modules in development.
+> If you don't want to debug your code by `spm doc`, you can try [seajs-wrap](https://github.com/seajs/seajs-wrap) or [spm-server](https://github.com/spmjs/spm-server/) to debug `CommonJS` modules in development.
 
 ## Add Test Case
 
@@ -178,7 +178,7 @@ The default build result is a package which could be deployed at cdn. Then you c
 </script>
 ```
 
-You can also build a [standalone](/documentation/spm-commands#spm-build) package by adding an argument.
+And We strongly recommend building a [standalone](/documentation/spm-commands#spm-build) package by adding an argument.
 
 ```bash
 $ spm build --include standalone
