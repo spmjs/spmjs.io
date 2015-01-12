@@ -31,8 +31,16 @@ renderer.heading = function(text, level) {
 // Synchronous highlighting with highlight.js
 kramed.setOptions({
   renderer: renderer,
-  highlight: function (code) {
-    return hljs.highlightAuto(code).value;
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (__) {}
+    return ''; // use external default escaping
   }
 });
 
