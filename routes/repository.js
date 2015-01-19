@@ -226,24 +226,29 @@ exports.package = {
 
 exports.filename = {
   get: function(req, res) {
-    fs.readFile(path.join(CONFIG.wwwroot, 'repository',
+    if (path.extname(req.params.filename) === '.json') {
+      res.set('Content-Type', 'application/json');
+    }
+
+    var file = path.join(
+      CONFIG.wwwroot,
+      'repository',
       req.params.name,
       req.params.version,
       req.params.filename
-    ), function(err, data) {
+    );
+
+    res.download(file, function(err) {
       if (err) {
         abortify(res, { code: 404 });
+      } else {
+        var package = new Package({
+          name: req.params.name,
+          version: req.params.version
+        });
+        hook.emit('download:package', package);
       }
-      if (path.extname(req.params.filename) === '.json') {
-        res.set('Content-Type', 'application/json');
-      }
-      var package = new Package({
-        name: req.params.name,
-        version: req.params.version
-      });
-      hook.emit('download:package', package);
-      res.send(data);
-    });
+    })
   }
 };
 
