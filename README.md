@@ -46,6 +46,13 @@ You can set it via `spm config`
 $ spm config register http://your_spm_server.com
 ```
 
+Also you can use arguments `--registry` or `-r` for each command.
+
+```bash
+$ spm install -r http://127.0.0.1:3000
+$ spm publish -r http://127.0.0.1:3000
+```
+
 Reindex the packages for elastic search.
 
 ```bash
