@@ -183,8 +183,6 @@
 .markdown td {
   text-align: left;
   padding: 3px 10px;
-}
-.markdown td {
   vertical-align: top;
 }
 .markdown tbody tr:nth-child(odd) {

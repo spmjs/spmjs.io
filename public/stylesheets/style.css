@@ -596,7 +596,6 @@ img.badge {
 .markdown .meta table {
   border: none;
   width: auto;
-  white-space: nowrap;
 }
 
 .markdown .meta table tbody tr {
