@@ -4,7 +4,7 @@
 
 `spm` have a collection of commands for package lifecycle management.
 
-There is a simple list of them, and you can type `spm help [command]` to learn more details.
+There is a simple list of them, and you can type `spm [command] -h` to learn more details.
 
 ![](https://t.alipayobjects.com/images/T1Rj8cXhl5XXXXXXXX.png)
 
@@ -35,17 +35,21 @@ Show the dependencies tree of the package.
 #### spm doc `[build|watch|publish]`
 Documentation management toolkit.
 
+* spm doc
+
+  Alias for `spm doc watch`.
+
+* spm doc watch
+
+  Build and start a watching server of demo site at http://127.0.0.1:8000 .
+  
 * spm doc build
 
   Build a demo package to `_site` folder.
 
-* spm doc watch
-
-  Build and start a watching server at http://127.0.0.1:8000.
-
 * spm doc publish
 
-  Publish `_site` folder to [spmjs.io](http://spmjs.io/). The demo url is `http://spmjs.io/docs/{{package-name}}`
+  Publish `_site` folder to [spmjs.io](http://spmjs.io/). The demo site url is `http://spmjs.io/docs/{{package-name}}`
 
 #### spm test
 Run test case in phantomjs.
@@ -54,7 +58,7 @@ Run test case in phantomjs.
 Build package for browser.
 
 * -O [dir] `output directory, default: dist`
-* --include [include] `determine which files will be included, optional: relative, all, standalone`
+* --include [include] `determine which files will be included, optional: relative, all, standalone, umd`
   - relative `default`
 
     Only contain relative dependencies. Absolute dependencies should also be deployed so that it can run on Sea.js.
@@ -77,4 +81,6 @@ Build package for browser.
     ```
 
 * --ignore [ignore] `determine which id will not be transported`
+* --skip [skip] `determine which id will not be parsed when analyse`
+* --global [jquery:$,underscore:_] `replace package name to global variable, format jquery:$,underscore:_`
 * --idleading [idleading] `prefix of module name, default: {{name}}/{{version}}`

@@ -93,7 +93,7 @@ exports.logout = function(req, res) {
 
 // for spm login
 exports.authorize = function(req, res) {
-  var id = req.body.account;
+  var id = req.body.account.trim();
   var authkey = req.body.authkey;
   account.authorize(id, authkey, function(result) {
     if (result) {

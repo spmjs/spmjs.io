@@ -13,6 +13,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var NedbStore = require('connect-nedb-session')(session);
 var serveStatic = require('serve-static');
 var fs = require('fs-extra');
 var spmjsioVersion = require('./package').version;
@@ -24,6 +25,9 @@ global.CONFIG = CONFIG;
 
 // start sync
 require('./sync');
+
+// start index cache
+require('./lib/cacheIndex')();
 
 // mkdir data directory
 if (!fs.existsSync(CONFIG.wwwroot)) {
@@ -62,7 +66,8 @@ app.use(cookieParser('spmjs'));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new NedbStore({filename: path.join(__dirname, './data/db/session.db')})
 }));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
@@ -120,3 +125,4 @@ app.get('*', function(req, res) {
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+

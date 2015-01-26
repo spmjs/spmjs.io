@@ -18,4 +18,4 @@
 
 - No need to build first before publish, the package only contains source code. Building is needed just before using in your website.
 
-- [迁移 spm2 到 spm3](https://github.com/spmjs/spm/wiki/%E8%BF%81%E7%A7%BB-spm2-%E5%88%B0-spm3)
+- [迁移 spm2 到 spm3](https://github.com/spmjs/spm/wiki/%E8%BF%81%E7%A7%BB-spm2-%E7%9A%84%E6%A8%A1%E5%9D%97%E5%88%B0-spm3)

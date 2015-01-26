@@ -66,17 +66,16 @@ Then edit `examples/index.md`:
 ## Normal usage
 
 ````javascript
-seajs.use('index', function(now) {
-  alert(now); // add this
-});
+var now = require(../index);
+console.log(now);
 ````
 </pre>
 
 
-Run `spm doc watch` to start a documentation service at `127.0.0.1:8000` .
+Run `spm doc` to start a documentation service at `127.0.0.1:8000` .
 
 ```bash
-$ spm doc watch
+$ spm doc
 ```
 
 Open [http://127.0.0.1:8000/examples/](http://127.0.0.1:8000/examples/) in browser to see the result.
@@ -94,7 +93,7 @@ I am in a iframe of 600px high
 </pre>
 
 
-> If you don't want to debug your code by `spm doc watch`, you can try [seajs-wrap](https://github.com/seajs/seajs-wrap) or [spm-server](https://github.com/spmjs/spm-server/) to debug `CommonJS` modules in development.
+> If you don't want to debug your code by `spm doc`, you can try [seajs-wrap](https://github.com/seajs/seajs-wrap) or [spm-server](https://github.com/spmjs/spm-server/) to debug `CommonJS` modules in development.
 
 ## Add Test Case
 
@@ -179,7 +178,7 @@ The default build result is a package which could be deployed at cdn. Then you c
 </script>
 ```
 
-You can also build a [standalone](/documentation/spm-commands#spm-build) package by adding an argument.
+And We strongly recommend building a [standalone](/documentation/spm-commands#spm-build) package by adding an argument.
 
 ```bash
 $ spm build --include standalone

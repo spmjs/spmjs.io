@@ -5,10 +5,14 @@
     <span class="package-version">@<%= package.version %></span>
   </h1>
   <hr>
-  <p><%= package.description || "No description" %></p>
-  <pre>spm install <%= package.name %>@<%= package.version %></pre>
-  <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
-  <table class="meta">
+  <div class="flex-container meta">
+    <div class="flex-column">
+      <p><%= package.description || "No description" %></p>
+      <pre>spm install <%= package.name %>@<%= package.version %></pre>
+      <p>Version: <strong><%= package.version %></strong> <span>~ <%= package.tag %></span></p>
+    </div>
+  <div class="flex-column-2">
+  <table>
     <tr>
       <th width="20%">Updated</th>
       <td width="80%" title="<%= package.updated_at %>"><%= package.fromNow %></td>
@@ -62,6 +66,8 @@
     </tr>
     <% } %>
   </table>
+  </div>
+  </div>
 </div>
 <div class="markdown readme">
 <%- package.readme %>

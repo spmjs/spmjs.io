@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var request = require('request');
 var elastical = require('elastical');
+var semver = require('semver');
 var client = new elastical.Client();
 var badge = require('../lib/badge');
 var anonymous = CONFIG.authorize.type === 'anonymous';
@@ -17,90 +18,69 @@ var capitalize = require('capitalize');
 var gu = require('githuburl');
 var async = require('async');
 var spmjsioVersion = require('../package').version;
+var hljs = require('highlight.js');
 
-var marked = require('marked');
-var renderer = new marked.Renderer();
+var kramed = require('kramedx');
+var renderer = new kramed.Renderer();
 renderer.heading = function(text, level) {
   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
   return '<h' + level + ' id="' + escapedText + '">' + text + '<a name="' + escapedText +
-         '" class="anchor" href="#' + escapedText +
-         '"><span class="header-link iconfont">&#xe601;</span></a></h' + level + '>';
+    '" class="anchor" href="#' + escapedText +
+    '"><span class="header-link iconfont">&#xe601;</span></a></h' + level + '>';
 };
-
 // Synchronous highlighting with highlight.js
-marked.setOptions({
-  pedantic: true,
-  highlight: function (code) {
-    return require('highlight.js').highlightAuto(code).value;
+kramed.setOptions({
+  renderer: renderer,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+    return str;
   }
 });
 
 exports.index = function(req, res) {
-  async.parallel([
-    function(callback) {
-      download.stat(function(downloadResult) {
-        callback(null, downloadResult);
-      });
-    },
-    function(callback) {
-      history.stat(function(recentlyUpdates, publishCount) {
-        callback(null, {
-          recentlyUpdates: recentlyUpdates,
-          publishCount: publishCount
-        });
-      });
-    },
-    function(callback) {
-      if (anonymous) {
-        callback();
-      } else {
-        account.getAll(function(users) {
-          callback(null, users);
+  var results = global.indexResults;
+  var todayCount = results[0].todayCount;
+  var recentlyPackages = results[0].recentlyPackages;
+  var recentlyUpdates = results[1].recentlyUpdates;
+  var publishCount = results[1].publishCount;
+  var users = results[2];
+
+  recentlyUpdates.forEach(function(item) {
+    item.fromNow = moment(item.time).fromNow();
+  });
+  var data = {
+    title: CONFIG.website.title,
+    spmjsioVersion: spmjsioVersion,
+    count: Project.getAll().length,
+    user: req.session.user,
+    anonymous: anonymous,
+    GA: CONFIG.website.GA,
+    recentlyUpdates: recentlyUpdates,
+    publishCount: publishCount,
+    todayCount: todayCount,
+    recentlyPackages: recentlyPackages,
+    mostDependents: results[3]
+  };
+  if (!anonymous) {
+    var submitors = [];
+    users.forEach(function(u) {
+      if (u.count && u.count > 0) {
+        submitors.push({
+          login: u.login,
+          count: u.count
         });
       }
-    }
-  ],
-  // optional callback
-  function(err, results) {
-    var todayCount = results[0].todayCount;
-    var recentlyPackages = results[0].recentlyPackages;
-    var recentlyUpdates = results[1].recentlyUpdates;
-    var publishCount = results[1].publishCount;
-    var users = results[2];
-
-    recentlyUpdates.forEach(function(item) {
-      item.fromNow = moment(item.time).fromNow();
     });
-    var data = {
-      title: CONFIG.website.title,
-      spmjsioVersion: spmjsioVersion,
-      count: Project.getAll().length,
-      user: req.session.user,
-      anonymous: anonymous,
-      GA: CONFIG.website.GA,
-      recentlyUpdates: recentlyUpdates,
-      publishCount: publishCount,
-      todayCount: todayCount,
-      recentlyPackages: recentlyPackages,
-      mostDependents: dependent.getSortedDependents()
-    };
-    if (!anonymous) {
-      var submitors = [];
-      users.forEach(function(u) {
-        if (u.count && u.count > 0) {
-          submitors.push({
-            login: u.login,
-            count: u.count
-          });
-        }
-      });
-      data.submitors = submitors.sort(function(a, b) {
-        return b.count - a.count;
-      });
-      data.submitors = data.submitors.slice(0, 10);
-    }
-    res.render('index', data);
-  });
+    data.submitors = submitors.sort(function(a, b) {
+      return b.count - a.count;
+    });
+    data.submitors = data.submitors.slice(0, 10);
+  }
+  res.render('index', data);
 };
 
 exports.project = function(req, res, next) {
@@ -115,7 +95,7 @@ exports.project = function(req, res, next) {
     });
     p.versions = p.getVersions();
     p.fromNow = moment(p.updated_at).fromNow();
-    p.latest.readme = marked(p.latest.readme || '');
+    p.latest.readme = kramed(p.latest.readme || '');
     // jquery@1.7.2 -> jquery
     p.latest.dependencies = _.uniq((p.latest.dependencies || []).map(function(d) {
       return d.split('@')[0];
@@ -123,6 +103,9 @@ exports.project = function(req, res, next) {
     p.latest.dependents = _.uniq((p.latest.dependents || []).map(function(d) {
       return d.split('@')[0];
     }));
+    if (p.unpublished) {
+      p.unpublished.fromNow = moment(p.unpublished.time).fromNow();
+    }
 
     var editable;
     if (p.owners && p.owners.length > 0 && req.session.user &&
@@ -154,13 +137,17 @@ exports.project = function(req, res, next) {
 
 exports.package = function(req, res, next) {
   var name = req.params.name;
-  var version = req.params.version;
+  var project = new Project({
+    name: req.params.name
+  });
+  var version = semver.maxSatisfying(Object.keys(project.packages || {}), req.params.version);
+
   var p = new Package({
     name: name,
     version: version
   });
   if (p.md5) {
-    p.readme = marked(p.readme || '');
+    p.readme = kramed(p.readme || '');
     p.fromNow = moment(p.updated_at).fromNow();
     // jquery@1.7.2 -> jquery
     p.dependents = _.uniq((p.dependents || []).map(function(d) {
@@ -282,9 +269,7 @@ var DocumentationOrder = {
 exports.documentation = function(req, res, next) {
   var title = req.params.title || 'getting-started';
   var content = (fs.readFileSync(path.join('documentation', title + '.md')) || '').toString();
-  content = marked(content, {
-    renderer: renderer
-  });
+  content = kramed(content);
 
   var nav = fs.readdirSync('documentation');
   nav = nav.map(function(item, i) {

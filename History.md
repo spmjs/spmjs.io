@@ -1,6 +1,11 @@
-1.3.0 / 开发中
+1.3.0 / 2014-12-26
 ==================
 
+* 对 `publish -f` 和 `unpublish` 进行调整，只允许管理员进行操作。#81
+* 增加对于 semver 版本号的下载支持。#81
+* 用 [markdown-it](https://github.com/markdown-it/markdown-it) 代替 [marked](https://github.com/chjj/marked/)。
+* 用 [pm2](https://github.com/Unitech/PM2/) 代替 forever 。#90
+* 将 `elasticsearch.tar.gz` 移出仓库。#88
 * [提升了首页的加载性能](https://github.com/spmjs/spmjs.io/commit/573d7d39dc32ae1d7cfcfc2aff872e8220e0f436)。
 * 修复解析 md 文件里长 html 字符串时太慢的[问题](https://github.com/spmjs/spm/issues/1067)。
 * 简化了 badge 的文案。

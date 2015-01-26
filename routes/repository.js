@@ -5,6 +5,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var tempfile = require('tempfile');
 var tar = require('tarball-extract');
+var semver = require('semver');
 var hook = require('../lib/hook');
 var history = require('../lib/history');
 var elastical = require('elastical');
@@ -68,9 +69,14 @@ exports.project = {
 var Cache = {};
 exports.package = {
   get: function(req, res) {
+    var project = new Project({
+      name: req.params.name
+    });
+    var version = semver.maxSatisfying(Object.keys(project.packages || {}), req.params.version);
+
     var p = new Package({
       name: req.params.name,
-      version: req.params.version
+      version: version
     });
     if (!p.md5) {
       abortify(res, { code: 404 });
@@ -116,6 +122,7 @@ exports.package = {
         if (!publisher) {
           return abortify(res, { code: 401 });
         }
+
         var permission = (!p.created_at) || account.checkPermission(publisher, name);
         if (!permission) {
           return abortify(res, { code: 403 });
@@ -142,25 +149,23 @@ exports.package = {
 
     Cache.package = new Package(data);
 
-    var force = req.headers['x-yuan-force'];
-    if(Cache.package.md5 && !force) {
+    if (Cache.package.md5) {
       return abortify(res, { code: 444 });
     }
 
-    var isNewProject;
     Cache.project = new Project(data);
     var isNewProject = !Cache.project['created_at'];
     if (isNewProject) {
       data.owners = [data.publisher];
     }
     Cache.project.update(data);
+    delete Cache.project.unpublished;
     if (isNewProject) {
       hook.emit('create:project', Cache.project, data.publisher);
     }
     res.status(200).send({});
   },
   put: function(req, res) {
-    var data = req.body;
     var package = Cache.package;
     var project = Cache.project;
     if (!package) {
@@ -179,8 +184,7 @@ exports.package = {
       });
     }
 
-    var force = req.headers['x-yuan-force'];
-    if(package.md5 && !force) {
+    if(package.md5) {
       return abortify(res, { code: 444 });
     }
 
@@ -222,24 +226,29 @@ exports.package = {
 
 exports.filename = {
   get: function(req, res) {
-    fs.readFile(path.join(CONFIG.wwwroot, 'repository',
+    if (path.extname(req.params.filename) === '.json') {
+      res.set('Content-Type', 'application/json');
+    }
+
+    var file = path.join(
+      CONFIG.wwwroot,
+      'repository',
       req.params.name,
       req.params.version,
       req.params.filename
-    ), function(err, data) {
+    );
+
+    res.download(file, function(err) {
       if (err) {
         abortify(res, { code: 404 });
+      } else {
+        var package = new Package({
+          name: req.params.name,
+          version: req.params.version
+        });
+        hook.emit('download:package', package);
       }
-      if (path.extname(req.params.filename) === '.json') {
-        res.set('Content-Type', 'application/json');
-      }
-      var package = new Package({
-        name: req.params.name,
-        version: req.params.version
-      });
-      hook.emit('download:package', package);
-      res.send(data);
-    });
+    })
   }
 };
 
@@ -312,11 +321,12 @@ exports.search = function(req, res, next) {
       data.push({
         name: p.name,
         version: p.version,
+        versions: p.getVersions(),
         description: p.description,
         keywords: p.keywords,
         homepage: p.homepage,
         repository: p.repository && p.repository.url,
-        created_at: p.created_at,
+        created_at: p.created_at
       });
     });
 
@@ -361,7 +371,7 @@ function abortify(res, options) {
     406: 'Not acceptable.',
     415: 'Unsupported media type.',
     426: 'Upgrade required.',
-    444: 'Force option required.'
+    444: 'Cannot modify pre-existing version.'
   };
   message = options.message || msgs[code];
   res.status(code).send({
@@ -370,3 +380,5 @@ function abortify(res, options) {
     message: message
   });
 }
+
+

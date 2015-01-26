@@ -9,7 +9,7 @@
 ## Install
 
 ```bash
-$ git clone git://github.com/spmjs/spmjs.io.git
+$ git clone git://github.com/spmjs/spmjs.io.git --depth=1
 $ cd spmjs.io
 $ npm install
 ```
@@ -40,6 +40,15 @@ Then you have a complete package source server which can interact with [spm3.x](
 registry = http://127.0.0.1:3000
 ```
 
+You can set it via `spm config set register http://your_spm_server.com`.
+
+Also you can use arguments `--registry` or `-r` for each command.
+
+```bash
+$ spm install -r http://127.0.0.1:3000
+$ spm publish -r http://127.0.0.1:3000
+```
+
 Reindex the packages for elastic search.
 
 ```bash
@@ -52,6 +61,5 @@ Require Java 7 environment : https://github.com/Homebrew/homebrew/issues/29910
 
 ## TODO:
 
-- packages sync server
 - data backup
-- spm owner [ls|add|rm] ?
+- spm owner [ls|add|rm]

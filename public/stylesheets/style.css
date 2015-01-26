@@ -1,16 +1,22 @@
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://fontscontent.useso.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fontstatic.useso.com/s/opensans/v10/DXI1ORHCpsQm3Vp6mXoaTSYtBUPDK3WL7KRKS_3q7OE.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/DXI1ORHCpsQm3Vp6mXoaTeY5mlVXtdNkpsMpKkrDXP4.woff) format('woff');
 }
-
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fontscontent.useso.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://fontstatic.useso.com/s/opensans/v10/u-WUoqrET9fUeobQW7jkRZBw1xU1rKptJj_0jans920.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/u-WUoqrET9fUeobQW7jkRbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fontstatic.useso.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSiYtBUPDK3WL7KRKS_3q7OE.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSuY5mlVXtdNkpsMpKkrDXP4.woff) format('woff');
+}
+
 
 @font-face {
   font-family: 'iconfont';
@@ -214,34 +220,6 @@ header #logo,
   position: relative;
 }
 
-.aside-right {
-  font-style: italic;
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.aside-right,
-.aside-right a,
-.aside-right i {
-  color: #777!important;
-  outline: none;
-}
-
-.aside-right a:hover {
-  text-decoration: none;
-}
-
-.aside-right i {
-  margin-left: 15px;
-  margin-right: -4px;
-  font-size: 20px;
-}
-
-.github-stars {
-  display: none;
-}
-
 footer {
   padding: 20px 0;
   font-size: 14px;
@@ -433,44 +411,6 @@ footer a {
   color: #A95151;
 }
 
-@media (max-width: 1030px) {
-  header {
-    height: auto;
-    overflow: hidden;
-  }
-  .navigation {
-    display: block;
-    float: none;
-    font-size: 16px;
-  }
-  header #logo,
-  .navigation li,
-  .search-form {
-    display: block;
-    text-align: center;
-  }
-  .search-form {
-    width: 100%;
-    margin-left: 0;
-  }
-  .search-form input {
-    padding: 0.5em 1em;
-  }
-  .search-form input:focus {
-    width: 80%;
-  }
-  .search-form .iconfont {
-    display: none;
-  }
-  .index-box {
-    display: block;
-  }
-  .index-list {
-    float: left;
-    margin-left: 20px;
-  }
-}
-
 .security-tip {
   font-size: 14px;
   font-weight: bold;
@@ -503,17 +443,27 @@ img.badge {
 }
 
 .all-packages a {
-  background: none repeat scroll 0 0 #fafafa;
-  border-radius: 2px;
-  border-bottom: 3px solid #F0F1F1;
+  background: #FAFAFA;
+  border-radius: 5px;
+  border-left: 4px solid rgb(240, 241, 241);
+  border-bottom: 2px solid rgb(240, 241, 241);
   display: inline-block;
   margin-bottom: 8px;
-  margin-right: 4px;
-  width: 152px;
-  padding: 1px 8px;
+  margin-right: 3px;
+  width: 150px;
+  padding: 2px 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.all-packages a:hover {
+  background: #f8f8f9;
+  border-left: 3px solid #ddd;
+  border-bottom: 2px solid #ddd;
 }
 
 .page-404 img {
@@ -529,7 +479,7 @@ img.badge {
   left: 0;
   position: absolute;
   top: 0;
-  width: 250px;
+  width: 256px;
 }
 
 .documentation-nav ol {
@@ -540,14 +490,14 @@ img.badge {
 .documentation-nav li {
   text-transform: uppercase;
   line-height: 2;
-  border-radius: 3px;
   padding: 3px 12px;
+  border-left: 5px solid transparent;
 }
 
 .documentation-nav li.current {
   font-weight: bold;
-  background: #FEFFEF;
-  border-width: 2px 0;
+  background: #F8F8F8;
+  border-left: 5px solid #93C7DD;
 }
 
 .markdown h1.package-name {
@@ -563,6 +513,7 @@ img.badge {
 .markdown .anchor {
   display: none;
   margin-left: 8px;
+  position: absolute;
 }
 
 .markdown .header-link {
@@ -611,4 +562,114 @@ img.badge {
 
 .ui-autocomplete-item-hover {
   background: #f3f3f4;
+}
+
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-column {
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.flex-column-2 {
+  -webkit-flex: 2;
+          flex: 2;
+}
+
+.flex-column-3 {
+  -webkit-flex: 3;
+          flex: 3;
+}
+
+.meta {
+  border-bottom: 3px solid #EEE;
+}
+
+.meta div:first-child {
+  padding-right: 50px;
+  font-size: 16px;
+}
+
+.markdown .meta table {
+  border: none;
+  width: auto;
+}
+
+.markdown .meta table tbody tr {
+  background: none;
+}
+
+.markdown .meta table tbody th,
+.markdown .meta table tbody td {
+  padding: 0 12px 5px;
+}
+
+.meta-links,
+.meta-links a,
+.meta-links i {
+  color: #888!important;
+  outline: none;
+}
+
+.meta-links a {
+  margin-right: 12px;
+}
+
+.meta-links a:hover,
+.meta-links a:hover i {
+  text-decoration: none;
+  color: #666!important;
+}
+
+.meta-links i {
+  margin-right: -2px;
+  font-size: 20px;
+}
+
+.github-stars {
+  display: none;
+}
+
+@media (max-width: 1030px) {
+  header {
+    height: auto;
+    overflow: hidden;
+  }
+  .navigation {
+    display: block;
+    float: none;
+    font-size: 16px;
+  }
+  header #logo,
+  .navigation li,
+  .search-form {
+    display: block;
+    text-align: center;
+  }
+  .search-form {
+    width: 100%;
+    margin-left: 0;
+  }
+  .search-form input {
+    padding: 0.5em 1em;
+  }
+  .search-form input:focus {
+    width: 80%;
+  }
+  .search-form .iconfont {
+    display: none;
+  }
+  .index-box {
+    display: block;
+  }
+  .index-list {
+    float: left;
+    margin-left: 20px;
+  }
+  .flex-container {
+    display: block;
+  }
 }
