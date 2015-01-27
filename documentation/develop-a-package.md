@@ -66,7 +66,7 @@ Then edit `examples/index.md`:
 ## Normal usage
 
 ````javascript
-var now = require(../index);
+var now = require('../index');
 console.log(now);
 ````
 </pre>
