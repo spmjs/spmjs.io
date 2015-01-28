@@ -131,7 +131,6 @@ Project.prototype = {
 
 Project.getAll = function() {
   var pathStr = path.join(CONFIG.wwwroot, 'repository');
-
   if (!fs.existsSync(pathStr)) {
     var pathArr = pathStr.split('/');
     var tpath = '';
@@ -142,7 +141,6 @@ Project.getAll = function() {
         }
       }
     }
-
   return fs.readdirSync(pathStr);
 };
 
