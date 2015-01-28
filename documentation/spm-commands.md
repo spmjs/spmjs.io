@@ -61,24 +61,29 @@ Build package for browser.
 * --include [include] `determine which files will be included, optional: relative, all, standalone, umd`
   - relative `default`
 
-    Only contain relative dependencies. Absolute dependencies should also be deployed so that it can run on Sea.js.
+    Only contain relative dependencies. Absolute dependencies should be online so that it can be loaded dynamicly.
     ```js
-    // would load abc, and abc's dependencies separately.
-    seajs.use('abc');
+    // would load the-module, and load the-module's dependencies dynamicly.
+    seajs.use('the-module');
     ```
   - all
 
     Contain relative and absolute dependencies.
     ```js
-    // only need to load abc.
-    seajs.use('abc');
+    // only load the-module, all dependencies will be packed in the-module.js.
+    seajs.use('the-module');
     ```
   - standalone
 
     Build a standalone package that could be used in script tag way without any loader.
     ```html
-    <script src="path/to/abc.js"></script>
+    <script src="path/to/the-module.js"></script>
     ```
+
+  - umd
+
+    Build a umd package for either loader or global usage.
+
 
 * --ignore [ignore] `determine which id will not be transported`
 * --skip [skip] `determine which id will not be parsed when analyse`
