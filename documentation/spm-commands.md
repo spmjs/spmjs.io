@@ -42,7 +42,7 @@ Documentation management toolkit.
 * spm doc watch
 
   Build and start a watching server of demo site at http://127.0.0.1:8000 .
-  
+
 * spm doc build
 
   Build a demo package to `_site` folder.
@@ -52,13 +52,21 @@ Documentation management toolkit.
   Publish `_site` folder to [spmjs.io](http://spmjs.io/). The demo site url is `http://spmjs.io/docs/{{package-name}}`
 
 #### spm test
+
 Run test case in phantomjs.
 
 #### spm build
+
 Build package for browser.
 
-* -O [dir] `output directory, default: dist`
-* --include [include] `determine which files will be included, optional: relative, all, standalone, umd`
+* -O `[dir]`
+
+  output directory, default: `dist`
+
+* --include `[include]`
+
+  Determine which files will be included, optional: `relative`, `all`, `standalone`, `umd`.
+
   - relative `default`
 
     Only contain relative dependencies. Absolute dependencies should be online so that it can be loaded dynamicly.
@@ -73,7 +81,7 @@ Build package for browser.
     // only load the-module, all dependencies will be packed in the-module.js.
     seajs.use('the-module');
     ```
-  - standalone
+  - standalone `recommended`
 
     Build a standalone package that could be used in script tag way without any loader.
     ```html
@@ -85,7 +93,18 @@ Build package for browser.
     Build a umd package for either loader or global usage.
 
 
-* --ignore [ignore] `determine which id will not be transported`
-* --skip [skip] `determine which id will not be parsed when analyse`
-* --global [jquery:$,underscore:_] `replace package name to global variable, format jquery:$,underscore:_`
-* --idleading [idleading] `prefix of module name, default: {{name}}/{{version}}`
+* --ignore `[ignore]`
+
+  Determine which id will not be transported.
+
+* --skip `[skip]`
+
+  Determine which id will not be parsed when analyse.
+
+* --global `[jquery:$,underscore:\_]`
+
+  Replace package name to global variable, format `jquery:$,underscore:_`.
+
+* --idleading `[idleading]`
+
+  Prefix of module name, default: `{{name}}/{{version}}`.
