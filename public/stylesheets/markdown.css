@@ -141,9 +141,9 @@
 }
 .markdown code,
 .markdown tt {
-  font-size: 0.96em;
-  background-color: #FFFDD7;
-  padding: 1px 4px;
+  font-size: 0.9em;
+  background-color: #FEE9CC;
+  padding: 1px 6px;
   border-radius: 2px;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
