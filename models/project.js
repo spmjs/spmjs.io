@@ -130,7 +130,20 @@ Project.prototype = {
 };
 
 Project.getAll = function() {
-  return fs.readdirSync(path.join(CONFIG.wwwroot, 'repository'));
+  var pathStr = path.join(CONFIG.wwwroot, 'repository');
+
+  if (!fs.existsSync(pathStr)) {
+    var pathArr = pathStr.split('/');
+    var tpath = '';
+    for (var i = 0, len = pathArr.length; i < len; i++) {
+      tpath = path.join(tpath, pathArr[i]);
+      if (!fs.existsSync(tpath)) {
+          fs.mkdirSync(tpath)
+        }
+      }
+    }
+
+  return fs.readdirSync(pathStr);
 };
 
 Project.getData = function(filter) {
