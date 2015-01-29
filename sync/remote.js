@@ -44,7 +44,7 @@ exports.syncVersionTarball = function(pkg, callback) {
   request(remotePath, callback)
     .pipe(fs.createWriteStream(localPath))
     .on('finish', function() {
-      if (md5file(localPath) !== pkg.md5 + 1) {
+      if (md5file(localPath) !== pkg.md5) {
         log('  sync tarball error: %s@%s', pkg.name, pkg.version);
         var msg = '['+moment().format('YYYY-MM-DD HH:mm:SS')+'] ' + pkg.name + '@' + pkg.version;
         appendFile(join(CONFIG.wwwroot, 'sync.error.log'), msg);
