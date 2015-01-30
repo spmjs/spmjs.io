@@ -50,8 +50,14 @@ $ spm install moment --save
 Edit `index.js` as follow, just like nodejs.
 
 ```javascript
+// require module in spm.dependencies
 var moment = require('moment');
+
+// require relative file in you project
+// var util = require('./util');
+
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+
 
 module.exports = now;
 ```
