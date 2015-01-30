@@ -57,8 +57,6 @@ var moment = require('moment');
 // var util = require('./util');
 
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
-
-
 module.exports = now;
 ```
 
