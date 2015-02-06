@@ -10,7 +10,6 @@ Field | Description |
 ------------ | ------------- |
 name* | name of the package in lowercase, use a `-` or `.` as a separator between words
 version* | semantic versioning like 1.0.0
-private | prevent accidental publication of private repositories, default `false`
 description | a brief description of the package
 keywords | an array of keywords
 homepage | url of the package's website
