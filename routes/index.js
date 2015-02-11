@@ -261,9 +261,10 @@ exports.badge = function(req, res) {
 var DocumentationOrder = {
   'getting-started': 1,
   'develop-a-package': 2,
-  'package.json': 3,
-  'spm-commands': 4,
-  'difference-from-2.x': 5
+  'css-and-template': 3,
+  'package.json': 4,
+  'spm-commands': 5,
+  'difference-from-2.x': 6
 };
 
 exports.documentation = function(req, res, next) {
