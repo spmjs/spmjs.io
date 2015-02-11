@@ -40,6 +40,8 @@ Simply import files and other packages  by a standard `@import`.
 @import url('./tip.css');
 ```
 
+[alice-button](https://github.com/aliceui/button) is good example as well.
+
 You can also require css package in js file, just like js package but without exports.
 
 ```
