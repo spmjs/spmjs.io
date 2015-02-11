@@ -66,14 +66,14 @@ Fisrtly, write your template in file, named it as `*.html` or `*.tpl` or `*.hand
 
 Then require it in js file.
 
-```
+```js
 var Handlebars = require('handlebars');
 var source = require('./defalut.tpl'); // string content of defalut.tpl
 
 var template = Handlebars.compile(source);  // compile it with your compiler
 var result = template({
-  name: "alex",
-  content: "content"
+  name: 'alex',
+  content: 'content'
 });
 ```
 
