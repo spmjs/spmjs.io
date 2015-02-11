@@ -2,7 +2,7 @@
 
 ---
 
-Css and html template is significant parts in front-end development, and spm is just good for it.
+Css and html template are significant parts in front-end development, and spm is just good for it.
 
 ## Css
 
