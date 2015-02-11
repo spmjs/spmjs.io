@@ -14,25 +14,25 @@ Init a package from template.
 #### spm login
 Login for getting permission.
 
-#### spm install `[name[@version]]`
+#### spm install [name[@version]]
 Install dependencies and engines to local folder.
 
 #### spm publish
 Publish a package.
 
-#### spm unpublish `[name[@version]]`
+#### spm unpublish [name[@version]]
 Unpublish a package.
 
-#### spm info `[name[@version]]`
+#### spm info [name[@version]]
 Show information by package name.
 
-#### spm search `[query]`
+#### spm search [query]
 Search packages.
 
-#### spm tree
+#### spm ls
 Show the dependencies tree of the package.
 
-#### spm doc `[build|watch|publish]`
+#### spm doc [build|watch|publish]
 Documentation management toolkit.
 
 * spm doc
