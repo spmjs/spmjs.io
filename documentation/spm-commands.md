@@ -59,13 +59,26 @@ Run test case in phantomjs.
 
 Build package for browser.
 
-* -O `[dir]`
+##### -O [dir]
 
   output directory, default: `dist`
 
-* --include `[include]`
+##### -o [file] `since 3.4.0+`
 
-  Determine which files will be included, optional: `relative`, `all`, `standalone`, `umd`.
+  output single file.
+
+  ```
+  spm build index.js -o build.js
+  ```
+
+##### -s --standalone `since 3.4.0+`
+
+  Build a standalone package that could be used in script tag way without any loader,
+  equal with `--include standalone`.
+
+##### --sea [mode] `since 3.4.0+`
+
+  Build a [CMD](https://github.com/cmdjs/specification/blob/master/draft/module.md) package that could be loaded by [Sea.js](https://github.com/seajs/seajs), equal with `--include [relative|all]`.
 
   - relative `default`
 
@@ -74,14 +87,42 @@ Build package for browser.
     // would load the-module, and load the-module's dependencies dynamicly.
     seajs.use('the-module');
     ```
+
   - all
 
     Contain relative and absolute dependencies.
     ```js
     // only load the-module, all dependencies will be packed in the-module.js.
     seajs.use('the-module');
+
+##### --umd `since 3.4.0+`
+
+  Build a umd package for both loader and global usage.
+
+##### --include [include] `Deprecated`
+
+  Determine which files will be included, optional: `relative`, `all`, `standalone`, `umd`.
+
+  Deprecated, use --standalone, --umd [umd] and --sea <sea> instead.
+
+  - relative `default`
+
+    Only contain relative dependencies. Absolute dependencies should be online so that it can be loaded dynamicly.
+    ```js
+    // would load the-module, and load the-module's dependencies dynamicly.
+    seajs.use('the-module');
     ```
-  - standalone `recommended`
+
+  - all
+
+    Contain relative and absolute dependencies.
+    ```js
+    // only load the-module, all dependencies will be packed in the-module.js.
+    seajs.use('the-module');
+
+    ```
+
+  - standalone
 
     Build a standalone package that could be used in script tag way without any loader.
     ```html
@@ -90,21 +131,21 @@ Build package for browser.
 
   - umd
 
-    Build a umd package for either loader or global usage.
+    Build a umd package for both loader and global usage.
 
 
-* --ignore `[ignore]`
+##### --ignore [ignore]
 
   Determine which id will not be transported.
 
-* --skip `[skip]`
+##### --skip [skip]
 
   Determine which id will not be parsed when analyse.
 
-* --global `[jquery:$,underscore:\_]`
+##### --global [jquery:$,underscore:\_]
 
   Replace package name to global variable, format `jquery:$,underscore:_`.
 
-* --idleading `[idleading]`
+##### --idleading [idleading]
 
   Prefix of module name, default: `{{name}}/{{version}}`.

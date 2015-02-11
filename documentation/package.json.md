@@ -26,6 +26,8 @@ spm.devDependencies | specify dependencies relation of the package in developing
 spm.tests | specify all test files, support glob patterns: `tests/*-spec.js`
 spm.buildArgs | specify the cli arguments for `spm build`
 spm.ignore | an array of ignore files in package, same function as `.spmignore`
+spm.scripts | like npm.scripts, handle around some spm commands, it support `prebuild`, `postbuild`, `preinstall`, `postinstall`, `prepublish`, `postpublish`.
+
 
 ### A basic example
 
@@ -69,7 +71,10 @@ spm.ignore | an array of ignore files in package, same function as `.spmignore`
     },
     "tests": "tests/*-spec.js",
     "ignore": ["dist"],
-    "buildArgs": "--ignore jquery"
+    "buildArgs": "--ignore jquery",
+    "scripts": {
+      "prepublish": "lessc index.less index.css"
+    }
   }
 }
 ```
