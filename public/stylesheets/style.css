@@ -1,25 +1,4 @@
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fontstatic.useso.com/s/opensans/v10/DXI1ORHCpsQm3Vp6mXoaTSYtBUPDK3WL7KRKS_3q7OE.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/DXI1ORHCpsQm3Vp6mXoaTeY5mlVXtdNkpsMpKkrDXP4.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://fontstatic.useso.com/s/opensans/v10/u-WUoqrET9fUeobQW7jkRZBw1xU1rKptJj_0jans920.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/u-WUoqrET9fUeobQW7jkRbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fontstatic.useso.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSiYtBUPDK3WL7KRKS_3q7OE.woff2) format('woff2'), url(http://fontstatic.useso.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSuY5mlVXtdNkpsMpKkrDXP4.woff) format('woff');
-}
-
-@font-face {
   font-family: 'iconfont';
   src: url('http://at.alicdn.com/t/font_1409386016_6601303.eot'); /* IE9*/
   src: url('http://at.alicdn.com/t/font_1409386016_6601303.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
