@@ -11,11 +11,11 @@ client.deleteIndex('spmjs', function() {
 
   client.createIndex('spmjs', {
     "mappings" : {
-        "package" : {
-            "properties" : {
-                "suggest" : { "type" : "string", "index" : "not_analyzed" }
-            }
+      "package" : {
+        "properties" : {
+          "suggest" : { "type" : "string", "index" : "not_analyzed" }
         }
+      }
     }
   }, function() {
     var operations = [];
