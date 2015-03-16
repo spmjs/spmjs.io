@@ -25,19 +25,19 @@ exports.index = function(req, res) {
       anonymous: anonymous,
       GA: CONFIG.website.GA,
       profile: profile,
-      ownPackages: account.getPackages(profile.login),
+      ownPackages: account.getPackages(profile.id),
       errormessage: req.query.errormessage
     });
   }
 };
 
 exports.user = function(req, res, next) {
-  account.get(req.params.user, function(user) {
+  account.getByName(req.params.user, function(user) {
     if (user) {
       var profile = user;
       // not show authkey in public profile
       profile.authkey = null;
-      var packages = account.getPackages(profile.login);
+      var packages = account.getPackages(profile.id);
       res.render('account', {
         title: user.login + ' - ' + CONFIG.website.title,
         spmjsioVersion: spmjsioVersion,
@@ -76,7 +76,7 @@ exports.callback = function(req, res) {
           user.authkey = crypto.createHash('md5').update(token.access_token).digest('hex');
           req.session.user = user;
           // save user to database
-          account.save(user.login, {
+          account.save(user.id, {
             $set: user
           }, function() {
             res.redirect('/account');

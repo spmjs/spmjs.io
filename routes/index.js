@@ -108,8 +108,11 @@ exports.project = function(req, res, next) {
     }
 
     var editable;
-    if (p.owners && p.owners.length > 0 && req.session.user &&
-        !anonymous && p.owners.indexOf(req.session.user.login) >= 0) {
+    var ownerIds = p.owners.map(function(owner) {
+      return owner && owner.id;
+    });
+    if (ownerIds && ownerIds.length > 0 && req.session.user &&
+        !anonymous && ownerIds.indexOf(req.session.user.id) >= 0) {
       editable = true;
     }
     if (p.repository && p.repository.url) {

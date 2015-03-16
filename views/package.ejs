@@ -58,9 +58,9 @@
       <th>Publisher</th>
       <td>
         <% if (anonymous) { %>
-          <%= package.publisher %>
+          <%= package.publisher.name %>
         <% } else { %>
-          <a href="/account/<%= package.publisher %>"><%= package.publisher %></a>
+          <a href="/account/<%= package.publisher.name %>"><%= package.publisher.name %></a>
         <% } %>
       </td>
     </tr>

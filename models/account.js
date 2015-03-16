@@ -8,14 +8,22 @@ var account = new Datastore({
 var Project = require('./project');
 
 var save = exports.save = function(id, user, callback) {
-  account.update({login: id}, user, {upsert: true}, function(err) {
+  account.update({id: id}, user, {upsert: true}, function(err) {
     callback && callback(user);
   });
 };
 
 var getAccount = exports.get = function(id, callback) {
   account.findOne({
-    login: id
+    id: id
+  }, function(err, result) {
+    callback && callback(result);
+  });
+};
+
+var getAccountByName = exports.getByName = function(name, callback) {
+  account.findOne({
+    login: name
   }, function(err, result) {
     callback && callback(result);
   });
@@ -37,7 +45,7 @@ exports.authorize = function(id, authkey, callback) {
 };
 
 exports.delete = function(id, callback) {
-  account.remove({login: id}, {}, callback);
+  account.remove({id: id}, {}, callback);
 };
 
 var getPackages = exports.getPackages = function(id) {
@@ -47,7 +55,10 @@ var getPackages = exports.getPackages = function(id) {
       name: name
     });
     var owners = p.owners || [];
-    if (owners.indexOf(id) >= 0) {
+    var ownerIds = owners.map(function(owner) {
+      return owner && owner.id;
+    });
+    if (ownerIds.indexOf(id) >= 0) {
       res.push(p.name);
     }
   });
@@ -67,7 +78,7 @@ exports.getAccountByAuthkey = function(authkey, callback) {
   account.find({authkey: authkey}, function(err, results) {
     var keys = Object.keys(results);
     if (keys.length === 1) {
-      callback(results[keys[0]].login);
+      callback(results[keys[0]]);
     } else {
       callback();
     }
@@ -89,8 +100,14 @@ exports.addPackage = function(id, name, callback) {
       return;
     }
     p.owners = p.owners || [];
-    if (p.owners.indexOf(id) < 0) {
-      p.owners.push(id);
+    var ownerIds = p.owners.map(function(owner) {
+      return owner && owner.id;
+    });
+    if (ownerIds.indexOf(id) < 0) {
+      p.owners.push({
+        name: result.login,
+        id: result.id
+      });
       p.save();
     }
     callback(p.name);
@@ -102,9 +119,14 @@ exports.removePackage = function(id, name, callback) {
   var p = new Project({
     name: name
   });
-  if (p.packages && p.owners.indexOf(id) >= 0 &&
-      p.owners.length !== 1) {
-    p.owners.splice(p.owners.indexOf(id), 1);
+  p.owners = p.owners || [];
+  var ownerIds = p.owners.map(function(owner) {
+    return owner && owner.id;
+  });
+  if (p.packages &&
+      ownerIds.indexOf(id) >= 0 &&
+      ownerIds.length !== 1) {
+    p.owners.splice(ownerIds.indexOf(id), 1);
     p.save();
     callback(p.name);
   }
