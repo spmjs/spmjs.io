@@ -118,16 +118,19 @@ exports.package = {
     if (anonymous) {
       next();
     } else {
-      account.getAccountByAuthkey(authkey, function(publisher) {
-        if (!publisher) {
+      account.getAccountByAuthkey(authkey, function(user) {
+        if (!user) {
           return abortify(res, { code: 401 });
         }
 
-        var permission = (!p.created_at) || account.checkPermission(publisher, name);
+        var permission = (!p.created_at) || account.checkPermission(user.id, name);
         if (!permission) {
           return abortify(res, { code: 403 });
         }
-        req.body.publisher = publisher;
+        req.body.publisher = {
+          name: user.login,
+          id: user.id
+        };
         next();
       });
     }

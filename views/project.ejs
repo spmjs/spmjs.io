@@ -112,12 +112,12 @@
       <td>
       <% project.owners.forEach(function(owner, i) { %>
         <% if (anonymous) { %>
-          <%= owner %><% if(i!==project.owners.length-1){ %>,<% } %>
+          <%= owner.name %><% if(i!==project.owners.length-1){ %>,<% } %>
         <% } else { %>
           <span class="package">
-            <a href="/account/<%= owner %>"><%= owner %></a>
+            <a href="/account/<%= owner.name %>"><%= owner.name %></a>
             <% if (editable) { %>
-              <i title="click to remove ownership" data-target="<%= owner %>" class="iconfont">&#xf000d;</i>
+              <i title="click to remove ownership" data-target="<%= owner.name %>" class="iconfont">&#xf000d;</i>
             <% } %>
           </span>
         <% } %>
