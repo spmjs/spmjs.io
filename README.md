@@ -61,5 +61,4 @@ Require Java 7 environment : https://github.com/Homebrew/homebrew/issues/29910
 
 ## TODO:
 
-- data backup
 - spm owner [ls|add|rm]
