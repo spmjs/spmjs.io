@@ -24,7 +24,7 @@ Project.getAll().forEach(function(projectName) {
     if (ownerName && typeof ownerName === 'string') {
       tasks.push(function(callback) {
         getObjByName(ownerName, function(obj) {
-          console.log('  project owner field fix to ' + obj);
+          console.log('  project owner field fix to ' + JSON.stringify(obj));
           project.owners[i] = obj;
           callback(null, obj);
         });
@@ -36,7 +36,7 @@ Project.getAll().forEach(function(projectName) {
     if (publisher && typeof publisher === 'string') {
       tasks.push(function(callback) {
         getObjByName(publisher, function(obj) {
-          console.log('  project publisher field fix to ' + obj);
+          console.log('  project publisher field fix to ' + JSON.stringify(obj));
           project.packages[version].publisher = obj;
           callback(null, obj);
         });
@@ -54,7 +54,7 @@ Project.getAll().forEach(function(projectName) {
     });
     if (package.publisher && typeof package.publisher === 'string') {
       getObjByName(package.publisher, function(obj) {
-        console.log('  package publisher field fix to ' + obj);
+        console.log('  package publisher field fix to ' + JSON.stringify(obj));
         package.publisher = obj;
         package.save();
       });
@@ -67,7 +67,7 @@ function getObjByName(name, callback) {
     if (user) {
       callback({
         name: user.login,
-        id: user.id
+        id: user.id.toString()
       });
     }
   });
