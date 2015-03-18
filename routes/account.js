@@ -78,6 +78,8 @@ exports.callback = function(req, res) {
           // authkey is the md5 value of github token
           user.authkey = crypto.createHash('md5').update(token.access_token).digest('hex');
           req.session.user = user;
+          // save as string
+          user.id = user.id.toString();
           // save user to database
           account.save(user.id, {
             $set: user
