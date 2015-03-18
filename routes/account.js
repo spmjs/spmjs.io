@@ -4,6 +4,7 @@ var account = require('../models/account');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var crypto = require('crypto');
 var spmjsioVersion = require('../package').version;
+var gitRev = require('git-rev-sync').short();
 
 var githubToken = require('github-token')({
   githubClient: CONFIG.authorize.clientId,
@@ -21,6 +22,7 @@ exports.index = function(req, res) {
     res.render('account', {
       title: 'My account - ' + CONFIG.website.title,
       spmjsioVersion: spmjsioVersion,
+      gitRev: gitRev,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,

@@ -18,6 +18,8 @@ var capitalize = require('capitalize');
 var gu = require('githuburl');
 var async = require('async');
 var spmjsioVersion = require('../package').version;
+var gitRev = require('git-rev-sync').short();
+
 var hljs = require('highlight.js');
 
 var kramed = require('kramedx');
@@ -52,9 +54,11 @@ exports.index = function(req, res) {
   recentlyUpdates.forEach(function(item) {
     item.fromNow = moment(item.time).fromNow();
   });
+
   var data = {
     title: CONFIG.website.title,
     spmjsioVersion: spmjsioVersion,
+    gitRev: gitRev,
     count: Project.getAll().length,
     user: req.session.user,
     anonymous: anonymous,
@@ -122,6 +126,7 @@ exports.project = function(req, res, next) {
     res.render('project', {
       title: p.name + ' - '+ CONFIG.website.title,
       spmjsioVersion: spmjsioVersion,
+      gitRev: gitRev,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -163,6 +168,7 @@ exports.package = function(req, res, next) {
     res.render('package', {
       title: p.name + '@' + p.version + ' - '+ CONFIG.website.title,
       spmjsioVersion: spmjsioVersion,
+      gitRev: gitRev,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -177,6 +183,7 @@ exports.all = function(req, res) {
   res.render('packages', {
     title: 'All Packages - ' + CONFIG.website.title,
     spmjsioVersion: spmjsioVersion,
+    gitRev: gitRev,
     user: req.session.user,
     anonymous: anonymous,
     GA: CONFIG.website.GA,
@@ -206,6 +213,7 @@ exports.search = function(req, res, next) {
     res.render('search', {
       title: 'Search Result - ' + CONFIG.website.title,
       spmjsioVersion: spmjsioVersion,
+      gitRev: gitRev,
       user: req.session.user,
       anonymous: anonymous,
       GA: CONFIG.website.GA,
@@ -289,6 +297,7 @@ exports.documentation = function(req, res, next) {
   res.render('documentation', {
     title: capitalize.words(title.replace(/-/g, ' ')) + '- spm documentation',
     spmjsioVersion: spmjsioVersion,
+    gitRev: gitRev,
     user: req.session.user,
     anonymous: anonymous,
     nav: nav,

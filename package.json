@@ -47,6 +47,7 @@
     "express": "^4.10.4",
     "express-session": "^1.9.2",
     "fs-extra": "^0.13.0",
+    "git-rev-sync": "~1.0.0",
     "github-token": "~0.1.1",
     "githuburl": "~0.1.6",
     "highlight.js": "^8.4.0",
