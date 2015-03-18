@@ -10,6 +10,7 @@
 * 修正首页下载列表不满的问题。#102
 * 配合 spm@3.4.* 对文档进行了大幅更新。
 * 在页脚添加 git rev 信息。#122
+* 升级 elasticsearch 到 1.4.3 。
 * 修正更换 Github 账户名导致的无法登陆 spmjs 的问题。#101 #121
   - 升级前需要运行 `node scripts/fixGithubLoginToId.js` 更新数据，建议事先做好数据备份。
 
