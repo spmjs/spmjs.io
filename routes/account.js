@@ -43,6 +43,7 @@ exports.user = function(req, res, next) {
       res.render('account', {
         title: user.login + ' - ' + CONFIG.website.title,
         spmjsioVersion: spmjsioVersion,
+        gitRev: gitRev,
         user: req.session.user,
         anonymous: anonymous,
         GA: CONFIG.website.GA,
