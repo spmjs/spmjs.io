@@ -35,8 +35,8 @@ exports.getAll = function(callback) {
   });
 };
 
-exports.authorize = function(id, authkey, callback) {
-  getAccount(id, function(result) {
+exports.authorize = function(name, authkey, callback) {
+  getAccountByName(name, function(result) {
     if (result && result.authkey !== authkey) {
       result = null;
     }
