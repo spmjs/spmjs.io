@@ -77,8 +77,12 @@ exports.getAccountByAuthkey = function(authkey, callback) {
   callback = callback || function() {};
   account.find({authkey: authkey}, function(err, results) {
     var keys = Object.keys(results);
-    if (keys.length === 1) {
-      callback(results[keys[0]]);
+    if (keys.length >= 1) {
+      // only return item.id which type is string
+      // for duplicate items
+      callback(results.filter(function(item) {
+        return typeof item.id === 'string';
+      })[0]);
     } else {
       callback();
     }
