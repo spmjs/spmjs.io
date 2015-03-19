@@ -310,10 +310,15 @@ exports.search = function(req, res, next) {
     return abortify(res, { code: 404 });
   }
   client.search({
-    query: query,
+    query: {
+      "multi_match" : {
+        "query" : query,
+        "fields" : [ "name^3", "description", "keywords" ]
+      }
+    },
     index: 'spmjs',
     type: 'package',
-    size: 100,
+    size: 100
   }, function(err, results) {
     var data = [];
     results = results || { hits: [] };

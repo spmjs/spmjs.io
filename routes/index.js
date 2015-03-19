@@ -209,8 +209,8 @@ exports.search = function(req, res, next) {
       }
     },
     index: 'spmjs',
-    size: 100,
     type: 'package',
+    size: 100
   }, function(err, results) {
     results = results || { hits: [] };
     res.render('search', {
