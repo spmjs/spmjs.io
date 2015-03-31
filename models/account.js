@@ -124,18 +124,16 @@ exports.removePackage = function(account, name, callback) {
     name: name
   });
   p.owners = p.owners || [];
-  var ownerIds = p.owners.map(function(owner) {
-    return owner && owner.id;
+  var ownerNames = p.owners.map(function(owner) {
+    return owner && owner.name;
   });
-  getAccountByName(account, function(result) {
-    if (p.packages &&
-        ownerIds.indexOf(result.id) >= 0 &&
-        ownerIds.length !== 1) {
-      p.owners.splice(ownerIds.indexOf(result.id), 1);
-      p.save();
-      callback(p.name);
-    } else {
-      callback();
-    }
-  });
+  if (p.packages &&
+      ownerNames.indexOf(account) >= 0 &&
+      ownerNames.length !== 1) {
+    p.owners.splice(ownerNames.indexOf(account), 1);
+    p.save();
+    callback(p.name);
+  } else {
+    callback();
+  }
 };
