@@ -89,7 +89,7 @@ exports.getAccountByAuthkey = function(authkey, callback) {
   });
 };
 
-exports.addPackage = function(id, name, callback) {
+exports.addPackage = function(account, name, callback) {
   callback = callback || function() {};
   var p = new Project({
     name: name
@@ -98,7 +98,7 @@ exports.addPackage = function(id, name, callback) {
     callback();
     return;
   }
-  getAccount(id, function(result) {
+  getAccountByName(account, function(result) {
     if (!result) {
       callback();
       return;
@@ -107,7 +107,7 @@ exports.addPackage = function(id, name, callback) {
     var ownerIds = p.owners.map(function(owner) {
       return owner && owner.id;
     });
-    if (ownerIds.indexOf(id) < 0) {
+    if (ownerIds.indexOf(result.id) < 0) {
       p.owners.push({
         name: result.login,
         id: result.id
@@ -118,7 +118,7 @@ exports.addPackage = function(id, name, callback) {
   });
 };
 
-exports.removePackage = function(id, name, callback) {
+exports.removePackage = function(account, name, callback) {
   callback = callback || function() {};
   var p = new Project({
     name: name
@@ -127,12 +127,15 @@ exports.removePackage = function(id, name, callback) {
   var ownerIds = p.owners.map(function(owner) {
     return owner && owner.id;
   });
-  if (p.packages &&
-      ownerIds.indexOf(id) >= 0 &&
-      ownerIds.length !== 1) {
-    p.owners.splice(ownerIds.indexOf(id), 1);
-    p.save();
-    callback(p.name);
-  }
-  callback();
+  getAccountByName(account, function(result) {
+    if (p.packages &&
+        ownerIds.indexOf(result.id) >= 0 &&
+        ownerIds.length !== 1) {
+      p.owners.splice(ownerIds.indexOf(result.id), 1);
+      p.save();
+      callback(p.name);
+    } else {
+      callback();
+    }
+  });
 };
