@@ -57,7 +57,6 @@
 .markdown img {
   max-width: 100%;
   height: auto;
-  margin: 0.2em 0;
 }
 .markdown a img {
   /* Remove border on IE */
