@@ -114,6 +114,7 @@ app.get('/repository/:name/:version/:filename', repository.filename.get);
 app.get('/repositories', repository.data);
 
 app.get('/docs/:name/:version/*', docs);
+app.get('/docs/*', express.static(path.join(CONFIG.wwwroot)));
 
 // 404
 app.get('*', function(req, res) {
