@@ -6,9 +6,17 @@ var EventEmitter = require('events').EventEmitter;
 var rimraf = require('rimraf');
 var remote = require('./remote');
 var log = require('./log');
+var syncFilters=CONFIG.syncFilterReg.split(' ');
 
 function Worker(options) {
   EventEmitter.call(this);
+  if(CONFIG.syncFilter === 'on'){
+    options.names = options.names.filter(function(name){
+       return syncFilters.some(function(reg){
+         return new RegExp(reg).test(name);
+       })
+     })
+  }
   this.names = options.names || [];
 }
 
@@ -21,6 +29,7 @@ Worker.prototype.start = function() {
 };
 
 Worker.prototype.next = function() {
+
   var name = this.names.shift();
   if (!name) {
     return setImmediate(this.finish.bind(this));
