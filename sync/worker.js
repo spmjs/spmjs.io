@@ -9,6 +9,14 @@ var log = require('./log');
 
 function Worker(options) {
   EventEmitter.call(this);
+  if (CONFIG.syncFilter === 'on') {
+    var syncFilters = CONFIG.syncFilterReg.split(' ');
+    options.names = options.names.filter(function (name) {
+      return syncFilters.some(function (reg) {
+        return new RegExp(reg).test(name);
+      })
+    })
+  }
   this.names = options.names || [];
 }
 
@@ -91,15 +99,15 @@ Worker.prototype._sync = function(name, pkg, callback) {
 Worker.prototype._syncOneVersion = function(pkg, callback) {
   log('  sync tarball and index.json for %s@%s', pkg.name, pkg.version);
   async.parallel([
-      // 1. index.json
-      function(callback) {
-        remote.syncVersionPackageInfo(pkg, callback);
-      },
-      // 2. tarball
-      function(callback) {
-        remote.syncVersionTarball(pkg, callback);
-      }
-    ], callback);
+    // 1. index.json
+    function(callback) {
+      remote.syncVersionPackageInfo(pkg, callback);
+    },
+    // 2. tarball
+    function(callback) {
+      remote.syncVersionTarball(pkg, callback);
+    }
+  ], callback);
 };
 
 function getLocalPkg(name) {
@@ -139,7 +147,7 @@ function getMissVersions(pkg, localPkg) {
       rPkg.updated_at != lPkg.updated_at ||
       rPkg.md5 != lPkg.md5 ||
       rPkg.author != lPkg.author
-      ) {
+    ) {
       ret.push(k);
     }
   }
