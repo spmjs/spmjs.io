@@ -112,7 +112,7 @@
       <td>
       <% project.owners.forEach(function(owner, i) { %>
         <% if (anonymous) { %>
-          <%= owner.name %><% if(i!==project.owners.length-1){ %>,<% } %>
+          <%= owner && owner.name %><% if(i!==project.owners.length-1){ %>,<% } %>
         <% } else { %>
           <span class="package">
             <a href="/account/<%= owner.name %>"><%= owner.name %></a>
