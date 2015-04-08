@@ -9,6 +9,14 @@ var log = require('./log');
 
 function Worker(options) {
   EventEmitter.call(this);
+  if (CONFIG.syncFilter === 'on') {
+    var syncFilters = CONFIG.syncFilterReg.split(' ');
+    options.names = options.names.filter(function (name) {
+      return syncFilters.some(function (reg) {
+        return new RegExp(reg).test(name);
+      })
+    })
+  }
   this.names = options.names || [];
 }
 
@@ -16,11 +24,11 @@ util.inherits(Worker, EventEmitter);
 
 module.exports = Worker;
 
-Worker.prototype.start = function() {
+Worker.prototype.start = function () {
   this.next();
 };
 
-Worker.prototype.next = function() {
+Worker.prototype.next = function () {
   var name = this.names.shift();
   if (!name) {
     return setImmediate(this.finish.bind(this));
@@ -28,16 +36,16 @@ Worker.prototype.next = function() {
 
   log(name);
   log('  getting package info');
-  remote.getPackage(name, function(err, pkg) {
+  remote.getPackage(name, function (err, pkg) {
     this._sync(name, pkg);
   }.bind(this));
 };
 
-Worker.prototype.finish = function() {
+Worker.prototype.finish = function () {
   this.emit('end');
 };
 
-Worker.prototype._sync = function(name, pkg, callback) {
+Worker.prototype._sync = function (name, pkg, callback) {
   log('  start sync');
 
   var localPkg = getLocalPkg(name);
@@ -57,7 +65,7 @@ Worker.prototype._sync = function(name, pkg, callback) {
 
   var unpublishedVersions = getUnpublishedVersions(pkg, localPkg);
   log('  unpublished versions: %s', unpublishedVersions);
-  unpublishedVersions.forEach(function(version) {
+  unpublishedVersions.forEach(function (version) {
     deleteLocalVersionPackage(localPkg.packages[version]);
   });
 
@@ -67,7 +75,7 @@ Worker.prototype._sync = function(name, pkg, callback) {
   var self = this;
 
   if (missVersions.length) {
-    async.eachSeries(missVersions, function(version, callback) {
+    async.eachSeries(missVersions, function (version, callback) {
       var _pkg = pkg.packages[version];
       if (!_pkg.filename) {
         // pkg is not exists if no filename.
@@ -82,24 +90,24 @@ Worker.prototype._sync = function(name, pkg, callback) {
 
   function syncPackageInfo() {
     log('  sync index.json for package');
-    remote.syncPackageInfo(name, function() {
+    remote.syncPackageInfo(name, function () {
       self.next();
     });
   }
 };
 
-Worker.prototype._syncOneVersion = function(pkg, callback) {
+Worker.prototype._syncOneVersion = function (pkg, callback) {
   log('  sync tarball and index.json for %s@%s', pkg.name, pkg.version);
   async.parallel([
-      // 1. index.json
-      function(callback) {
-        remote.syncVersionPackageInfo(pkg, callback);
-      },
-      // 2. tarball
-      function(callback) {
-        remote.syncVersionTarball(pkg, callback);
-      }
-    ], callback);
+    // 1. index.json
+    function (callback) {
+      remote.syncVersionPackageInfo(pkg, callback);
+    },
+    // 2. tarball
+    function (callback) {
+      remote.syncVersionTarball(pkg, callback);
+    }
+  ], callback);
 };
 
 function getLocalPkg(name) {
@@ -139,7 +147,7 @@ function getMissVersions(pkg, localPkg) {
       rPkg.updated_at != lPkg.updated_at ||
       rPkg.md5 != lPkg.md5 ||
       rPkg.author != lPkg.author
-      ) {
+    ) {
       ret.push(k);
     }
   }
