@@ -20,5 +20,7 @@ default:
   sync: off
   syncInterval: '10m'
   syncSource: 'http://spmjs.io'
+  # syncFilter: on
+  # syncFilterReg: 'arale[-]\w*[-]?\w* ^jquery[-.]?\w* seajs[-]?\w* animate.css echarts placeholders.js moment'
 
   indexCacheInterval: '1m'
