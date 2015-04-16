@@ -6,6 +6,8 @@ var EventEmitter = require('events').EventEmitter;
 var rimraf = require('rimraf');
 var remote = require('./remote');
 var log = require('./log');
+var elastical = require('elastical');
+var client = new elastical.Client();
 
 function Worker(options) {
   EventEmitter.call(this);
@@ -59,6 +61,7 @@ Worker.prototype._sync = function(name, pkg, callback) {
     // Delete local package
     if (localPkg && localPkg.sync_from_remote) {
       deleteLocalPackage(name);
+      client.delete('spmjs', 'package', name);
     }
     return this.next();
   }
@@ -98,16 +101,26 @@ Worker.prototype._sync = function(name, pkg, callback) {
 
 Worker.prototype._syncOneVersion = function(pkg, callback) {
   log('  sync tarball and index.json for %s@%s', pkg.name, pkg.version);
+
   async.parallel([
-    // 1. index.json
-    function(callback) {
-      remote.syncVersionPackageInfo(pkg, callback);
-    },
-    // 2. tarball
-    function(callback) {
-      remote.syncVersionTarball(pkg, callback);
-    }
-  ], callback);
+      // 1. index.json
+      function(callback) {
+        remote.syncVersionPackageInfo(pkg, callback);
+      },
+      // 2. tarball
+      function(callback) {
+        remote.syncVersionTarball(pkg, callback);
+      },
+      // 3. reindex package
+      function(callback) {
+        client.index('spmjs', 'package', {
+          name: pkg.name,
+          description : pkg.description,
+          keywords : pkg.keywords,
+          suggest: pkg.name
+        }, { id: pkg.name }, callback);
+      }
+    ], callback);
 };
 
 function getLocalPkg(name) {
