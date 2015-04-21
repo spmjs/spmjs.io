@@ -8,7 +8,7 @@
 
 [![](https://i.alipayobjects.com/i/localhost/png/201404/2YQxOTYoFp.png)](https://github.com/spmjs/spm)
 
-All packages in `spmjs.io` should be writen by CommonJS, having a complete lifecycle management via [spm](https://github.com/spmjs/spm), including the following features:
+All packages in `spmjs.io` should be written in CommonJS, having a complete lifecycle management via [spm](https://github.com/spmjs/spm), including the following features:
 
 - Initialization
 - Dependencies Management
