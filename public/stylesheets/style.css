@@ -212,7 +212,7 @@ footer {
 
 .index-banner {
   display: none;
-  background: #eee;
+  background: linear-gradient(to bottom, #fff 0px, #ececec 100%);
   text-align: center;
   padding: 20px 0 80px;
 }
