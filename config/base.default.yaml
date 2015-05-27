@@ -24,3 +24,6 @@ default:
   # syncFilterReg: 'arale[-]\w*[-]?\w* ^jquery[-.]?\w* seajs[-]?\w* animate.css echarts placeholders.js moment'
 
   indexCacheInterval: '1m'
+
+  sessionStore:
+    type: 'nedb'
