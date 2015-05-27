@@ -36,7 +36,7 @@ Package.prototype = {
 
   saveTarfile: function(data) {
     this.filename = this.name + '-' + this.version + '.tar.gz';
-    fs.writeFileSync(
+    fs.outputFileSync(
       path.join(CONFIG.wwwroot, 'repository', this.name, this.version, this.filename),
       data
     );
