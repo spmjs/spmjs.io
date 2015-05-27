@@ -13,7 +13,6 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var NedbStore = require('connect-nedb-session-two')(session);
 var serveStatic = require('serve-static');
 var fs = require('fs-extra');
 var spmjsioVersion = require('./package').version;
@@ -64,15 +63,25 @@ app.use(require('./middlewares/raw-body')({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser('spmjs'));
+
+var sessionStore;
+if (CONFIG.sessionStore && CONFIG.sessionStore.type === 'redis') {
+  var RedisStore = require('connect-redis')(session);
+  sessionStore = new RedisStore(CONFIG.sessionStore);
+} else {
+  var NedbStore = require('connect-nedb-session-two')(session);
+  sessionStore = new NedbStore({
+    filename: path.join(__dirname, './data/db/session.db'),
+    clearInterval: 24 * 3600 * 1000
+  });
+}
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new NedbStore({
-    filename: path.join(__dirname, './data/db/session.db'),
-    clearInterval: 24 * 3600 * 1000
-  })
+  store: sessionStore
 }));
+
 app.use(serveStatic(path.join(__dirname, 'public')));
 
 // development only
