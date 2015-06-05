@@ -45,9 +45,9 @@ module.exports = function(sequelize, DataTypes) {
           });
           var owners = p.owners || [];
           var ownerIds = owners.map(function(owner) {
-            return owner && owner.id;
+            return owner && (+owner.id);
           });
-          if (ownerIds.indexOf(id) >= 0) {
+          if (ownerIds.indexOf(+id) >= 0) {
             res.push(p.name);
           }
         });
