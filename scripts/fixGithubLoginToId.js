@@ -9,7 +9,7 @@ var yaml = require('node-yaml-config');
 var CONFIG = yaml.load('./config/base.yaml');
 global.CONFIG = CONFIG;
 
-var account = require('../models/account');
+var models = require('../models');
 var Project = require('../models/project');
 var Package = require('../models/package');
 
@@ -63,7 +63,7 @@ Project.getAll().forEach(function(projectName) {
 });
 
 function getObjByName(name, callback) {
-  account.getByName(name, function(user) {
+  models.Account.getByName(name, function(user) {
     if (user) {
       callback({
         name: user.login,

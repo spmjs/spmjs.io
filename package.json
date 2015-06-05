@@ -68,6 +68,7 @@
     "request": "^2.48.0",
     "rimraf": "~2.2.8",
     "semver": "^4.1.0",
+    "sequelize": "~3.1.1",
     "serve-favicon": "^2.1.7",
     "serve-spm": "~0.10.0",
     "serve-static": "^1.8.0",

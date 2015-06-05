@@ -1,6 +1,6 @@
 var request = require('request');
 var url = require('url');
-var account = require('../models/account');
+var models = require('../models');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 var crypto = require('crypto');
 var spmjsioVersion = require('../package').version;
@@ -27,19 +27,19 @@ exports.index = function(req, res) {
       anonymous: anonymous,
       GA: CONFIG.website.GA,
       profile: profile,
-      ownPackages: account.getPackages(profile.id),
+      ownPackages: models.Account.getPackages(profile.id),
       errormessage: req.query.errormessage
     });
   }
 };
 
 exports.user = function(req, res, next) {
-  account.getByName(req.params.user, function(user) {
+  models.Account.getByName(req.params.user, function(user) {
     if (user) {
       var profile = user;
       // not show authkey in public profile
       profile.authkey = null;
-      var packages = account.getPackages(profile.id);
+      var packages = models.Account.getPackages(profile.id);
       res.render('account', {
         title: user.login + ' - ' + CONFIG.website.title,
         spmjsioVersion: spmjsioVersion,
@@ -81,9 +81,11 @@ exports.callback = function(req, res) {
           // save as string
           user.id = user.id.toString();
           // save user to database
-          account.save(user.id, {
-            $set: user
-          }, function() {
+          models.Account.update(user, {
+            where: {
+              id: user.id
+            }
+          }).then(function() {
             res.redirect('/account');
           });
         }
@@ -100,7 +102,7 @@ exports.logout = function(req, res) {
 exports.authorize = function(req, res) {
   var name = req.body.account.trim();
   var authkey = req.body.authkey;
-  account.authorize(name, authkey, function(result) {
+  models.Account.authorize(name, authkey, function(result) {
     if (result) {
       res.status(200).send({
         data: authkey
@@ -129,7 +131,7 @@ exports.ownership =  function(req, res) {
     errormessage = '?errormessage=your are the only owner of ' + req.body.package;
   }
 
-  account[action + 'Package'](req.body.account, req.body.package, function(result) {
+  models.Account[action + 'Package'](req.body.account, req.body.package, function(result) {
     if (result) {
       errormessage = '';
     }
