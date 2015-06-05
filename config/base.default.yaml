@@ -27,3 +27,7 @@ default:
 
   sessionStore:
     type: 'nedb'
+
+  database:
+    dialect: 'sqlite'
+    storage: './data/db.production.sqlite'

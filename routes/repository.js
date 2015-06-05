@@ -7,10 +7,10 @@ var tempfile = require('tempfile');
 var tar = require('tarball-extract');
 var semver = require('semver');
 var hook = require('../lib/hook');
-var history = require('../lib/history');
+var history = require('../models/history');
 var elastical = require('elastical');
 var client = new elastical.Client();
-var account = require('../models/account');
+var models = require('../models');
 var anonymous = CONFIG.authorize.type === 'anonymous';
 
 exports.index = function(req, res) {
@@ -118,12 +118,12 @@ exports.package = {
     if (anonymous) {
       next();
     } else {
-      account.getAccountByAuthkey(authkey, function(user) {
+      models.Account.getAccountByAuthkey(authkey, function(user) {
         if (!user) {
           return abortify(res, { code: 401 });
         }
 
-        var permission = (!p.created_at) || account.checkPermission(user.id, name);
+        var permission = (!p.created_at) || models.Account.checkPermission(user.id, name);
         if (!permission) {
           return abortify(res, { code: 403 });
         }

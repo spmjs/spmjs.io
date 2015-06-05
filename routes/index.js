@@ -1,9 +1,5 @@
 var Project = require('../models/project');
 var Package = require('../models/package');
-var account = require('../models/account');
-var history= require('../lib/history');
-var download = require('../lib/download');
-var dependent = require('../lib/dependent');
 var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
