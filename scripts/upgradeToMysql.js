@@ -34,7 +34,9 @@ function transform(type, done) {
       item.publisher_name = item.publisher.name;
       item.publisher_id = item.publisher.id;
     }
-    models[type].create(item).then(callback);
+    models[type].create(item).then(function() {
+      callback();
+    });
   }, function() {
     done();
   });
