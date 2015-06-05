@@ -7,7 +7,6 @@ var tempfile = require('tempfile');
 var tar = require('tarball-extract');
 var semver = require('semver');
 var hook = require('../lib/hook');
-var history = require('../models/history');
 var elastical = require('elastical');
 var client = new elastical.Client();
 var models = require('../models');
@@ -28,7 +27,7 @@ exports.since = function(req, res, next) {
   if (!updateAfter) {
     return abortify(res, { code: 404 });
   }
-  history.updateAfter(updateAfter, function(data) {
+  models.History.updateAfter(updateAfter, function(data) {
     res.set('Content-Type', 'application/javascript');
     res.status(200).send(data);
   });
