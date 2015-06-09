@@ -125,6 +125,14 @@
       </td>
     </tr>
     <% } %>
+    <% if (project.republish) { %>
+    <tr>
+      <th>Republish</th>
+      <td>
+        <b>It's risky to require this package as dependency, as it can be republished by the owner.</b>
+      </td>
+    </tr>
+    <% } %>
   </table>
   </div>
   </div>
