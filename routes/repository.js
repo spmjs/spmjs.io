@@ -150,15 +150,19 @@ exports.package = {
     data.spm.main = data.spm.main || 'index.js';
 
     Cache.package = new Package(data);
+    Cache.project = new Project(data);
 
-    if (Cache.package.md5) {
+    var force = req.headers['x-yuan-force'];
+    if (Cache.package.md5 && !(force && Cache.project.republish)) {
       return abortify(res, { code: 444 });
     }
 
-    Cache.project = new Project(data);
     var isNewProject = !Cache.project['created_at'];
     if (isNewProject) {
       data.owners = [data.publisher];
+      if (Cache.project.spm.republish) {
+        Cache.project.republish = true;
+      }
     }
     Cache.project.update(data);
     delete Cache.project.unpublished;
@@ -186,7 +190,8 @@ exports.package = {
       });
     }
 
-    if(package.md5) {
+    var force = req.headers['x-yuan-force'];
+    if(package.md5 && !(force && project.republish)) {
       return abortify(res, { code: 444 });
     }
 
