@@ -81,7 +81,7 @@ exports.callback = function(req, res) {
           // save as string
           user.id = user.id.toString();
           // save user to database
-          models.Account.update(user, {
+          models.Account.upsert(user, {
             where: {
               id: user.id
             }
