@@ -118,7 +118,7 @@ function *syncPkg(pkg, owner) {
     throw Error('tarball not found in pkg %s@%s', pkg.name, pkg.version);
   }
   var filename = pkg.dist.tarball.replace(/(:|\/)/g, '_');
-  var file = join(process.env.TMPDIR, +new Date() + '_' + filename);
+  var file = join(process.env.TMPDIR || '/tmp/', +new Date() + '_' + filename);
   yield download(pkg.dist.tarball, file);
 
   // 解压 tar 包
@@ -168,7 +168,7 @@ function getReadme(dir) {
 }
 
 function _createTar(pkg, cwd, callback) {
-  var tarfile = join(process.env.TMPDIR, format('%s-%s.tar.gz', pkg.name, pkg.version));
+  var tarfile = join(process.env.TMPDIR || '/tmp/', format('%s-%s.tar.gz', pkg.name, pkg.version));
   clientTar.create(cwd, tarfile, function(err, target) {
     if (err) {
       log.error('tar error %s', err.stack);
