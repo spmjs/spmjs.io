@@ -47,8 +47,10 @@ process.on('message', function(m) {
     name: m[1],
     id: m[2]
   }, function(err) {
-    process.send('end');
-    process.exit(0);
+    setTimeout(function() {
+      process.send('end');
+      process.exit(0);
+    }, 1000);
   });
 
 });
