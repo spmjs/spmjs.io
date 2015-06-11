@@ -8,6 +8,8 @@ var yaml = require('node-yaml-config');
 var CONFIG = yaml.load(join(__dirname, '../config/base.yaml'));
 global.CONFIG = CONFIG;
 
+var registry = CONFIG.npmSyncRegistry || 'registry.npmjs.org';
+
 var hook = require('../lib/hook');
 
 var request = require('co-request');
@@ -53,7 +55,7 @@ module.exports = function(id, owner, callback) {
 };
 
 function *syncPackages(name, owner) {
-  var url = 'http://registry.npm.alibaba-inc.com/' + name;
+  var url = 'http://' + registry + '/' + name;
   log.info('npm request', url);
   var result = yield request(url);
   if (result.statusCode === 404) {
@@ -293,7 +295,7 @@ var pkgCache = {};
 function *getPkg(name, version) {
   var id = name + '@' + version;
   if (!pkgCache[id]) {
-    var url = 'http://registry.npm.alibaba-inc.com/' + name + '/' + version;
+    var url = 'http://' + registry + '/' + name + '/' + version;
     log.info('npm request', url);
     var result = yield request(url);
     if (result.statusCode === 404) {
