@@ -278,7 +278,8 @@ function *getPkgs(name, version) {
       v = v.replace(/^([^\d]+)/, '');
 
       if (!/^\d+\.\d+\.\d+$/.test(v)) {
-        throw Error('pkg version `' + v + '` of '+n+' is invalid');
+        //throw Error('pkg version `' + v + '` of '+n+' is invalid');
+        v = yield getVersion(n, v);
       }
       // TODO: 这里要用 semver 检查是否已存在于 pkgs 中，否则会出现死循环
 
@@ -288,6 +289,23 @@ function *getPkgs(name, version) {
   }
 
   return pkgs;
+}
+
+function *getVersion(name, range) {
+  var url = 'http://' + registry + '/' + name;
+  log.info('npm request', url);
+  var result = yield request(url);
+  if (result.statusCode === 404) {
+    throw Error(format('pkg %s not found on npm', name))
+  }
+  var data = JSON.parse(result.body);
+  var versions = Object.keys(data.versions);
+
+  var version = semver.maxSatisfying(versions, range);
+  if (!version) {
+    throw Error('pkg version `' + range + '` of ' + name + ' is invalid');
+  }
+  return version;
 }
 
 var pkgCache = {};
