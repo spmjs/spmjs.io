@@ -182,6 +182,15 @@ function updatePackageJSON(file) {
   var pkg = JSON.parse(require('fs').readFileSync(file, 'utf-8'));
   pkg.spm = {};
   if (pkg.main) pkg.spm.main = pkg.main;
+
+  // 合并 peerDependencies 到 dependencies
+  if (pkg.peerDependencies) {
+    for (var k in pkg.peerDependencies) {
+      pkg.dependencies = pkg.dependencies || {};
+      pkg.dependencies[k] = pkg.peerDependencies[k];
+    }
+  }
+
   if (pkg.dependencies) {
     for (var k in pkg.dependencies) {
       if (BLACK_PKGS.indexOf(k) === -1) {
@@ -266,6 +275,14 @@ function *getPkgs(name, version) {
     pkg.main = pkg.main + '.js';
   }
   pkgs[pkg.name + '@' + pkg.version] = pkg;
+
+  // 合并 peerDependencies 到 dependencies
+  if (pkg.peerDependencies) {
+    for (var k in pkg.peerDependencies) {
+      pkg.dependencies = pkg.dependencies || {};
+      pkg.dependencies[k] = pkg.peerDependencies[k];
+    }
+  }
 
   if (pkg.dependencies) {
     for (var n in pkg.dependencies) {
