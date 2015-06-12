@@ -292,7 +292,7 @@ function *getPkgs(name, version) {
       }
 
       var v = pkg.dependencies[n];
-      v = v.replace(/^([^\d]+)/, '');
+      //v = v.replace(/^([^\d]+)/, '');
 
       if (!/^\d+\.\d+\.\d+$/.test(v)) {
         //throw Error('pkg version `' + v + '` of '+n+' is invalid');
