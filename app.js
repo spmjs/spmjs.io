@@ -40,9 +40,6 @@ if (!fs.existsSync(path.join(CONFIG.wwwroot, 'repository'))) {
   fs.mkdirSync(path.join(CONFIG.wwwroot, 'repository'));
 }
 
-// start index cache
-require('./lib/cacheIndex')();
-
 var routes = require('./routes');
 var account = require('./routes/account');
 var repository = require('./routes/repository');
@@ -137,6 +134,11 @@ app.get('*', function(req, res) {
   });
 });
 
-http.createServer(app).listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+require('./models').sequelize.sync().then(function() {
+  // start index cache
+  require('./lib/cacheIndex')();
+
+  http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
 });
