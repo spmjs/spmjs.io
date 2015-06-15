@@ -239,10 +239,9 @@ exports.suggest = function(req, res, next) {
   // http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
   client.search({
     query: {
-      "prefix": {
-        "suggest": {
-          "value": query
-        }
+      "multi_match" : {
+        "query" : query,
+        "fields" : [ "name^3", "description", "keywords" ]
       }
     },
     index: 'spmjs',
