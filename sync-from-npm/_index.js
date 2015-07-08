@@ -21,6 +21,7 @@ var extend = require('extend');
 var thunkify = require('thunkify');
 var crypto = require('crypto');
 var clientTar = require('spm-client').tar;
+var moment = require('moment');
 
 var Project = require('../models/project');
 var Package = require('../models/package');
@@ -34,7 +35,8 @@ var readFile = require('fs').readFileSync;
 
 // 有些 pkg 是纯粹的 node 包，不迁移
 var BLACK_PKGS = [
-  'envify'
+  'envify',
+  'jsdom'
 ];
 
 module.exports = function(id, count, owner, callback) {
@@ -68,6 +70,10 @@ function *syncPackages(name, count, owner) {
 
   versions = versions.filter(function(v) {
     return /^\d+\.\d+\.\d+$/.test(v);
+  });
+
+  versions = versions.sort(function(a, b) {
+    return moment(pkg.time[b]) - moment(pkg.time[a]);
   });
 
   if (project && project.packages) {
