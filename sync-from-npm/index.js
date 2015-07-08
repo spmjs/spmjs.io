@@ -43,7 +43,7 @@ console.log = function() {
 
 process.on('message', function(m) {
   m = m.split('^');
-  require('./_index')(m[0], {
+  require('./_index')(m[0], m[3], {
     name: m[1],
     id: m[2]
   }, function(err) {

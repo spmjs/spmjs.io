@@ -37,13 +37,13 @@ var BLACK_PKGS = [
   'envify'
 ];
 
-module.exports = function(id, owner, callback) {
+module.exports = function(id, count, owner, callback) {
   co(function *() {
     if (id.indexOf('@') > -1) {
       id = id.split('@');
       yield syncPackage(id[0], id[1], owner);
     } else {
-      yield syncPackages(id, owner);
+      yield syncPackages(id, count, owner);
     }
   }).then(function() {
     callback();
@@ -54,7 +54,7 @@ module.exports = function(id, owner, callback) {
   });
 };
 
-function *syncPackages(name, owner) {
+function *syncPackages(name, count, owner) {
   var url = 'http://' + registry + '/' + name;
   log.info('npm request', url);
   var result = yield request(url);
@@ -70,6 +70,7 @@ function *syncPackages(name, owner) {
   versions = versions.sort(function(a, b) {
     return semver.compare(a, b);
   });
+  versions = versions.slice(-count);
   log.info('versions filtered', versions.join(', '));
   console.log();
 

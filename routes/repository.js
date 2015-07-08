@@ -386,11 +386,11 @@ exports.syncFromNpm = function(req, res) {
 
   worker.on('message', function(m) {
     res.write(m + '\n');
-    //console.log(m);
     if (m === 'end') res.end();
   });
 
-  worker.send([id, req.session.user.login, req.session.user.id].join('^'));
+  var count = req.query.count || 5;
+  worker.send([id, req.session.user.login, req.session.user.id, count].join('^'));
 };
 
 function abortify(res, options) {
