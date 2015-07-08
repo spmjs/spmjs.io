@@ -64,13 +64,29 @@ function *syncPackages(name, count, owner) {
   var pkg = JSON.parse(result.body);
   var versions = Object.keys(pkg.versions);
   log.info('versions', versions.join(', '));
+  var project = new Project({name:name});
+
   versions = versions.filter(function(v) {
     return /^\d+\.\d+\.\d+$/.test(v);
   });
+
+  if (project && project.packages) {
+    var newVersions = [];
+    for (var j = 0; j < versions.length; j++) {
+      var v = versions[j];
+      if (project.packages[v]) {
+        break;
+      } else {
+        newVersions.push(v);
+      }
+    }
+    versions = newVersions;
+  }
+
+  versions = versions.slice(0, count);
   versions = versions.sort(function(a, b) {
     return semver.compare(a, b);
   });
-  versions = versions.slice(-count);
   log.info('versions filtered', versions.join(', '));
   console.log();
 
