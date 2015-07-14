@@ -371,6 +371,28 @@ exports.data = function(req, res) {
   });
 };
 
+exports.syncFromNpm = function(req, res) {
+  if (!req.session.user) {
+    return res.end('401');
+  }
+
+  var cp = require('child_process');
+  var worker = cp.fork('./sync-from-npm/index');
+
+  var id = req.params.name;
+  if (req.params.version) {
+    id = id + '@' + req.params.version;
+  }
+
+  worker.on('message', function(m) {
+    res.write(m + '\n');
+    if (m === 'end') res.end();
+  });
+
+  var count = req.query.count || 5;
+  worker.send([id, req.session.user.login, req.session.user.id, count].join('^'));
+};
+
 function abortify(res, options) {
   code = options.code || 401;
   status = options.status || 'error';
