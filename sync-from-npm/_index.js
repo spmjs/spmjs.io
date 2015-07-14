@@ -156,7 +156,7 @@ function *syncPkg(pkg, owner) {
 
   // 发布
   pkg.tag = 'stable';
-  pkg.readme = getReadme(target);
+  pkg.readme = getReadme(join(file, 'package'));
   pkg.dependencies = getDependencies(pkg);
 
   var project = new Project(pkg);
@@ -379,12 +379,3 @@ function *getPkg(name, version) {
   }
   return pkgCache[id];
 }
-
-
-/**
-TODO:
-
-1. 同步依赖的时候要全量同步? 还是只同步最符合的那个版本?
-2. 获取依赖版本时，不要请求 name/version，而是请求 name，然后拿 versions 进行 semver 校验
-*/
-
