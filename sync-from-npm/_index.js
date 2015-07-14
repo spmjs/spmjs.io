@@ -262,6 +262,16 @@ function filterPkgs(pkgs) {
   return ret;
 }
 
+function semverPkgExist(name, version) {
+  var project = new Project({name:name});
+  if (!project.packages) return;
+
+  var versions = Object.keys(project.packages);
+  if (!versions.length) return;
+
+  return semver.maxSatisfying(versions, version);
+}
+
 function testPkg(name, version) {
   var project = new Project({name:name});
   var projectExists = !!project.packages;
@@ -316,6 +326,11 @@ function *getPkgs(name, version) {
 
       var v = pkg.dependencies[n];
       //v = v.replace(/^([^\d]+)/, '');
+
+      // 如果本地存在，则不添加到依赖项中
+      if (semverPkgExist(n, v)) {
+        continue;
+      }
 
       if (!/^\d+\.\d+\.\d+$/.test(v)) {
         //throw Error('pkg version `' + v + '` of '+n+' is invalid');
