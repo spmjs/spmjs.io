@@ -109,7 +109,7 @@ exports.project = function(req, res, next) {
 
     var editable;
     var ownerIds = p.owners.map(function(owner) {
-      return owner && owner.id;
+      return String(owner && owner.id);
     });
     if (ownerIds && ownerIds.length > 0 && req.session.user &&
         !anonymous && ownerIds.indexOf(req.session.user.id) >= 0) {
